@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="fvb_dao" />
+        <module name="fvb_interface" />
+        <module name="fvb_pojo" />
+        <module name="fvb_service" />
+        <module name="fvb_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fvb_dao" target="1.7" />
+      <module name="fvb_interface" target="1.7" />
+      <module name="fvb_parent" target="1.7" />
+      <module name="fvb_pojo" target="1.7" />
+      <module name="fvb_service" target="1.7" />
+      <module name="fvb_web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

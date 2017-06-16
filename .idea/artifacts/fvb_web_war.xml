@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fvb_web:war">
+    <output-path>$PROJECT_DIR$/fvb_web/target</output-path>
+    <root id="archive" name="fvb_web.war">
+      <element id="artifact" artifact-name="fvb_web:war exploded" />
+    </root>
+  </artifact>
+</component>
