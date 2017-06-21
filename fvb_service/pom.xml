@@ -7,16 +7,21 @@
   </parent>
   <artifactId>fvb_service</artifactId>
   <dependencies>
-  	<dependency>
-  		<groupId>com.FoodVoteBox</groupId>
-	    <artifactId>fvb_dao</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.FoodVoteBox</groupId>
-	    <artifactId>fvb_interface</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+		<dependency>
+			<groupId>com.FoodVoteBox</groupId>
+			<artifactId>fvb_dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.FoodVoteBox</groupId>
+			<artifactId>fvb_interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	  <dependency>
+		  <groupId>com.FoodVoteBox</groupId>
+		  <artifactId>fvb_util</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+	  </dependency>
   	<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

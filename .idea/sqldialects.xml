@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/fvb_dao/src/main/java/com/foodvotebox/mapper/FvbUserMapper.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/fvb_service/src/main/resources/sql/Structure.sql" dialect="MySQL" />
+  </component>
+</project>
