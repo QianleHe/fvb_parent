@@ -27,6 +27,9 @@
           <element id="archive" name="fvb_interface-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="fvb_interface" />
           </element>
+          <element id="archive" name="fvb_util-0.0.1-SNAPSHOT.jar">
+            <element id="module-output" name="fvb_util" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />

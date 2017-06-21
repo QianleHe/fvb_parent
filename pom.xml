@@ -14,6 +14,7 @@
         <module>fvb_web</module>
         <module>fvb_service</module>
         <module>fvb_pojo</module>
+        <module>fvb_util</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

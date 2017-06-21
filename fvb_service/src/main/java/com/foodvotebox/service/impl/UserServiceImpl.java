@@ -7,11 +7,13 @@ import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
 
+import java.io.Serializable;
+
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Serializable {
 
-	@Autowired
+	@Autowired(required = false)
 	private FvbUserMapper fvbUserMapper;
 	
 	@Override

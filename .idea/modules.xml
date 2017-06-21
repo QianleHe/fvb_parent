@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/fvb_parent.iml" filepath="$PROJECT_DIR$/fvb_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/fvb_pojo/fvb_pojo.iml" filepath="$PROJECT_DIR$/fvb_pojo/fvb_pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/fvb_service/fvb_service.iml" filepath="$PROJECT_DIR$/fvb_service/fvb_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fvb_util/fvb_util.iml" filepath="$PROJECT_DIR$/fvb_util/fvb_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/fvb_web/fvb_web.iml" filepath="$PROJECT_DIR$/fvb_web/fvb_web.iml" />
     </modules>
   </component>

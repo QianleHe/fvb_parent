@@ -17,4 +17,40 @@
 		WHERE
 			userid = #{userId}
 	</select>
+
+	<select id="queryByUserName" resultType="com.foodvotebox.pojo.FvbUser" parameterType="String">
+		SELECT
+			userid,
+			username,
+			password,
+			phone,
+			email,
+			created,
+			updated
+		FROM
+			fvb_user
+		WHERE
+			username = #{userName}
+	</select>
+
+	<select id="queryByEmail" resultType="com.foodvotebox.pojo.FvbUser" parameterType="String">
+		SELECT
+			userid,
+			username,
+			password,
+			phone,
+			email,
+			created,
+			updated
+		FROM
+			fvb_user
+		WHERE
+			email = #{email}
+	</select>
+	
+	<insert id="addUser">
+		<!-- ignore 主键冲突，报错 -->
+		INSERT ignore INTO fvb_user (username, password, phone, email, created, updated)
+		VALUES (#{userName}, #{password}, #{phone}, #{email}, now(), now())
+	</insert>
 </mapper>
