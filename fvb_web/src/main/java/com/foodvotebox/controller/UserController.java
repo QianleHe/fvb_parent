@@ -33,7 +33,7 @@ public class UserController {
 	public FvbUserMapper fvbUserMapper;
 
 	public Logger logger = Logger.getAnonymousLogger();
-	
+
 	@RequestMapping("/test")
 	public String queryById(HttpServletRequest request) throws Exception{
 		FvbUser user = userService.queryById(9);
@@ -47,7 +47,7 @@ public class UserController {
 			FvbUser user = (FvbUser)session.getAttribute("newUser");
 			if (user != null) {
 				boolean loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
-				return "redirect: user/" + user.getUserId();
+				return "redirect:" + user.getUsername();
 			}
 		}
 		return "login";
@@ -55,45 +55,56 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public String login(FvbUser user, HttpSession session) throws Exception {
-	    logger.log(Level.INFO, "------Run the login function------");
-	    logger.log(Level.INFO, user.getEmail());
+		logger.log(Level.INFO, "------Run the login function------");
+		logger.log(Level.INFO, user.getEmail());
+		if (session != null) {
+			FvbUser curUser = (FvbUser)session.getAttribute("newUser");
+			if (curUser != null) {
+				return "redirect:" + curUser.getUsername();
+			}
+		}
 		boolean loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
 		if (loginType) {
 			FvbUser newUser = fvbUserMapper.queryByEmail(user.getEmail()) == null ? fvbUserMapper.queryByUserName(user.getEmail()) : fvbUserMapper.queryByEmail(user.getEmail());
 			session.setAttribute("newUser", newUser);
 			logger.log(Level.INFO, "login successfully");
-			return "redirect: user/" + newUser.getUserId();
+			return "redirect:" + newUser.getUsername();
 		}
+
 
 		return "error";
 	}
 
-	@RequestMapping("user/{userId}")
-	public String doSuccess(@PathVariable("userId") long userId, Map<String, Object> model) {
-		FvbUser user = fvbUserMapper.queryById(userId);
-		logger.log(Level.INFO, user.toString());
-        // model.addObject("user", user);
-        model.put("user", user);
-		return "loginSuccess";
+	@RequestMapping("{username}")
+	public String doSuccess(@PathVariable("username") String username, HttpSession session, Map<String, Object> model) {
+		FvbUser user = (FvbUser)session.getAttribute("newUser");
+		if (user.getUserId() == fvbUserMapper.queryByUserName(username).getUserId()) {
+			//如果ID不同，应该可以浏览但不能修改信息，之后可以加个权限
+			logger.log(Level.INFO, user.toString());
+			model.put("user", user);
+			return "loginSuccess";
+		}
+		logger.log(Level.INFO, "You can only visit your profile");
+		return "redirect:" + user.getUsername();
 	}
 
 
 	@RequestMapping("/register")
-    public String register() {
-	    return "register";
-    }
+	public String register() {
+		return "register";
+	}
 
-    @RequestMapping(value = "/register/do", method = RequestMethod.POST)
-    public  String doRegister(FvbUser user) {
-	    //logger.log(Level.INFO, user.getUsername());
-	    loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
-        //loginService.register("hehehe", user.getPassword(), user.getEmail(), user.getPhone());
-	    return "login";
-    }
+	@RequestMapping(value = "/register/do", method = RequestMethod.POST)
+	public  String doRegister(FvbUser user) {
+		//logger.log(Level.INFO, user.getUsername());
+		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
+		//loginService.register("hehehe", user.getPassword(), user.getEmail(), user.getPhone());
+		return "login";
+	}
 
-    @RequestMapping("/logout")
-    public String logout(HttpSession session) {
-	    session.removeAttribute("newUser");
-	    return "login";
-    }
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("newUser");
+		return "login";
+	}
 }
