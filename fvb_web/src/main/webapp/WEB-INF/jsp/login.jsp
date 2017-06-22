@@ -38,8 +38,8 @@
         }
         .flipbtn {
             position: absolute;
-            bottom: 2em;
-            left: 6em;
+            bottom: 1.5em;
+            left: 5.5em;
         }
 
         /* hide back of pane during swap */
@@ -54,7 +54,7 @@
         .front {
             z-index: 2;
             padding: 2%;
-            background: rgba(252, 150, 141,0.6);
+            background: rgba(158, 172, 193,0.6);
             /*opacity: 0.6;*/
             transform: rotateY(0deg);
             border-radius: 2.5em;
@@ -63,7 +63,7 @@
         /* back, initially hidden pane */
         .back {
             padding: 2%;
-            background: rgba(128, 176, 252,0.6);
+            background: rgba(161, 163, 168,0.6);
             /*opacity: 0.6;*/
             transform: rotateY(180deg);
             border-radius: 2.5em;
@@ -80,13 +80,16 @@
         }
         form tr {
             text-align: center;
-            height: 40px;
+            height: 30px;
         }
 
         .center {
             margin: auto;
-            margin-top: 50px;
+
             text-align: center;
+        }
+        .topspace{
+            margin-top: 50px;
         }
         /*body {*/
             /*background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg");*/
@@ -112,29 +115,53 @@
 
             filter:alpha(opacity=80);
         }
-
-        table,tr,h4{
-            opacity: 1.0;
+        table {
+            width:100%;
         }
         input {
-            border-radius: 0.5em;
+
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
+
+        .top {
+            border-top-left-radius: 0.5em;
+            border-top-right-radius: 0.5em;
+            border-top: solid lightgrey;
+        }
+
+        .middle {
+            /*padding-left: 1px;*/
+            /*padding-right: 1px;*/
+            border-left: 2px solid lightgrey;
+            border-right: 2px solid lightgrey;
+            border-style: inset;
+        }
+
+        .bottom {
+            border-bottom-left-radius: 0.5em;
+            border-bottom-right-radius: 0.5em;
+            border-bottom: solid lightgrey;
+        }
+
 
     </style>
 </head>
 <body>
     <div id="background"></div>
     <div class="row">
-        <div class="col-md-12 col-sm-12"><div class="center"><h1>Welcome to FoodVoteBox</h1></div></div>
+        <div class="col-md-12 col-sm-12"><div class="center topspace"><h1>Welcome to FoodVoteBox</h1></div></div>
         <div class="col-md-12 col-sm-12">
-            <div id="login" class="flip-container center">
+            <div id="login" class="flip-container center topspace">
                 <div class="flipper ">
                     <div class="front center">
                         <h4>Login</h4>
                         <form action="/fvb_web/login" method="post">
                             <table>
-                                <tr><th>Username: </th><td><input type='text' name='email'></input></td></tr>
-                                <tr><th>Password: </th><td><input type='text' name='password'></input></td></tr>
+                                <tr><td><input class="top" type='text' name='email' placeholder="Username"></td></tr>
+                                <tr><td><input class="bottom" type='text' name='password' placeholder="Password"></td></tr>
 
                                 <!-- <tr><td><button onclick="flip('login')">Do not have account? Sign up</button></td></tr> -->
                             </table>
@@ -147,10 +174,10 @@
                         <h4>Register</h4>
                         <form action="/fvb_web/register/do" method="post">
                             <table>
-                                <tr><th>Username: </th><td><input type='text' name='username'></input></td></tr>
-                                <tr><th>Email: </th><td><input type='text' name='email'></input></td></tr>
-                                <tr><th>Password: </th><td><input type='text' name='password'></input></td></tr>
-                                <tr><th>Phone: </th><td><input type='text' name='phone'></input></td></tr>
+                                <tr><td><input class="top" type='text' name='username' placeholder="Username"></td></tr>
+                                <tr><td><input class="middle" type='text' name='email' placeholder="Email"></td></tr>
+                                <tr><td><input class="middle" type='text' name='password' placeholder="Password"></td></tr>
+                                <tr><td><input class="bottom" type='text' name='phone' placeholder="Phone Number"></td></tr>
                             </table>
                             <input type="submit" value="Sign Up"/>
                         </form>
