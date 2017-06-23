@@ -65,7 +65,8 @@
 
 	<update id="updatePassword">
 		UPDATE fvb_user
-		SET password = #{password}
+		SET password = #{password},
+			updated = now()
 		WHERE userId = #{userId}
 	</update>
 </mapper>

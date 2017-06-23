@@ -21,6 +21,7 @@ Login Success!
     <a href = "/fvb_web/logout">Log out!</a><br>
     <a href="/fvb_web/userInfo">Check UserInfo</a><br>
     <a href="/fvb_web/updateUser">updateInfo</a><br>
+    <a href="/fvb_web/updatePassword">updatePassword</a>
 
 
     <form name="UserInfo" method="get" >

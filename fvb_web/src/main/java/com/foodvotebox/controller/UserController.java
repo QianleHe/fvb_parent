@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.service.LoginService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -135,4 +136,31 @@ public class UserController {
 	    model.put("user", updatedUser);
 		return "loginSuccess";
 	}
+
+	@RequestMapping("/updatePassword")
+    public String gotoPasswordUpdate(HttpSession session, Map<String, Object> model) {
+	    if (session == null) return "login";
+	    else {
+
+        }
+	    return "userPasswordRevise";
+    }
+
+    @RequestMapping("/updatePassword/do")
+    public String doUpdatePassword(HttpSession session, @RequestParam("newpassword") String newPassword, @RequestParam("oldpassword") String oldPassword, Map<String, Object> model) {
+	    if (newPassword == null || newPassword.length() == 0) return "error"; // 当你要改的密码的内容是null的话，就报错
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        logger.log(Level.INFO, newPassword);
+        if (userService.updatePassword(user.getUserId(), newPassword, oldPassword)) {
+            logger.log(Level.INFO,"update has been called");
+//            session.removeAttribute("newUser"); //when it success, remove the login state and jump to login page again
+//            return "login";
+            // renew the session, jump to personal page
+            FvbUser revisedUser = userService.queryById(user.getUserId());
+            session.setAttribute("newUser", revisedUser);
+            model.put("user", revisedUser);
+            return "loginSuccess";
+        }
+        return "login";
+    }
 }
