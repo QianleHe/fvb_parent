@@ -48,7 +48,7 @@ public class EventController {
         logger.log(Level.INFO, event.toString());
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         logger.log(Level.INFO, user.getUserId().toString());
-        eventService.createEvent(user.getUserId().toString(),event.getEventname(),event.getEventdate());
+        eventService.createEvent(user.getUserId().toString(), event.getEventname(), event.getEventdate(), event.getDescription());
         return "error";
     }
 }

@@ -6,7 +6,7 @@
 	
 	<insert id="createEvent">
 		<!-- ignore 主键冲突，报错 -->
-		INSERT ignore INTO fvb_event (eventname, eventdate, ownerid)
-		VALUES (#{eventName}, #{eventDate}, #{userId})
+		INSERT ignore INTO fvb_event (eventname, eventdate, ownerid, description)
+		VALUES (#{eventName}, #{eventDate}, #{userId}, #{description})
 	</insert>
 </mapper>

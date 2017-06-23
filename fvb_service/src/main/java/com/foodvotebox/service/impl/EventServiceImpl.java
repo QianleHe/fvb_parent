@@ -18,18 +18,18 @@ import java.util.logging.Logger;
 @Service(value = "eventService")
 public class EventServiceImpl implements EventService, Serializable {
 
-    @Autowired
+    @Autowired(required = false)
     public FvbEventMapper fvbEventMapper;
 
     public Logger logger = Logger.getAnonymousLogger();
 
     @Override
-    public void createEvent(String userId, String eventName, String eventDate) {
+    public void createEvent(String userId, String eventName, String eventDate, String description) {
         //ApplicationContext context = new ClassPathXmlApplicationContext("spring/ApplicationContext-dao.xml");
         logger.log(Level.INFO, userId);
         logger.log(Level.INFO, eventName);
         logger.log(Level.INFO, eventDate);
-        fvbEventMapper.createEvent(userId, eventName, eventDate);
+        fvbEventMapper.createEvent(userId, eventName, eventDate, description);
     }
 
     @Override

@@ -44,6 +44,7 @@ CREATE TABLE `fvb_event` (
   `eventname` varchar(100) NOT NULL,
   `eventdate` datetime NOT NULL,
   `ownerid` bigint(20) NOT NULL,
+  `description` varchar(200),
   PRIMARY KEY (`eventid`),
   KEY `ownerid` (`ownerid`) USING BTREE,
   CONSTRAINT FOREIGN KEY (`ownerid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE
@@ -57,6 +58,7 @@ DROP TABLE IF EXISTS `fvb_eventMember`;
 CREATE TABLE `fvb_eventMember` (
   `eventid` bigint(20) NOT NULL,
   `memberid` bigint(20) NOT NULL,
+  `voted` boolean DEFAULT FALSE,
   PRIMARY KEY (`eventid`, `memberid`),
   CONSTRAINT FOREIGN KEY (`eventid`) REFERENCES `fvb_event` (`eventid`) ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`memberid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE
@@ -69,6 +71,7 @@ DROP TABLE IF EXISTS `fvb_eventRestaurant`;
 CREATE TABLE `fvb_eventRestaurant` (
   `eventid` bigint(20) NOT NULL,
   `restaurantid` bigint(20) NOT NULL,
+  `votes` int default 0,
   PRIMARY KEY (`eventid`, `restaurantid`),
   CONSTRAINT FOREIGN KEY (`eventid`) REFERENCES `fvb_event` (`eventid`) ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`restaurantid`) REFERENCES `fvb_restaurant` (`restaurantid`) ON DELETE CASCADE

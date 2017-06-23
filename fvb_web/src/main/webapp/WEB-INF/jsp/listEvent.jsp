@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="description"> Description: </label>
             <br>
-            <textarea rows="5" cols="55" id="description"></textarea>
+            <textarea rows="5" cols="55" name="description" id="description"></textarea>
         </div>
         <button type="submit" class="btn btn-default">List it!</button>
     </form>

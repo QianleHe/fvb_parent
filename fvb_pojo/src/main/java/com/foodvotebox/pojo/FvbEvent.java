@@ -14,7 +14,7 @@ public class FvbEvent {
 
     private Long ownerid;
 
-
+    private String description;
 
     public void setEventid(Long eventid) {
         this.eventid = eventid;
@@ -22,6 +22,10 @@ public class FvbEvent {
 
     public void setEventname(String eventname) {
         this.eventname = eventname;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setEventdate(String eventdate) {
@@ -47,6 +51,10 @@ public class FvbEvent {
 
     public Long getOwnerid() {
         return ownerid;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
