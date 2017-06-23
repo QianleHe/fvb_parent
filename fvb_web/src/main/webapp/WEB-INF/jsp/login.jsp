@@ -161,7 +161,7 @@
                         <form action="/fvb_web/login" method="post">
                             <table>
                                 <tr><td><input class="top" type='text' name='email' placeholder="Username"></td></tr>
-                                <tr><td><input class="bottom" type='text' name='password' placeholder="Password"></td></tr>
+                                <tr><td><input class="bottom" type='password' name='password' placeholder="Password"></td></tr>
 
                                 <!-- <tr><td><button onclick="flip('login')">Do not have account? Sign up</button></td></tr> -->
                             </table>
