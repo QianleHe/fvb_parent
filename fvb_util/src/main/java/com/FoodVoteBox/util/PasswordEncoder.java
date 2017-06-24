@@ -1,5 +1,6 @@
 package com.FoodVoteBox.util;
 
+import org.springframework.stereotype.Component;
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.IIOException;
@@ -14,10 +15,8 @@ import java.util.Properties;
 /**
  * Created by qianle on 6/17/17.
  */
+@Component
 public class PasswordEncoder {
-
-
-
     public String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         // get the salt value which is from properties file
         //InputStream in = ClassLoader.getSystemResourceAsStream("properties/salt.properties");
