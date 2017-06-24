@@ -47,8 +47,20 @@ public class EventController {
     public String listSuccess(FvbEvent event, HttpSession session) {
         logger.log(Level.INFO, event.toString());
         FvbUser user = (FvbUser)session.getAttribute("newUser");
-        logger.log(Level.INFO, user.getUserId().toString());
-        eventService.createEvent(user.getUserId().toString(), event.getEventname(), event.getEventdate(), event.getDescription());
+        if (user != null) {
+            logger.log(Level.INFO, user.getUserId().toString());
+            Long eventId = eventService.createEvent(user.getUserId(), event.getEventName(), event.getEventDate(), event.getDescription());
+            //logger.log(Level.INFO, eventId.toString());
+            return "redirect:event" + eventId.toString();
+        }
         return "error";
+    }
+
+    //eventId应该是long?
+    @RequestMapping("event{eventId}")
+    public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model) {
+        FvbEvent event = fvbEventMapper.queryById(eventId);
+        logger.log(Level.INFO, event.toString());
+        return "eventPage";
     }
 }

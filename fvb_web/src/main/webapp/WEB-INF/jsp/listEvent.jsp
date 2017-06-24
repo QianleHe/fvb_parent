@@ -16,12 +16,12 @@
             <p> Fields with an asterisk (*) are required </p>
         </div>
         <div class="form-group">
-            <label for="eventname"> * Listing Title: </label>
-            <input type="text" class="form-control" name="eventname" id="eventname" placeholder="Listing Title" required>
+            <label for="eventName"> * Listing Title: </label>
+            <input type="text" class="form-control" name="eventName" id="eventName" placeholder="Listing Title" required>
         </div>
         <div class="form-group">
-            <label for="eventdate"> * Event date: </label>
-            <input type="datetime" class="form-control" name="eventdate" id="eventdate" placeholder="Event date" required>
+            <label for="eventDate"> * Event date: </label>
+            <input type="datetime" class="form-control" name="eventDate" id="eventDate" placeholder="Event date" required>
         </div>
         <div class="form-group">
             <label for="description"> Description: </label>

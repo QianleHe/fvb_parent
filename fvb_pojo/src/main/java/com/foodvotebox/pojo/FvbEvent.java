@@ -6,51 +6,52 @@ import java.util.Date;
  * Created by FYG on 17/6/22.
  */
 public class FvbEvent {
-    private Long eventid;
+    private Long eventId;
 
-    private String eventname;
+    private String eventName;
 
-    private String eventdate;
+    private String eventDate;
 
-    private Long ownerid;
+    private Long ownerId;
 
     private String description;
 
-    public void setEventid(Long eventid) {
-        this.eventid = eventid;
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
-    public void setEventname(String eventname) {
-        this.eventname = eventname;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setEventdate(String eventdate) {
-        this.eventdate = eventdate;
+    public Long getEventId() {
+
+        return eventId;
     }
 
-    public void setOwnerid(Long ownerid) {
-        this.ownerid = ownerid;
+    public String getEventName() {
+        return eventName;
     }
 
-    public Long getEventid() {
-
-        return eventid;
+    public String getEventDate() {
+        return eventDate;
     }
 
-    public String getEventname() {
-        return eventname;
-    }
-
-    public String getEventdate() {
-        return eventdate;
-    }
-
-    public Long getOwnerid() {
-        return ownerid;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
     public String getDescription() {
@@ -60,10 +61,11 @@ public class FvbEvent {
     @Override
     public String toString() {
         return "FvbEvent{" +
-                "eventid=" + eventid +
-                ", eventname='" + eventname + '\'' +
-                ", eventdate=" + eventdate +
-                ", ownerid=" + ownerid +
+                "eventId=" + eventId +
+                ", eventName='" + eventName + '\'' +
+                ", eventDate='" + eventDate + '\'' +
+                ", ownerId=" + ownerId +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

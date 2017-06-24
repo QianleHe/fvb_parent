@@ -1,6 +1,7 @@
 package com.foodvotebox.service.impl;
 
 import com.foodvotebox.mapper.FvbEventMapper;
+import com.foodvotebox.pojo.FvbEvent;
 import com.foodvotebox.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,12 +25,19 @@ public class EventServiceImpl implements EventService, Serializable {
     public Logger logger = Logger.getAnonymousLogger();
 
     @Override
-    public void createEvent(String userId, String eventName, String eventDate, String description) {
+    public Long createEvent(Long userId, String eventName, String eventDate, String description) {
         //ApplicationContext context = new ClassPathXmlApplicationContext("spring/ApplicationContext-dao.xml");
-        logger.log(Level.INFO, userId);
+        //logger.log(Level.INFO, userId);
         logger.log(Level.INFO, eventName);
         logger.log(Level.INFO, eventDate);
-        fvbEventMapper.createEvent(userId, eventName, eventDate, description);
+        //return fvbEventMapper.createEvent(userId, eventName, eventDate, description);
+        FvbEvent newEvent = new FvbEvent();
+        newEvent.setEventName(eventName);
+        newEvent.setEventDate(eventDate);
+        newEvent.setDescription(description);
+        newEvent.setOwnerId(userId);
+        fvbEventMapper.createEventAndGetId(newEvent);
+        return newEvent.getEventId();
     }
 
     @Override
