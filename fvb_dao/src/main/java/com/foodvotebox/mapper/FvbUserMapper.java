@@ -14,4 +14,9 @@ public interface FvbUserMapper {
 	FvbUser queryByEmail(String email);
 
 	void addUser(@Param("userName") String userName,@Param("password") String password,@Param("phone") String phone,@Param("email") String email);
+
+	void updateUser(@Param("userId") long userId, @Param("userName") String userName,@Param("phone") String phone,@Param("email") String email);
+
+	void updatePassword(@Param("userId") long userId, @Param("password") String password);
+
 }

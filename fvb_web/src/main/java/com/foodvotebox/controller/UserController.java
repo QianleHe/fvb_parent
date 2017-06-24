@@ -8,12 +8,10 @@ import com.foodvotebox.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -107,4 +105,61 @@ public class UserController {
 		session.removeAttribute("newUser");
 		return "login";
 	}
+
+	// get json data when you click check button
+	@RequestMapping("/userInfo")
+	@ResponseBody
+	public FvbUser showInfo(HttpSession session) {
+		FvbUser user = (FvbUser)session.getAttribute("newUser");
+		return user;
+	}
+
+	@RequestMapping("/updateUser")
+	public String gotoUserUpdate(HttpSession session, Map<String, Object> model) {
+	    if (session == null) return "login";
+	    else {
+	        FvbUser user = (FvbUser)session.getAttribute("newUser");
+	        model.put("user", user);
+        }
+		return "userInfoRevise";
+	}
+
+	@RequestMapping("/doUpdate")
+	public String doUpdate(HttpSession session, FvbUser user, Map<String, Object> model) {
+	    if (session == null) return "login";
+	    FvbUser storedUser = (FvbUser)session.getAttribute("newUser");
+	    fvbUserMapper.updateUser(storedUser.getUserId(), user.getUsername(), user.getPhone(), user.getEmail());
+        logger.log(Level.INFO, storedUser.getUserId().toString());
+        FvbUser updatedUser = userService.queryById(storedUser.getUserId());
+	    session.setAttribute("newUser", updatedUser);
+	    model.put("user", updatedUser);
+		return "loginSuccess";
+	}
+
+	@RequestMapping("/updatePassword")
+    public String gotoPasswordUpdate(HttpSession session, Map<String, Object> model) {
+	    if (session == null) return "login";
+	    else {
+
+        }
+	    return "userPasswordRevise";
+    }
+
+    @RequestMapping("/updatePassword/do")
+    public String doUpdatePassword(HttpSession session, @RequestParam("newpassword") String newPassword, @RequestParam("oldpassword") String oldPassword, Map<String, Object> model) {
+	    if (newPassword == null || newPassword.length() == 0) return "error"; // 当你要改的密码的内容是null的话，就报错
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        logger.log(Level.INFO, newPassword);
+        if (userService.updatePassword(user.getUserId(), newPassword, oldPassword)) {
+            logger.log(Level.INFO,"update has been called");
+//            session.removeAttribute("newUser"); //when it success, remove the login state and jump to login page again
+//            return "login";
+            // renew the session, jump to personal page
+            FvbUser revisedUser = userService.queryById(user.getUserId());
+            session.setAttribute("newUser", revisedUser);
+            model.put("user", revisedUser);
+            return "loginSuccess";
+        }
+        return "login";
+    }
 }

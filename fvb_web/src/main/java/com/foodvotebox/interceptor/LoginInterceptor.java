@@ -17,14 +17,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         String url = request.getServletPath();
         System.out.println("post URL：" + url);
         if (url != "") {
-            System.out.println("I am here");
             FvbUser user = (FvbUser)request.getSession().getAttribute("newUser");
+            System.out.println(user);
             if (user == null) {
-                response.sendRedirect("");
+                response.sendRedirect("/fvb_web/");
                 return false;
             }
         }
-        //System.out.println("hhhhhhhhh");
         return true;
     }
 

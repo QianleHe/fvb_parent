@@ -40,6 +40,8 @@ public class LoginServiceImpl implements LoginService {
         } else if (fvbUserMapper.queryByEmail(email) != null){
             user = fvbUserMapper.queryByEmail(email);
         } else {
+            // there is no such user
+            logger.log(Level.INFO, "NoSuchUser");
             return false;
         }
         //if (user == null) return false;
@@ -47,7 +49,7 @@ public class LoginServiceImpl implements LoginService {
         logger.log(Level.INFO, user.toString());
         try {
             if (!passwordChecker.checkerPassword(password, user.getPassword())) {
-                
+                logger.log(Level.INFO, "Password wrong");
                 return false;
             }
         } catch (NoSuchAlgorithmException e) {
