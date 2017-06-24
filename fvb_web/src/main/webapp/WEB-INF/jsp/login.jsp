@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-deep_orange.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
     <style>
         .flip-container {
             perspective: 1000px;
@@ -38,8 +43,8 @@
         }
         .flipbtn {
             position: absolute;
-            bottom: 1.5em;
-            left: 5.5em;
+            bottom: 0.9em;
+            left: 5.8em;
         }
 
         /* hide back of pane during swap */
@@ -52,10 +57,11 @@
 
         /* front pane, placed above back */
         .front {
-            z-index: 2;
+            /*z-index: 2;*/
             padding: 2%;
             background: rgba(158, 172, 193,0.6);
             /*opacity: 0.6;*/
+            /*background: rgb(158, 172, 193);*/
             transform: rotateY(0deg);
             border-radius: 2.5em;
         }
@@ -65,6 +71,8 @@
             padding: 2%;
             background: rgba(161, 163, 168,0.6);
             /*opacity: 0.6;*/
+            /*z-index:1;*/
+            /*background: rgb(158, 172, 193);*/
             transform: rotateY(180deg);
             border-radius: 2.5em;
         }
@@ -92,27 +100,27 @@
             margin-top: 50px;
         }
         /*body {*/
-            /*background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg");*/
-            /**/
+        /*background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg");*/
+        /**/
         /*}*/
         #background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-image: url('https://github.com/JiamengWang/ImageStore/raw/master/winter_scenery_2-wallpaper-1920x1200.jpg');
-            /*background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg");*/
+            height: 300px;
+            /*background-image: url('./img/winter_scenery_2-wallpaper-1920x1200.jpg');*/
+            background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/winter_scenery_2-wallpaper-1920x1200.jpg");
             background-repeat: repeat-y;
             background-attachment: fixed;
             background-size: 100%;
-            opacity: 0.8;
+            /*opacity: 0.8;*/
             -moz-filter: blur(5px);
             -webkit-filter: blur(5px);
             -o-filter: blur(5px);
             -ms-filter: blur(5px);
             filter: blur(5px);
-
+            z-index: -1;
             filter:alpha(opacity=80);
         }
         table {
@@ -120,10 +128,10 @@
         }
         input {
 
-            padding-left: 12px;
-            padding-right: 12px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-left: 6px;
+            padding-right: 6px;
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
 
         .top {
@@ -145,33 +153,182 @@
             border-bottom-right-radius: 0.5em;
             border-bottom: solid lightgrey;
         }
+    </style>
 
+    <style>
+        .demo-layout-transparent {
+            /*background: url('https://github.com/JiamengWang/ImageStore/raw/master/winter_scenery_2-wallpaper-1920x1200.jpg') center / cover;
+            -moz-filter: blur(5px);
+            -webkit-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+            filter:alpha(opacity=80);*/
+        }
+        .demo-layout-transparent .mdl-layout__header,
+        .demo-layout-transparent .mdl-layout__drawer-button {
+            /* This background is dark, so we set text to white. Use 87% black instead if
+               your background is light. */
+            color: white;
+        }
+        .drawer_pic {
+            width:100%;
+            background: url("https://github.com/JiamengWang/ImageStore/raw/master/03-8-ways-to-hate-junk-food-trail-mix.jpg");
+            /*background: :url("./img/03-8-ways-to-hate-junk-food-trail-mix.jpg");*/
+            background-size: cover;
+            height: 240px;
+        }
 
+        .page-content {
+            margin-top: 200px;
+            height: 100vh;
+            border-radius: 2em;
+            /*border: 1px solid;*/
+            background: white;
+        }
+    </style>
+    <style>
+        .box {
+            width: 40%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.2);
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+        }
+
+        .button {
+            /*font-size: 2em;*/
+            padding: 10px;
+            /*color: #fff;*/
+            /*border: 2px solid #06D85F;*/
+            /*border-radius: 20px/50px;*/
+            text-decoration: none;
+            /*cursor: pointer;*/
+            transition: all 0.3s ease-out;
+        }
+        /*.button:hover {
+        background: #06D85F;
+        }*/
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1;
+        }
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+            z-index: 3;
+        }
+
+        .popup {
+            margin: 200px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255,0.9);
+            border-radius: 5px;
+            width: 250px;
+            position: relative;
+            transition: all 5s ease-in-out;
+            height: 330px;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        .popup .close:hover {
+            color: #06D85F;
+        }
+        .popup .content {
+            margin-top: 40px;
+            height: 80%;
+            overflow: auto;
+        }
+
+        @media screen and (max-width: 700px){
+            .box{
+                width: 70%;
+            }
+            .popup{
+                width: 70%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="background"></div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12"><div class="center topspace"><h1>Welcome to FoodVoteBox</h1></div></div>
-        <div class="col-md-12 col-sm-12">
-            <div id="login" class="flip-container center topspace">
-                <div class="flipper ">
-                    <div class="front center">
-                        <h4>Login</h4>
+<!-- Always shows a header, even in smaller screens. -->
+<div id="background"></div>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <!-- <div class="mdl-layout-icon"></div> -->
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">FoodVoteBox</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="button mdl-navigation__link" href="#login_pop">LOGIN</a>
+                <a class="mdl-navigation__link" href="#signup_pop">SIGN UP</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <!-- <span class="mdl-layout-title">Title</span> -->
+        <div class="drawer_pic"></div>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="#tab1">Popluar Foods</a>
+            <a class="mdl-navigation__link" href="#tab2">Resturants Recommend</a>
+            <a class="mdl-navigation__link" href="">Weekly Select</a>
+            <a class="mdl-navigation__link" href="">Yelp API</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content"><!-- Your content goes here -->
+            <div id="login_pop" class="overlay">
+                <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                    <div class="content center">
+                        <h4>LOGIN</h4>
                         <form action="/fvb_web/login" method="post">
                             <table>
                                 <tr><td><input class="top" type='text' name='email' placeholder="Username"></td></tr>
                                 <tr><td><input class="bottom" type='text' name='password' placeholder="Password"></td></tr>
-
-                                <!-- <tr><td><button onclick="flip('login')">Do not have account? Sign up</button></td></tr> -->
                             </table>
-                            <div class="center"><input type="submit" value="Login"/></div>
+                            <div class="flipbtn"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                SUBMIT
+                            </button></div>
                         </form>
-
-                        <div class="flipbtn"><button onclick="flip('login')">Do not have account?</button></div>
                     </div>
-                    <div class="back center">
-                        <h4>Register</h4>
+                </div>
+            </div>
+
+            <div id="signup_pop" class="overlay">
+                <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                    <div class="content center">
+                        <h4>SING UP</h4>
                         <form action="/fvb_web/register/do" method="post">
                             <table>
                                 <tr><td><input class="top" type='text' name='username' placeholder="Username"></td></tr>
@@ -179,14 +336,17 @@
                                 <tr><td><input class="middle" type='text' name='password' placeholder="Password"></td></tr>
                                 <tr><td><input class="bottom" type='text' name='phone' placeholder="Phone Number"></td></tr>
                             </table>
-                            <input type="submit" value="Sign Up"/>
+                            <div class="flipbtn"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                SUBMIT
+                            </button></div>
                         </form>
-                        <div class="flipbtn"><button onclick="flip('login')">Back to Login Page</button></div>
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
+    </main>
+</div>
 </body>
 
 <script>
