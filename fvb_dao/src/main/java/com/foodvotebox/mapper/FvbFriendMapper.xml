@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbFriendMapper">
+    <select id="queryById" resultType="com.foodvotebox.pojo.FvbFriend" parameterType="long">
+        SELECT
+        friendid,
+        friend_name
+        FROM
+        fvb_user_friends
+        WHERE
+        userid = #{userId}
+    </select>
+
+    <insert id="addFriend">
+        <!-- ignore 主键冲突，报错 -->
+        INSERT INTO fvb_user_friends (userid,friendid,friend_name)
+        VALUES (#{userId}, #{friendId}, #{friendName})
+    </insert>
+
+    <delete id="deleteFriend">
+        DELETE FROM
+        fvb_user_friends
+        WHERE
+        userid = #{userId} AND friendid = #{friendId}
+    </delete>
+</mapper>

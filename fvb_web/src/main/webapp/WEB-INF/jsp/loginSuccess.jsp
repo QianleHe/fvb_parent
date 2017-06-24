@@ -13,7 +13,7 @@
 <body>
 Login Success!
 <br>
-    Hello!${user.username}
+    Hello!${user.friendname}
 
     <br>
     <a href = "/fvb_web/memberinfo">Check my infomation</a><br>

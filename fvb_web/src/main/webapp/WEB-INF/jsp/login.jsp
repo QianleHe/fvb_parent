@@ -174,7 +174,7 @@
                         <h4>Register</h4>
                         <form action="/fvb_web/register/do" method="post">
                             <table>
-                                <tr><td><input class="top" type='text' name='username' placeholder="Username"></td></tr>
+                                <tr><td><input class="top" type='text' name='friendname' placeholder="Username"></td></tr>
                                 <tr><td><input class="middle" type='text' name='email' placeholder="Email"></td></tr>
                                 <tr><td><input class="middle" type='text' name='password' placeholder="Password"></td></tr>
                                 <tr><td><input class="bottom" type='text' name='phone' placeholder="Phone Number"></td></tr>

@@ -96,7 +96,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register/do", method = RequestMethod.POST)
 	public  String doRegister(FvbUser user) {
-		//logger.log(Level.INFO, user.getUsername());
+		//logger.log(Level.INFO, user.getFriendname());
 		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
 		//loginService.register("hehehe", user.getPassword(), user.getEmail(), user.getPhone());
 		return "login";
