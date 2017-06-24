@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>title用eventname</title>
+    <title>${event.eventName}</title>
 </head>
 <body>
-    <h1>这是eventpage</h1>
+    <h1>${event.eventName}</h1>
+    <h2>The event will be hold on ${event.eventDate}</h2>
+    <p>${event.description}</p>
 </body>
 </html>

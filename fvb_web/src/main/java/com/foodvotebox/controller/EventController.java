@@ -56,10 +56,18 @@ public class EventController {
         return "error";
     }
 
-    //eventId应该是long?
+    //owner可以添加，浏览，可以在上一步的时候先把owner加进eventMember表里
+    //member可以浏览，如果不是member可以做成直接回到个人界面弹窗
     @RequestMapping("event{eventId}")
     public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model) {
         FvbEvent event = fvbEventMapper.queryById(eventId);
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        model.put("user", user);
+        model.put("event", event);
+        //if (userId在member表里) ｛return eventPage;｝
+        if (event.getOwnerId() == user.getUserId()) {
+            //return "eventPage?..."
+        }
         logger.log(Level.INFO, event.toString());
         return "eventPage";
     }
