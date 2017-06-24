@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbEventMapper">
+	
+	<!--<insert id="createEvent">-->
+		<!--&lt;!&ndash; ignore 主键冲突，报错 &ndash;&gt;-->
+		<!--INSERT ignore INTO fvb_event (eventname, eventdate, ownerid, description)-->
+		<!--VALUES (#{eventName}, #{eventDate}, #{userId}, #{description})-->
+	<!--</insert>-->
+
+	<insert id="createEventAndGetId" useGeneratedKeys="true" keyProperty="eventId" parameterType="com.foodvotebox.pojo.FvbEvent">
+		INSERT ignore INTO fvb_event (eventname, eventdate, ownerid, description)
+		VALUES (#{eventName}, #{eventDate}, #{ownerId}, #{description})
+	</insert>
+	<select id="queryById" resultType="com.foodvotebox.pojo.FvbEvent" parameterType="long">
+		SELECT
+		eventid,
+		eventname,
+		eventdate,
+		ownerid,
+		description
+		FROM
+		fvb_event
+		WHERE
+		eventid = #{eventId}
+	</select>
+</mapper>
