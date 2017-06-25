@@ -78,5 +78,28 @@ public class FvbUser {
 		return "FvbUser [id=" + userid + ", username=" + username + ", password=" + password + ", phone=" + phone
 				+ ", email=" + email + ", created=" + created + ", updated=" + updated + "]";
 	}
-    
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		FvbUser user = (FvbUser) o;
+
+		if (!userid.equals(user.userid)) return false;
+		if (!username.equals(user.username)) return false;
+		if (!password.equals(user.password)) return false;
+		if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
+		return email != null ? email.equals(user.email) : user.email == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = userid.hashCode();
+		result = 31 * result + username.hashCode();
+		result = 31 * result + password.hashCode();
+		result = 31 * result + (phone != null ? phone.hashCode() : 0);
+		result = 31 * result + (email != null ? email.hashCode() : 0);
+		return result;
+	}
 }

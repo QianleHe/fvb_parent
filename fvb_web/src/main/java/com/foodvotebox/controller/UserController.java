@@ -3,10 +3,10 @@ package com.foodvotebox.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.FoodVoteBox.exception.UserServiceEnum;
 import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,15 +44,17 @@ public class UserController {
 		if (session != null) {
 			FvbUser user = (FvbUser)session.getAttribute("newUser");
 			if (user != null) {
-				boolean loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
-				return "redirect:" + user.getUsername();
+				UserServiceEnum loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
+				if (loginType == UserServiceEnum.SIGNIN_SUCCESS) {
+				    return "redirect:" + user.getUsername();
+                }
 			}
 		}
 		return "login";
 	}
 
 	@RequestMapping("/login")
-	public String login(FvbUser user, HttpSession session) throws Exception {
+	public String login(FvbUser user, HttpSession session, Map<String, String> model) throws Exception {
 		logger.log(Level.INFO, "------Run the login function------");
 		logger.log(Level.INFO, user.getEmail());
 		if (session != null) {
@@ -61,15 +63,14 @@ public class UserController {
 				return "redirect:" + curUser.getUsername();
 			}
 		}
-		boolean loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
-		if (loginType) {
+		UserServiceEnum loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
+		if (loginType == UserServiceEnum.SIGNIN_SUCCESS) {
 			FvbUser newUser = fvbUserMapper.queryByEmail(user.getEmail()) == null ? fvbUserMapper.queryByUserName(user.getEmail()) : fvbUserMapper.queryByEmail(user.getEmail());
 			session.setAttribute("newUser", newUser);
 			logger.log(Level.INFO, "login successfully");
 			return "redirect:" + newUser.getUsername();
 		}
-
-
+        model.put("errorInfo", loginType.getStateinfo());
 		return "error";
 	}
 
@@ -93,10 +94,18 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register/do", method = RequestMethod.POST)
-	public  String doRegister(FvbUser user) {
+	public  String doRegister(FvbUser user, Map<String, String> model) {
 		//logger.log(Level.INFO, user.getUsername());
+        FvbUser userTemp;
+        userTemp = fvbUserMapper.queryByUserName(user.getUsername());
+        if (userTemp != null) {
+            model.put("errorInfo", UserServiceEnum.REPEAT_USERNAME.getStateinfo());
+        }
+        userTemp = fvbUserMapper.queryByEmail(user.getEmail());
+        if (userTemp != null) {
+            model.put("error", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
+        }
 		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
-		//loginService.register("hehehe", user.getPassword(), user.getEmail(), user.getPhone());
 		return "login";
 	}
 
@@ -128,9 +137,24 @@ public class UserController {
 	public String doUpdate(HttpSession session, FvbUser user, Map<String, Object> model) {
 	    if (session == null) return "login";
 	    FvbUser storedUser = (FvbUser)session.getAttribute("newUser");
+	    FvbUser userTemp;
+	    userTemp = fvbUserMapper.queryByUserName(user.getUsername());
+	    if (userTemp != null && !userTemp.equals(storedUser)) {
+	        model.put("errorInfo", UserServiceEnum.REPEAT_USERNAME.getStateinfo());
+	        return "error";
+        }
+        FvbUser userTemp2;
+	    userTemp2 = fvbUserMapper.queryByEmail(user.getEmail());
+	    if (userTemp2 != null && !userTemp2.equals(storedUser)) {
+	        model.put("errorInfo", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
+	        return "error";
+        }
 	    fvbUserMapper.updateUser(storedUser.getUserId(), user.getUsername(), user.getPhone(), user.getEmail());
-        logger.log(Level.INFO, storedUser.getUserId().toString());
         FvbUser updatedUser = userService.queryById(storedUser.getUserId());
+        if (!updatedUser.getUsername().equals(user.getUsername()) || !updatedUser.getEmail().equals(user.getEmail()) || !updatedUser.getPhone().equals(user.getPhone())) {
+            model.put("errorInfo", UserServiceEnum.INNER_ERROR.getStateinfo());
+            return "error";
+        }
 	    session.setAttribute("newUser", updatedUser);
 	    model.put("user", updatedUser);
 		return "loginSuccess";
@@ -152,8 +176,6 @@ public class UserController {
         logger.log(Level.INFO, newPassword);
         if (userService.updatePassword(user.getUserId(), newPassword, oldPassword)) {
             logger.log(Level.INFO,"update has been called");
-//            session.removeAttribute("newUser"); //when it success, remove the login state and jump to login page again
-//            return "login";
             // renew the session, jump to personal page
             FvbUser revisedUser = userService.queryById(user.getUserId());
             session.setAttribute("newUser", revisedUser);

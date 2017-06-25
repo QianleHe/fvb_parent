@@ -1,5 +1,6 @@
 package com.foodvotebox.service.impl;
 
+import com.FoodVoteBox.exception.UserServiceEnum;
 import com.FoodVoteBox.util.PasswordChecker;
 import com.FoodVoteBox.util.PasswordEncoder;
 import com.foodvotebox.mapper.FvbUserMapper;
@@ -30,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
     public Logger logger = Logger.getAnonymousLogger();
 
     @Override
-    public boolean login(String email, String username, String password) {
+    public UserServiceEnum login(String email, String username, String password) {
         logger.log(Level.INFO, email);
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/ApplicationContext-dao.xml");
         PasswordChecker passwordChecker = (PasswordChecker)context.getBean("passwordChecker");
@@ -42,22 +43,21 @@ public class LoginServiceImpl implements LoginService {
         } else {
             // there is no such user
             logger.log(Level.INFO, "NoSuchUser");
-            return false;
+            return UserServiceEnum.NOSUCH_ACCOUNT;
         }
-        //if (user == null) return false;
 
         logger.log(Level.INFO, user.toString());
         try {
             if (!passwordChecker.checkerPassword(password, user.getPassword())) {
                 logger.log(Level.INFO, "Password wrong");
-                return false;
+                return UserServiceEnum.PASSWORD_ERROR;
             }
         } catch (NoSuchAlgorithmException e) {
             logger.log(Level.INFO, e.toString());
         } catch (UnsupportedEncodingException e) {
             logger.log(Level.INFO, e.toString());
         }
-        return true;
+        return UserServiceEnum.SIGNIN_SUCCESS;
     }
 
     @Override
