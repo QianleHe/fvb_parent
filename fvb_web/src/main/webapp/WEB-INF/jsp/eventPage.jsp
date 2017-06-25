@@ -14,5 +14,7 @@
     <h1>${event.eventName}</h1>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
+    <a href="/fvb_web/event${event.eventId}/deleteEvent">Delete</a>
+    <%--<button type="submit" href="/fvb_web/event${event.eventId}/deleteEvent">Next</button>--%>
 </body>
 </html>

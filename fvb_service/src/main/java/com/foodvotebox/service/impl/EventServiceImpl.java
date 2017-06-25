@@ -40,8 +40,9 @@ public class EventServiceImpl implements EventService, Serializable {
         return newEvent.getEventId();
     }
 
+    //删除失败？exception？数据库有问题需要抛exception不
     @Override
-    public boolean deleteEvent() {
-        return false;
+    public void deleteEvent(Long eventId) {
+        fvbEventMapper.deleteEvent(eventId);
     }
 }

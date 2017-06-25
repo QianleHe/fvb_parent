@@ -8,5 +8,5 @@ import java.util.Date;
 public interface EventService {
     Long createEvent(Long userId, String eventName, String eventDate, String description);
 
-    public boolean deleteEvent();
+    void deleteEvent(Long eventId);
 }

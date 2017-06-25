@@ -71,4 +71,11 @@ public class EventController {
         logger.log(Level.INFO, event.toString());
         return "eventPage";
     }
+
+    @RequestMapping("event{eventId}/deleteEvent")
+    public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        fvbEventMapper.deleteEvent(eventId);
+        return "redirect:/" + user.getUsername();
+    }
 }
