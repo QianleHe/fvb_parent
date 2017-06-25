@@ -53,4 +53,20 @@
 		INSERT ignore INTO fvb_user (username, password, phone, email, created, updated)
 		VALUES (#{userName}, #{password}, #{phone}, #{email}, now(), now())
 	</insert>
+
+	<update id="updateUser">
+		UPDATE fvb_user
+		SET username = #{userName},
+			phone = #{phone},
+			email = #{email},
+			updated = now()
+		WHERE userid = #{userId}
+	</update>
+
+	<update id="updatePassword">
+		UPDATE fvb_user
+		SET password = #{password},
+			updated = now()
+		WHERE userId = #{userId}
+	</update>
 </mapper>
