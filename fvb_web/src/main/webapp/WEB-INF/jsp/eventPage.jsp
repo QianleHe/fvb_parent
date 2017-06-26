@@ -23,6 +23,13 @@
     <input type="submit" value="Add" onclick="addRestaurant();"/>
 
 
+    <h1>Add Members </h1>
+    <input type="text" name="memberName" id="memberName"/>
+    <input type="submit" value="Add" onclick="addMember();"/>
+
+
+
+
     <%--<input type="submit" value="添加" onclick="ajaxTest();"/>--%>
     <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
     <script src="../fvb_web/js/eventPage.js"></script>
@@ -36,12 +43,12 @@
                 url:"event" + "${event.eventId}" + "/addRestaurant",
                 success: function(result){
                     //alert(result)
-                    if(result != null)
+                    if(result == "true")
                     {
-                        alert("success!!!");
+                        alert("Add restaurant successfully!!!");
                     }
-                    else if(result == null){
-                        alert("failed!!!");
+                    else {
+                        alert("No such restaurant or you have already added this restaurant");
                     }
                 }
             });
@@ -70,6 +77,51 @@
                 })
             }
         })
+    </script>
+    <script>
+        $("#memberName").blur(function () {
+            if ($(this).val()) {
+                var data = {memberName: $(this).val()};
+                $.ajax({
+                    type: "GET",
+                    url: "event" + "${event.eventId}" + "/validMemberName",
+                    data: data,
+                    dataType: "text",
+                    success: function(result){
+                        //alert(result)
+                        if(result == "true")
+                        {
+                            $("#memberName").css("border", "5px solid green")
+                        }
+                        else if(result == "false"){
+                            $("#memberName").css("border", "5px solid red");
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+    <script>
+        function addMember(){
+            var data = {memberName: $("#memberName").val()};
+            $.ajax({
+                data: data,
+                type: "POST",
+                dataType: "text",
+                url:"event" + "${event.eventId}" + "/addMember",
+                success: function(result){
+                    //alert(result)
+                    console.log(result);
+                    if(result == "true")
+                    {
+                        alert("Add member successfully!!!");
+                    }
+                    else {
+                        alert("No such user or you have already added this user");
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>

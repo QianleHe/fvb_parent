@@ -1,8 +1,11 @@
 package com.foodvotebox.service.impl;
 
 import com.foodvotebox.mapper.FvbEventMapper;
+import com.foodvotebox.mapper.FvbEventMemberMapper;
 import com.foodvotebox.mapper.FvbEventRestaurantMapper;
 import com.foodvotebox.pojo.FvbEvent;
+import com.foodvotebox.pojo.FvbEventMember;
+import com.foodvotebox.pojo.FvbEventRestaurant;
 import com.foodvotebox.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +29,9 @@ public class EventServiceImpl implements EventService, Serializable {
     @Autowired(required = false)
     public FvbEventRestaurantMapper fvbEventRestaurantMapper;
 
+    @Autowired(required = false)
+    public FvbEventMemberMapper fvbEventMemberMapper;
+
     public Logger logger = Logger.getAnonymousLogger();
 
     @Override
@@ -47,6 +53,29 @@ public class EventServiceImpl implements EventService, Serializable {
     @Override
     public void insertEventRestaurant(Long eventId, Long restaurantId) {
         fvbEventRestaurantMapper.insertRestaurant(eventId, restaurantId);
+    }
+
+    @Override
+    public boolean findEventRestaurant(Long eventId, Long restaurantId) {
+        FvbEventRestaurant eventRestaurant = fvbEventRestaurantMapper.findEventRestaurant(eventId, restaurantId);
+        if (eventRestaurant == null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void insertEventMember(Long eventId, Long memberId) {
+        fvbEventMemberMapper.insertMember(eventId, memberId);
+    }
+
+    @Override
+    public boolean findEventMember(Long eventId, Long memberId) {
+        FvbEventMember eventMember = fvbEventMemberMapper.findEventMember(eventId, memberId);
+        if (eventMember == null) {
+            return true;
+        }
+        return false;
     }
 
     //删除失败？exception？数据库有问题需要抛exception不

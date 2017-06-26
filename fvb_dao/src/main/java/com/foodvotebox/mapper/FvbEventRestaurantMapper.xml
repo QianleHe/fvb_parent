@@ -9,4 +9,16 @@
 		INSERT INTO fvb_eventRestaurant (eventid, restaurantid)
 		VALUES (#{eventId}, #{restaurantId})
 	</insert>
+
+	<select id="findEventRestaurant" resultType="com.foodvotebox.pojo.FvbEventRestaurant" parameterType="Long">
+		SELECT
+		eventid,
+		restaurantid,
+		votes
+		FROM
+		fvb_eventRestaurant
+		WHERE
+		eventid = #{eventId} AND
+		restaurantid = #{restaurantId}
+	</select>
 </mapper>

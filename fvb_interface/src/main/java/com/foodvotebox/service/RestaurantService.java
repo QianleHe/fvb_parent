@@ -9,4 +9,5 @@ public interface RestaurantService {
     boolean findRestaurant(String restaurantName);
 
     FvbRestaurant getRestaurant(String restaurantName);
+
 }
