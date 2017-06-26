@@ -1,13 +1,18 @@
 package com.foodvotebox.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.foodvotebox.mapper.FvbEventMapper;
+import com.foodvotebox.mapper.FvbEventRestaurantMapper;
+import com.foodvotebox.mapper.FvbRestaurantMapper;
 import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.pojo.FvbEvent;
+import com.foodvotebox.pojo.FvbRestaurant;
 import com.foodvotebox.service.EventService;
 import com.foodvotebox.service.LoginService;
+import com.foodvotebox.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -33,7 +39,20 @@ public class EventController {
     public EventService eventService;
 
     @Autowired(required = false)
+    public FvbUserMapper fvbUserMapper;
+
+    @Autowired(required = false)
     public FvbEventMapper fvbEventMapper;
+
+    @Autowired(required = false)
+    public FvbRestaurantMapper fvbRestaurantMapper;
+
+    @Autowired
+    @Qualifier(value = "restaurantService")
+    public RestaurantService restaurantService;
+
+    @Autowired(required = false)
+    public FvbEventRestaurantMapper fvbEventRestaurantMapper;
 
     public Logger logger = Logger.getAnonymousLogger();
 
@@ -51,6 +70,7 @@ public class EventController {
             logger.log(Level.INFO, user.getUserId().toString());
             Long eventId = eventService.createEvent(user.getUserId(), event.getEventName(), event.getEventDate(), event.getDescription());
             //logger.log(Level.INFO, eventId.toString());
+            eventService.insertEventMember(eventId, user.getUserId());
             return "redirect:event" + eventId.toString();
         }
         return "error";
@@ -70,5 +90,65 @@ public class EventController {
         }
         logger.log(Level.INFO, event.toString());
         return "eventPage";
+    }
+
+    @RequestMapping("event{eventId}/deleteEvent")
+    public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        fvbEventMapper.deleteEvent(eventId);
+        return "redirect:/" + user.getUsername();
+    }
+
+    @RequestMapping("event{eventId}/validRestName")
+    public @ResponseBody boolean validRestName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        logger.log(Level.INFO, request.getParameter("restaurantName"));
+        if (restaurantService.findRestaurant(request.getParameter("restaurantName"))) {
+            FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
+            if (eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "event{eventId}/addRestaurant", method = RequestMethod.POST)
+    public @ResponseBody boolean addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
+        //logger.log(Level.INFO, restaurant.toString());
+        //logger.log(Level.INFO, eventId.toString());
+        if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
+            !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
+            
+            return false;
+        }
+        eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
+        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
+        return true;
+    }
+
+    @RequestMapping("event{eventId}/validMemberName")
+    public @ResponseBody boolean validMemberName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        logger.log(Level.INFO, request.getParameter("memberName"));
+        FvbUser user = fvbUserMapper.queryByUserName(request.getParameter("memberName"));
+        if (user != null) {
+            if (eventService.findEventMember(eventId, user.getUserId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "event{eventId}/addMember", method = RequestMethod.POST)
+    public @ResponseBody boolean addMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        FvbUser user = fvbUserMapper.queryByUserName(request.getParameter("memberName"));
+        //logger.log(Level.INFO, user.toString());
+        //logger.log(Level.INFO, eventId.toString());
+        if (user == null ||
+                !eventService.findEventMember(eventId, user.getUserId())) {
+            return false;
+        }
+        eventService.insertEventMember(eventId, user.getUserId());
+        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
+        return true;
     }
 }

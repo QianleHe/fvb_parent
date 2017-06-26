@@ -26,4 +26,8 @@
 		WHERE
 		eventid = #{eventId}
 	</select>
+	<delete id="deleteEvent">
+		DELETE FROM fvb_event
+		WHERE eventid = #{eventId}
+	</delete>
 </mapper>

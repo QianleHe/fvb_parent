@@ -28,7 +28,7 @@
             <br>
             <textarea rows="5" cols="55" name="description" id="description"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">List it!</button>
+        <button type="submit" class="btn btn-default">Next</button>
     </form>
 </body>
 </html>
