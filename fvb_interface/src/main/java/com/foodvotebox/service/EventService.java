@@ -9,4 +9,6 @@ public interface EventService {
     Long createEvent(Long userId, String eventName, String eventDate, String description);
 
     void deleteEvent(Long eventId);
+
+    void insertEventRestaurant(Long eventId, Long restaurantId);
 }

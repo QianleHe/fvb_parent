@@ -1,6 +1,7 @@
 package com.foodvotebox.service.impl;
 
 import com.foodvotebox.mapper.FvbEventMapper;
+import com.foodvotebox.mapper.FvbEventRestaurantMapper;
 import com.foodvotebox.pojo.FvbEvent;
 import com.foodvotebox.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class EventServiceImpl implements EventService, Serializable {
     @Autowired(required = false)
     public FvbEventMapper fvbEventMapper;
 
+    @Autowired(required = false)
+    public FvbEventRestaurantMapper fvbEventRestaurantMapper;
+
     public Logger logger = Logger.getAnonymousLogger();
 
     @Override
@@ -38,6 +42,11 @@ public class EventServiceImpl implements EventService, Serializable {
         newEvent.setOwnerId(userId);
         fvbEventMapper.createEventAndGetId(newEvent);
         return newEvent.getEventId();
+    }
+
+    @Override
+    public void insertEventRestaurant(Long eventId, Long restaurantId) {
+        fvbEventRestaurantMapper.insertRestaurant(eventId, restaurantId);
     }
 
     //删除失败？exception？数据库有问题需要抛exception不

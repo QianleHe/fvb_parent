@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbEventRestaurantMapper">
+
+	<insert id="insertRestaurant">
+		<!-- ignore 主键冲突，报错 -->
+		INSERT INTO fvb_eventRestaurant (eventid, restaurantid)
+		VALUES (#{eventId}, #{restaurantId})
+	</insert>
+</mapper>

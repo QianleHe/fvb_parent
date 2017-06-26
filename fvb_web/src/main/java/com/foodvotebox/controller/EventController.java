@@ -1,13 +1,18 @@
 package com.foodvotebox.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.foodvotebox.mapper.FvbEventMapper;
+import com.foodvotebox.mapper.FvbEventRestaurantMapper;
+import com.foodvotebox.mapper.FvbRestaurantMapper;
 import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.pojo.FvbEvent;
+import com.foodvotebox.pojo.FvbRestaurant;
 import com.foodvotebox.service.EventService;
 import com.foodvotebox.service.LoginService;
+import com.foodvotebox.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -34,6 +40,16 @@ public class EventController {
 
     @Autowired(required = false)
     public FvbEventMapper fvbEventMapper;
+
+    @Autowired(required = false)
+    public FvbRestaurantMapper fvbRestaurantMapper;
+
+    @Autowired
+    @Qualifier(value = "restaurantService")
+    public RestaurantService restaurantService;
+
+    @Autowired(required = false)
+    public FvbEventRestaurantMapper fvbEventRestaurantMapper;
 
     public Logger logger = Logger.getAnonymousLogger();
 
@@ -77,5 +93,23 @@ public class EventController {
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         fvbEventMapper.deleteEvent(eventId);
         return "redirect:/" + user.getUsername();
+    }
+
+    @RequestMapping("event{eventId}/validRestName")
+    public @ResponseBody boolean validRestName(HttpServletRequest request, HttpServletResponse response) {
+        logger.log(Level.INFO, request.getParameter("restaurantName"));
+        boolean result = restaurantService.findRestaurant(request.getParameter("restaurantName"));
+        //System.out.println(result + "@#KjjkHKJKJDBFJKDSFJKBJKDF");
+        return result;
+    }
+
+    @RequestMapping(value = "event{eventId}/addRestaurant", method = RequestMethod.POST)
+    public @ResponseBody FvbRestaurant addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
+        logger.log(Level.INFO, restaurant.toString());
+        logger.log(Level.INFO, eventId.toString());
+        eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
+        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
+        return restaurant;
     }
 }
