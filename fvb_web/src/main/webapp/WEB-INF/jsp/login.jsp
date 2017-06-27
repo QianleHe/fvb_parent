@@ -5,6 +5,7 @@
   Time: 6:35 PM
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCUTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+    <link rel="shortcut icon" href="https://github.com/JiamengWang/ImageStore/raw/master/box347643540.ico" type="image/x-icon" />
     <style>
         .flip-container {
             perspective: 1000px;
@@ -275,13 +277,20 @@
             }
         }
     </style>
+
+
+    <style>
+        .mdl-layout__drawer-button {
+            top: 10px;
+        }
+    </style>
 </head>
 <body>
 <!-- Always shows a header, even in smaller screens. -->
 <div id="background"></div>
 <div class="demo-layout-transparent mdl-layout mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--transparent">
-        <!-- <div class="mdl-layout-icon"></div> -->
+        <div class="mdl-layout-icon"></div>
         <div class="mdl-layout__header-row">
             <!-- Title -->
             <span class="mdl-layout-title">FoodVoteBox</span>
@@ -313,10 +322,10 @@
                         <h4>LOGIN</h4>
                         <form action="/fvb_web/login" method="post">
                             <table>
-                                <tr><td><input class="top" type='text' name='email' placeholder="Username"></td></tr>
-                                <tr><td><input class="bottom" type='text' name='password' placeholder="Password"></td></tr>
+                                <tr><td><input id="loginusername" class="top" type='text' name='email' placeholder="Username"></td></tr>
+                                <tr><td><input id="loginpass" class="bottom" type='text' name='password' placeholder="Password"></td></tr>
                             </table>
-                            <div class="flipbtn"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            <div class="flipbtn"><button id="loginbtn"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>
                                 SUBMIT
                             </button></div>
                         </form>
@@ -331,12 +340,12 @@
                         <h4>SING UP</h4>
                         <form action="/fvb_web/register/do" method="post">
                             <table>
-                                <tr><td><input class="top" type='text' name='friendname' placeholder="Username"></td></tr>
-                                <tr><td><input class="middle" type='text' name='email' placeholder="Email"></td></tr>
-                                <tr><td><input class="middle" type='text' name='password' placeholder="Password"></td></tr>
+                                <tr><td><input id='signUsername' class="top" type='text' name='username' placeholder="Username"></td></tr>
+                                <tr><td><input id='signEmail'lass="middle" type='text' name='email' placeholder="Email"></td></tr>
+                                <tr><td><input id='signPass' clas="middle" type='text' name='password' placeholder="Password"></td></tr>
                                 <tr><td><input class="bottom" type='text' name='phone' placeholder="Phone Number"></td></tr>
                             </table>
-                            <div class="flipbtn"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            <div class="flipbtn"><button id='signbtn'class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>
                                 SUBMIT
                             </button></div>
                         </form>
@@ -353,6 +362,94 @@
     function flip(id) {
         $('#'+id)[0].classList.toggle('hover');
     }
+
+    function passwordValidate(pass) {
+        // check if the password meet the mininum requirements
+        console.log('check pass:',pass);
+        if (!pass) {
+            return false;
+        }
+        var DEFAULT_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8}/;
+        return pass.match(DEFAULT_PASSWORD_PATTERN);
+    }
+
+    function userNameValidate(username) {
+        console.log('check username',username);
+        if (!username || typeof(username)!= 'string' || username.length == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    function emailValidate(email) {
+        console.log('in check email',email);
+        if (!email || typeof(email)!= 'string' || email.length == 0) {
+            return false;
+        }
+        var DEFAULT_EMAIL_PATTERN = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        return email.match(DEFAULT_EMAIL_PATTERN);
+
+    }
+
+    function loginValidate(username,pass,button,email) {
+        $('#'+pass).on('keyup',function () {
+//            if (passwordValidate($('#'+pass).val())) {
+//                if (userNameValidate($('#'+username).val())) {
+//                    $('#'+button).prop("disabled",false);
+//                } else {
+//                    $('#'+button).prop("disabled",true);
+//                }
+//            } else {
+//                $('#'+button).prop("disabled",true);
+//            }
+
+            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
+                if (!email || emailValidate($('#'+email).val())) {
+                    $('#'+button).prop("disabled",false);
+                } else {
+                    $('#'+button).prop("disabled",true);
+                }
+            } else {
+                $('#'+button).prop("disabled",true);
+            }
+        });
+
+        $('#'+username).on('keyup',function () {
+//            if (userNameValidate($('#'+username).val())) {
+//                if (passwordValidate($('#'+pass).val())) {
+//                    $('#'+button).prop("disabled",false);
+//                } else {
+//                    $('#'+button).prop("disabled",true);
+//                }
+//            } else {
+//                $('#'+button).prop("disabled",true);
+//            }
+
+            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
+                if (!email || emailValidate($('#'+email).val())) {
+                    $('#'+button).prop("disabled",false);
+                } else {
+                    $('#'+button).prop("disabled",true);
+                }
+            } else {
+                $('#'+button).prop("disabled",true);
+            }
+        });
+
+        if (email) {
+            if (emailValidate($('#'+email).val()) && userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
+                $('#'+button).prop("disabled",false);
+            } else {
+                $('#'+button).prop("disabled",true);
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        console.log('ready');
+        loginValidate('loginusername','loginpass','loginbtn');
+        loginValidate('signUsername','signPass','signbtn','signEmail');
+    });
 </script>
 
 </html>
