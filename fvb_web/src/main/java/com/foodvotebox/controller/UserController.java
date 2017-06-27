@@ -100,10 +100,12 @@ public class UserController {
         userTemp = fvbUserMapper.queryByUserName(user.getUsername());
         if (userTemp != null) {
             model.put("errorInfo", UserServiceEnum.REPEAT_USERNAME.getStateinfo());
+            return "error";
         }
         userTemp = fvbUserMapper.queryByEmail(user.getEmail());
         if (userTemp != null) {
-            model.put("error", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
+            model.put("errorInfo", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
+            return "error";
         }
 		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
 		return "login";
