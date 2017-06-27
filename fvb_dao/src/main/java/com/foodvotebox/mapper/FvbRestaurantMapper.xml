@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbRestaurantMapper">
+
+	<select id="queryByName" resultType="com.foodvotebox.pojo.FvbRestaurant" parameterType="String">
+		SELECT
+		restaurantid,
+		restaurantname,
+		address,
+		phone,
+		photodir
+		FROM
+		fvb_restaurant
+		WHERE
+		restaurantname = #{restaurantName}
+	</select>
+</mapper>

@@ -11,5 +11,7 @@ public interface FvbEventMapper {
 
     Long createEventAndGetId(FvbEvent event);
 
+    void deleteEvent(Long eventId);
+
     FvbEvent queryById(Long eventId);
 }

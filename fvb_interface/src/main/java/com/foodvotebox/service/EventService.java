@@ -8,5 +8,13 @@ import java.util.Date;
 public interface EventService {
     Long createEvent(Long userId, String eventName, String eventDate, String description);
 
-    public boolean deleteEvent();
+    void deleteEvent(Long eventId);
+
+    void insertEventRestaurant(Long eventId, Long restaurantId);
+
+    boolean findEventRestaurant(Long eventId, Long restaurantId);
+
+    void insertEventMember(Long eventId, Long memberId);
+
+    boolean findEventMember(Long eventId, Long memberId);
 }
