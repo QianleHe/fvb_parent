@@ -40,4 +40,5 @@
     <!--<bean id="passwordEncoder" class="com.FoodVoteBox.util.PasswordEncoder"></bean>-->
 
 	<context:component-scan base-package="com.FoodVoteBox.util"></context:component-scan>
+	<context:component-scan base-package="com.FoodVoteBox.yelpApi"></context:component-scan>
 </beans>
