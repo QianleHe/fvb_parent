@@ -12,5 +12,6 @@
 </head>
 <body>
     This is a error.
+    The error info is ${errorInfo}
 </body>
 </html>
