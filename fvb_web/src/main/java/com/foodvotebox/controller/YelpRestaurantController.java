@@ -48,7 +48,7 @@ public class YelpRestaurantController {
         System.out.println(latitude + "--------" + longitude);
         JSONObject object = getRestaurant.getResByLocation(latitude, longitude, 1);
         logger.log(Level.INFO, object.toString());
-        model.put("resInfo", object.toString());
+        model.put("errorInfo", object.toString());
         String resInfo = object.toString();
         return resInfo;
     }

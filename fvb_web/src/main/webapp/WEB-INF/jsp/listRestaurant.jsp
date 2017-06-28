@@ -15,7 +15,7 @@
     <p>Click the button to get restaurants nearby.</p>
 
     <button onclick="getLocation()">Try It</button>
-    <button href="/fvb_web/listRestaurant">getList</button>
+    <button href="/fvb_web/listRestaurant" onclick="getRes()">getList</button>
 
     <p id="demo"></p>
 
@@ -54,10 +54,7 @@
                 }
             });
         }
-        
-        function getRes() {
-            
-        }
+
     </script>
 </body>
 </html>
