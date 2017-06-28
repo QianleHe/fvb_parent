@@ -1,11 +1,14 @@
 package com.foodvotebox.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.foodvotebox.mapper.FvbUserMapper;
+import com.foodvotebox.service.FvbFriendService;
 import com.foodvotebox.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +30,13 @@ public class UserController {
 	@Autowired
 	public LoginService loginService;
 
+	@Autowired
+	@Qualifier(value = "friendService")
+	private FvbFriendService fvbFriendService;
+
 	@Autowired(required = false)
 	public FvbUserMapper fvbUserMapper;
+
 
 	public Logger logger = Logger.getAnonymousLogger();
 
@@ -147,7 +155,10 @@ public class UserController {
 
     @RequestMapping("/updatePassword/do")
     public String doUpdatePassword(HttpSession session, @RequestParam("newpassword") String newPassword, @RequestParam("oldpassword") String oldPassword, Map<String, Object> model) {
-	    if (newPassword == null || newPassword.length() == 0) return "error"; // 当你要改的密码的内容是null的话，就报错
+	    if (session == null){
+	    	return "login";
+		}
+		if (newPassword == null || newPassword.length() == 0) return "error"; // 当你要改的密码的内容是null的话，就报错
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         logger.log(Level.INFO, newPassword);
         if (userService.updatePassword(user.getUserId(), newPassword, oldPassword)) {
@@ -162,4 +173,24 @@ public class UserController {
         }
         return "login";
     }
+
+    @RequestMapping("/addFriend")
+    public String gotoAddFriend(HttpSession session){
+		if (session == null){
+			return "login";
+		}
+		return "addFriend";
+	}
+	@RequestMapping("/addFriend/do")
+    public String doAddFriend(HttpSession session, @RequestParam("friendname") String friendName, Map<String,Object> model){
+		if (session == null){
+			return "login";
+		}
+		FvbUser user = (FvbUser) session.getAttribute("newUser");
+		if (user != null && !fvbFriendService.cannotAddFriend(user.getUserId(),friendName)) {
+			fvbFriendService.addFriend(user.getUserId(), friendName);
+		}
+		model.put("user",user);
+		return "loginSuccess";
+	}
 }

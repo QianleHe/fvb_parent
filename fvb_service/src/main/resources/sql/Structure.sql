@@ -91,5 +91,7 @@ CREATE TABLE `fvb_user_friends` (
   `userid` bigint(20) NOT NULL,
   `friendid` bigint(20) NOT NULL,
   `friend_name` varchar(50) NOT NULL COMMENT 'friend_name',
-  PRIMARY KEY (`userid`,`friendid`)
+  PRIMARY KEY (`userid`,`friendid`),
+  CONSTRAINT FOREIGN KEY (`userid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`friendid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='朋友表';

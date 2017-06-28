@@ -11,8 +11,8 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
 	<!-- @Service扫描 -->
-	<context:component-scan base-package="com.foodvotebox.service"></context:component-scan>
-	
+	<context:component-scan base-package="com.foodvotebox.service.impl"></context:component-scan>
+
 	<!-- <bean id="itemService" class="com.ecommerce.service.ItemService"></bean> -->
 	
 	<!-- public dubbo service -->

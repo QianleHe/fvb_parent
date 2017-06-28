@@ -13,8 +13,17 @@
         userid = #{userId}
     </select>
 
+    <select id="queryFriendById" resultType="com.foodvotebox.pojo.FvbFriend" parameterType="long">
+        SELECT
+        friendid,
+        friend_name
+        FROM
+        fvb_user_friends
+        WHERE
+        userid = #{userId} AND friendid = #{friendId}
+    </select>
+
     <insert id="addFriend">
-        <!-- ignore 主键冲突，报错 -->
         INSERT INTO fvb_user_friends (userid,friendid,friend_name)
         VALUES (#{userId}, #{friendId}, #{friendName})
     </insert>

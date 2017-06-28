@@ -13,6 +13,8 @@ public interface FvbFriendMapper {
 
     void deleteFriend(@Param("userId") long userId, @Param("friendId") long friendId);
 
+    FvbFriend queryFriendById(@Param("userId") long userId, @Param("friendId") long friendId);
+
     List<FvbFriend> queryById(long userId);
 
 }
