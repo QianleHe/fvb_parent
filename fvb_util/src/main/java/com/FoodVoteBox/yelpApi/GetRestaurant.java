@@ -49,4 +49,31 @@ public class GetRestaurant {
         }
         return jsonObject;
     }
+
+    public JSONObject getResByLocation(Double latitude, Double longitude, int offset) {
+        Token token = new Token();
+        String accessToken = token.getToken();
+        OkHttpClient client2 = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url("https://api.yelp.com/v3/businesses/search?term=food" + "&latitude=" + latitude + "&longitude=" + longitude + "&offset=" + offset + "&limit=1" + "")
+                .get()
+                .addHeader("authorization", "Bearer"+" "+accessToken)
+                //.addHeader("cache-control", "no-cache")
+                //.addHeader("postman-token", "b5fc33ce-3dad-86d7-6e2e-d67e14e8071b")
+                .build();
+
+        JSONObject jsonObject = null;
+        try {
+            Response response2 = client2.newCall(request).execute();
+
+            jsonObject = new JSONObject(response2.body().string().trim());       // parser
+            //JSONArray myResponse = (JSONArray)jsonObject.get("businesses");
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 }
