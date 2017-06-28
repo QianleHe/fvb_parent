@@ -28,7 +28,7 @@
         }
         /* flip the pane when hovered */
         .flip-container.hover .flipper {
-            transform: rotateY(180deg);
+            /*transform: rotateY(180deg);*/
         }
 
         .flip-container, .front, .back {
@@ -259,7 +259,7 @@
             text-decoration: none;
             color: #333;
         }
-        .popup .close:hover {
+        .close:hover {
             color: #06D85F;
         }
         .popup .content {
@@ -298,8 +298,8 @@
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="button mdl-navigation__link" href="#login_pop">LOGIN</a>
-                <a class="mdl-navigation__link" href="#signup_pop">SIGN UP</a>
+                <a id="login" class="button mdl-navigation__link" href="#login_pop">LOGIN</a>
+                <a id="singup" class="mdl-navigation__link" href="#signup_pop">SIGN UP</a>
             </nav>
         </div>
     </header>
@@ -322,8 +322,8 @@
                         <h4>LOGIN</h4>
                         <form action="/fvb_web/login" method="post">
                             <table>
-                                <tr><td><input id="loginusername" class="top" type='text' name='email' placeholder="Username"></td></tr>
-                                <tr><td><input id="loginpass" class="bottom" type='text' name='password' placeholder="Password"></td></tr>
+                                <tr><td><input id="loginusername" class="top" type='text' name='email' placeholder="Username" autocomplete="off"></td></tr>
+                                <tr><td><input id="loginpass" class="bottom" type='password' name='password' placeholder="Password" autocomplete="off"></td></tr>
                             </table>
                             <div class="flipbtn"><button id="loginbtn"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>
                                 SUBMIT
@@ -337,7 +337,7 @@
                 <div class="popup">
                     <a class="close" href="#">&times;</a>
                     <div class="content center">
-                        <h4>SING UP</h4>
+                        <h4>SIGN UP</h4>
                         <form action="/fvb_web/register/do" method="post">
                             <table>
                                 <tr><td><input id='signUsername' class="top" type='text' name='username' placeholder="Username"></td></tr>
@@ -365,7 +365,7 @@
 
     function passwordValidate(pass) {
         // check if the password meet the mininum requirements
-        console.log('check pass:',pass);
+//        console.log('check pass:',pass);
         if (!pass) {
             return false;
         }
@@ -374,7 +374,7 @@
     }
 
     function userNameValidate(username) {
-        console.log('check username',username);
+//        console.log('check username',username);
         if (!username || typeof(username)!= 'string' || username.length == 0) {
             return false;
         }
@@ -382,7 +382,7 @@
     }
 
     function emailValidate(email) {
-        console.log('in check email',email);
+//        console.log('in check email',email);
         if (!email || typeof(email)!= 'string' || email.length == 0) {
             return false;
         }
@@ -391,64 +391,77 @@
 
     }
 
-    function loginValidate(username,pass,button,email) {
-        $('#'+pass).on('keyup',function () {
-//            if (passwordValidate($('#'+pass).val())) {
-//                if (userNameValidate($('#'+username).val())) {
-//                    $('#'+button).prop("disabled",false);
-//                } else {
-//                    $('#'+button).prop("disabled",true);
-//                }
-//            } else {
-//                $('#'+button).prop("disabled",true);
-//            }
-
-            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
-                if (!email || emailValidate($('#'+email).val())) {
-                    $('#'+button).prop("disabled",false);
-                } else {
-                    $('#'+button).prop("disabled",true);
-                }
-            } else {
-                $('#'+button).prop("disabled",true);
-            }
-        });
-
-        $('#'+username).on('keyup',function () {
-//            if (userNameValidate($('#'+username).val())) {
-//                if (passwordValidate($('#'+pass).val())) {
-//                    $('#'+button).prop("disabled",false);
-//                } else {
-//                    $('#'+button).prop("disabled",true);
-//                }
-//            } else {
-//                $('#'+button).prop("disabled",true);
-//            }
-
-            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
-                if (!email || emailValidate($('#'+email).val())) {
-                    $('#'+button).prop("disabled",false);
-                } else {
-                    $('#'+button).prop("disabled",true);
-                }
-            } else {
-                $('#'+button).prop("disabled",true);
-            }
-        });
-
-        if (email) {
-            if (emailValidate($('#'+email).val()) && userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
+    function signUpValidate(username,pass,button,email) {
+        $('#'+pass).on('input',function () {
+            if (userNameValidate($('#' + username).val()) && passwordValidate($('#' + pass).val()) && emailValidate($('#'+email).val())) {
                 $('#'+button).prop("disabled",false);
             } else {
                 $('#'+button).prop("disabled",true);
             }
-        }
+        });
+
+        $('#'+username).on('input',function () {
+            if (userNameValidate($('#' + username).val()) && passwordValidate($('#' + pass).val()) && emailValidate($('#'+email).val())) {
+                $('#'+button).prop("disabled",false);
+            } else {
+                $('#'+button).prop("disabled",true);
+            }
+        });
+
+        $('#'+email).on('input',function () {
+            console.log('detect change');
+            if (userNameValidate($('#' + username).val()) && passwordValidate($('#' + pass).val()) && emailValidate($('#'+email).val())) {
+                $('#'+button).prop("disabled",false);
+            } else {
+                $('#'+button).prop("disabled",true);
+            }
+        });
     }
 
+    function loginValidate(username,pass,button) {
+
+            $('#'+pass).on('input',function () {
+                if (userNameValidate($('#'+username).val()) && userNameValidate($('#'+pass).val())) {
+                    $('#'+button).prop("disabled",false);
+                } else {
+                    $('#'+button).prop("disabled",true);
+                }
+            });
+
+            $('#'+username).on('input',function () {
+                if (userNameValidate($('#'+username).val()) && userNameValidate($('#'+pass).val())) {
+                    $('#'+button).prop("disabled",false);
+                } else {
+                    $('#'+button).prop("disabled",true);
+                }
+            });
+
+    }
+
+    function initialInput(loginbtn,singupbtn) {
+        $('.close').on('click',function(){
+            console.log('click close');
+            $('input').val('');
+            $('#'+loginbtn).prop("disabled",true);
+            $('#'+singupbtn).prop("disabled",true);
+        });
+
+//        $('#login').on('click',function () {
+//            $('#'+loginbtn).prop("disabled",true);
+//            $('input').val('');
+//        })
+//
+//        $('#signup').on('click',function () {
+//            $('#'+singupbtn).prop("disabled",true);
+//            $('input').val('');
+//        })
+
+    }
     $(document).ready(function () {
         console.log('ready');
         loginValidate('loginusername','loginpass','loginbtn');
-        loginValidate('signUsername','signPass','signbtn','signEmail');
+        signUpValidate('signUsername','signPass','signbtn','signEmail');
+        initialInput('loginbtn','signbtn');
     });
 </script>
 
