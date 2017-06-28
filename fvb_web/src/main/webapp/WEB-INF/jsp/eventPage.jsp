@@ -13,9 +13,6 @@
     <title>${event.eventName}</title>
 </head>
 <body>
-
-    <%--<div id="messageBar">You can't see this!</div>--%>
-    <h1>${memberList.get(1)}</h1>
     <h1>${event.eventName}</h1>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
@@ -28,36 +25,36 @@
     <h1>Add Members </h1>
     <input type="text" name="memberName" id="memberName"/>
     <input type="submit" value="Add" onclick="addMember();"/>
-
-    <div id = "showdiv">
-        <%
-            List<DBEventMemberReturnType> list = (List)request.getAttribute("memberList");
-            if (list.size() != 0) {
-                for (int i = 0; i < list.size(); i++) {
-        %>
-        <tr>
-            <td><%=list.get(i).getUserName() %></td>
-        </tr>
-        <%
-                }
-            }else{
-        %>
-            <tr><td colspan="6">数据库中没有数据！</td></tr>
-        <%
-                }
-        %>
+    <div id="memberDiv">
+        <table id="memeberTable">
+            <div id="InitialMemberDisplay">
+                <tr>
+                    <td>UserId</td>
+                    <td>UserName</td>
+                </tr>
+                <%
+                    List<DBEventMemberReturnType> list = (List)request.getAttribute("memberList");
+                    if (list.size() != 0) {
+                        for (int i = 0; i < list.size(); i++) {
+                %>
+                <tr>
+                    <td><%=list.get(i).getMemberId() %></td>
+                    <td><%=list.get(i).getUserName() %></td>
+                </tr>
+                <%
+                    }
+                }else{
+                %>
+                <tr><td colspan="6">数据库中没有数据！</td></tr>
+                <%
+                    }
+                %>
+            </div>
+            <div id = "showdiv"></div>
+        </table>
     </div>
-    <%--<c:forEach items = "${memberList}" var = "member" varStatus="status">--%>
-    <%--<tr>--%>
-        <%--<td>--%>
-            <%--SID=${member.memberId}--%>
-        <%--</td>--%>
-    <%--</tr>--%>
-    <%--</c:forEach>--%>
 
 
-
-    <%--<input type="submit" value="添加" onclick="ajaxTest();"/>--%>
     <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
     <script src="../fvb_web/js/eventPage.js"></script>
     <script>
@@ -138,20 +135,19 @@
                 url:"event" + "${event.eventId}" + "/addMember",
                 success: function(result){
                     $("#showdiv").empty();
+                    $("#memeberTable").remove();
+                    var panelheader = $("<tr><td>UserId</td> <td>UserName</td></tr>");
+                    var panelTable = $("<table></table>");
+                    $("#showdiv").append(panelheader);
                     for(a of result) {
-                        var PanelBodyDes = $("<p></p>").text(a.userName);
-                        $("#showdiv").append(PanelBodyDes);
+                        var panelBody = $("<tr></tr>");
+                        var panelBodyId = $("<td></td>").text(a.memberId);
+                        var panelBodyName = $("<td></td>").text(a.userName);
+                        panelBody.append(panelBodyId,panelBodyName);
+                        panelTable.append(panelBody);
                     }
 
-                    //document.getElementById("showdiv").innerHTML = result;
-                    //alert(result)
-//                    console.log(result);
-//                    if(result) {
-//                        alert("Add member successfully!!!");
-//                        document.getElementById("showdiv").innerHTML = result;
-//                    } else {
-//                        alert("No such user or you have already added this user");
-//                    }
+                    $("#showdiv").append(panelTable);
                 }
             });
         }
