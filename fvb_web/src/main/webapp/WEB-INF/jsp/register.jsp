@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <td>UserName:</td>
-                    <td><input type="text" name="username">
+                    <td><input type="text" name="friendname">
                     </td>
                 </tr>
                 <tr>
