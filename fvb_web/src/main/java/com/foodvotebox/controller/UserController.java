@@ -174,42 +174,4 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping("/addFriend")
-    public String gotoAddFriend(HttpSession session){
-		if (session == null){
-			return "login";
-		}
-		return "addFriend";
-	}
-	@RequestMapping("/addFriend/do")
-    public String doAddFriend(HttpSession session, @RequestParam("friendname") String friendName, Map<String,Object> model){
-		if (session == null){
-			return "login";
-		}
-		FvbUser user = (FvbUser) session.getAttribute("newUser");
-		if (user != null && !fvbFriendService.cannotAddFriend(user.getUserId(),friendName)) {
-			fvbFriendService.addFriend(user.getUserId(), friendName);
-		}
-		model.put("user",user);
-		return "loginSuccess";
-	}
-	@RequestMapping("/deleteFriend")
-	public String gotoDeleteFriend(HttpSession session){
-        if (session == null){
-            return "login";
-        }
-        return "deleteFriend";
-    }
-    @RequestMapping("/deleteFriend/do")
-	public String doDeleteFriend(HttpSession session, @RequestParam("friendname") String friendName, Map<String,Object> model){
-        if (session == null){
-            return "login";
-        }
-        FvbUser user = (FvbUser) session.getAttribute("newUser");
-        if (user!= null){
-            fvbFriendService.deleteFriend(user.getUserId(),friendName);
-        }
-        model.put("user",user);
-        return "loginSuccess";
-    }
 }
