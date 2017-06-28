@@ -1,3 +1,5 @@
+<%@ page import="com.foodvotebox.pojo.DBEventMemberReturnType" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: FYG
@@ -13,6 +15,7 @@
 <body>
 
     <%--<div id="messageBar">You can't see this!</div>--%>
+    <h1>${memberList.get(1)}</h1>
     <h1>${event.eventName}</h1>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
@@ -22,11 +25,35 @@
     <input type="text" name="restaurantName" id="restaurantName"/>
     <input type="submit" value="Add" onclick="addRestaurant();"/>
 
-
     <h1>Add Members </h1>
     <input type="text" name="memberName" id="memberName"/>
     <input type="submit" value="Add" onclick="addMember();"/>
 
+    <div id = "showdiv">
+        <%
+            List<DBEventMemberReturnType> list = (List)request.getAttribute("memberList");
+            if (list.size() != 0) {
+                for (int i = 0; i < list.size(); i++) {
+        %>
+        <tr>
+            <td><%=list.get(i).getUserName() %></td>
+        </tr>
+        <%
+                }
+            }else{
+        %>
+            <tr><td colspan="6">数据库中没有数据！</td></tr>
+        <%
+                }
+        %>
+    </div>
+    <%--<c:forEach items = "${memberList}" var = "member" varStatus="status">--%>
+    <%--<tr>--%>
+        <%--<td>--%>
+            <%--SID=${member.memberId}--%>
+        <%--</td>--%>
+    <%--</tr>--%>
+    <%--</c:forEach>--%>
 
 
 
@@ -107,18 +134,24 @@
             $.ajax({
                 data: data,
                 type: "POST",
-                dataType: "text",
+                dataType: "json",
                 url:"event" + "${event.eventId}" + "/addMember",
                 success: function(result){
+                    $("#showdiv").empty();
+                    for(a of result) {
+                        var PanelBodyDes = $("<p></p>").text(a.userName);
+                        $("#showdiv").append(PanelBodyDes);
+                    }
+
+                    //document.getElementById("showdiv").innerHTML = result;
                     //alert(result)
-                    console.log(result);
-                    if(result == "true")
-                    {
-                        alert("Add member successfully!!!");
-                    }
-                    else {
-                        alert("No such user or you have already added this user");
-                    }
+//                    console.log(result);
+//                    if(result) {
+//                        alert("Add member successfully!!!");
+//                        document.getElementById("showdiv").innerHTML = result;
+//                    } else {
+//                        alert("No such user or you have already added this user");
+//                    }
                 }
             });
         }

@@ -1,6 +1,8 @@
 package com.foodvotebox.service;
 
-import java.util.Date;
+import com.foodvotebox.pojo.DBEventMemberReturnType;
+
+import java.util.List;
 
 /**
  * Created by FYG on 17/6/22.
@@ -17,4 +19,6 @@ public interface EventService {
     void insertEventMember(Long eventId, Long memberId);
 
     boolean findEventMember(Long eventId, Long memberId);
+
+    List<DBEventMemberReturnType> findAllMembers(Long eventId);
 }

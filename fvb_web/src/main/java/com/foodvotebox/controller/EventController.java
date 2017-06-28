@@ -8,8 +8,7 @@ import com.foodvotebox.mapper.FvbEventMapper;
 import com.foodvotebox.mapper.FvbEventRestaurantMapper;
 import com.foodvotebox.mapper.FvbRestaurantMapper;
 import com.foodvotebox.mapper.FvbUserMapper;
-import com.foodvotebox.pojo.FvbEvent;
-import com.foodvotebox.pojo.FvbRestaurant;
+import com.foodvotebox.pojo.*;
 import com.foodvotebox.service.EventService;
 import com.foodvotebox.service.LoginService;
 import com.foodvotebox.service.RestaurantService;
@@ -20,14 +19,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by FYG on 17/6/22.
  */
@@ -76,18 +77,22 @@ public class EventController {
         return "error";
     }
 
+
     //owner可以添加，浏览，可以在上一步的时候先把owner加进eventMember表里
     //member可以浏览，如果不是member可以做成直接回到个人界面弹窗
     @RequestMapping("event{eventId}")
-    public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model) {
+    public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model, HttpServletRequest request) {
         FvbEvent event = fvbEventMapper.queryById(eventId);
         FvbUser user = (FvbUser)session.getAttribute("newUser");
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        request.setAttribute("memberList", members);
+        model.put("memberList", members);
         model.put("user", user);
         model.put("event", event);
         //if (userId在member表里) ｛return eventPage;｝
-        if (event.getOwnerId() == user.getUserId()) {
-            //return "eventPage?..."
-        }
+//        if (event.getOwnerId() == user.getUserId()) {
+//            //return "eventPage?..."
+//        }
         logger.log(Level.INFO, event.toString());
         return "eventPage";
     }
@@ -118,7 +123,7 @@ public class EventController {
         //logger.log(Level.INFO, eventId.toString());
         if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
             !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-            
+
             return false;
         }
         eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
@@ -139,16 +144,15 @@ public class EventController {
     }
 
     @RequestMapping(value = "event{eventId}/addMember", method = RequestMethod.POST)
-    public @ResponseBody boolean addMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+    public @ResponseBody List<DBEventMemberReturnType> addMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         FvbUser user = fvbUserMapper.queryByUserName(request.getParameter("memberName"));
-        //logger.log(Level.INFO, user.toString());
-        //logger.log(Level.INFO, eventId.toString());
-        if (user == null ||
-                !eventService.findEventMember(eventId, user.getUserId())) {
-            return false;
-        }
+//        if (user == null ||
+//                !eventService.findEventMember(eventId, user.getUserId())) {
+//            return "false";
+//        }
         eventService.insertEventMember(eventId, user.getUserId());
-        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
-        return true;
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        return members;
     }
+
 }
