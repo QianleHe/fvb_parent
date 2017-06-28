@@ -11,6 +11,7 @@ public interface FvbFriendService {
     public void addFriend(long userId, long friendId, String friendName);
     public void addFriend(long userId, String friendName);
     public void deleteFriend(long userId, long friendId);
+    public boolean deleteFriend(long userId, String friendName);
     public boolean cannotAddFriend(long userId, String friendName);
     public List<FvbFriend> displayFriend(long userId);
 }

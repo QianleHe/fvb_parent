@@ -317,6 +317,8 @@
             <a class="mdl-navigation__link" href="/fvb_web/userInfo">Check UserInfo</a>
             <a class="mdl-navigation__link" href="/fvb_web/updateUser">UPDATE BIO</a>
             <a class="mdl-navigation__link" href="/fvb_web/updatePassword">UPDATE PASSWORD</a>
+            <a class="mdl-navigation__link" href="/fvb_web/addFriend">Add Friend</a>
+            <a class="mdl-navigation__link" href="/fvb_web/deleteFriend">Delete Friend</a>
 
         </nav>
     </div>
