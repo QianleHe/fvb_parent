@@ -37,6 +37,17 @@ public class FvbFriendServiceImpl implements FvbFriendService {
     }
 
     @Override
+    public boolean deleteFriend(long userId, String friendName) {
+        FvbUser friend = fvbUserMapper.queryByUserName(friendName);
+        if (friend != null){
+            fvbFriendMapper.deleteFriend(userId, friend.getUserId());
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
     public boolean cannotAddFriend(long userId, String friendName) {
         //FIXME: WHEN CANNOT FIND FRIEND, IT IS SET TO TRUE.
         FvbUser friend = fvbUserMapper.queryByUserName(friendName);

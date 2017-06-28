@@ -193,4 +193,23 @@ public class UserController {
 		model.put("user",user);
 		return "loginSuccess";
 	}
+	@RequestMapping("/deleteFriend")
+	public String gotoDeleteFriend(HttpSession session){
+        if (session == null){
+            return "login";
+        }
+        return "deleteFriend";
+    }
+    @RequestMapping("/deleteFriend/do")
+	public String doDeleteFriend(HttpSession session, @RequestParam("friendname") String friendName, Map<String,Object> model){
+        if (session == null){
+            return "login";
+        }
+        FvbUser user = (FvbUser) session.getAttribute("newUser");
+        if (user!= null){
+            fvbFriendService.deleteFriend(user.getUserId(),friendName);
+        }
+        model.put("user",user);
+        return "loginSuccess";
+    }
 }
