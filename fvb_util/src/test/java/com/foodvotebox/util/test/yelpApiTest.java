@@ -25,4 +25,10 @@ public class yelpApiTest {
         JSONObject object = restaurant.getResByLocation(47.6638866,-122.31430569999999, 1);
         System.out.println(object.toString());
     }
+
+    @Test
+    public void test3() {
+        JSONObject object = restaurant.getRes("", "seattle",47.6638866,-122.31430569999999,2000,"food",1,1,"best_match","1,2,3",false,"default");
+        System.out.println(object.toString());
+    }
 }
