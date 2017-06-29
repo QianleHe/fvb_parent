@@ -1,6 +1,7 @@
 package com.foodvotebox.controller;
 
 import com.FoodVoteBox.yelpApi.GetRestaurant;
+import com.foodvotebox.pojo.YelpQueryPojo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,5 +52,47 @@ public class YelpRestaurantController {
         model.put("errorInfo", object.toString());
         String resInfo = object.toString();
         return resInfo;
+    }
+
+
+    @RequestMapping(value = "/listAllRestaurants")
+    @ResponseBody
+    public String getAllRes(YelpQueryPojo yelpQueryPojo) {
+        // location must has one
+        if (yelpQueryPojo.getTerm() == null) {
+            yelpQueryPojo.setTerm("");
+        }
+        if (yelpQueryPojo.getLocation() == null && (yelpQueryPojo.getLatitude() == null && yelpQueryPojo.getLongitude() == null)) {
+            yelpQueryPojo.setLocation("Seattle");
+            yelpQueryPojo.setLatitude(0.0);
+            yelpQueryPojo.setLongitude(0.0);
+        }
+        if (yelpQueryPojo.getRedis() == null) {
+            yelpQueryPojo.setRedis(2000);
+        }
+        if (yelpQueryPojo.getSort_by() == null) {
+            yelpQueryPojo.setSort_by("best_match");
+        }
+        if (yelpQueryPojo.getCategories() == null) {
+            yelpQueryPojo.setCategories("food");
+        }
+        if (yelpQueryPojo.getLimit() == null) {
+            yelpQueryPojo.setLimit(40);
+        }
+        yelpQueryPojo.setOffset(0);
+        if (yelpQueryPojo.getPrice() == null) {
+            yelpQueryPojo.setPrice("1,2,3,4");
+        }
+        if (yelpQueryPojo.getOpen_now() == null) {
+            yelpQueryPojo.setOpen_now(false);
+        }
+        if (yelpQueryPojo.getAttributes() == null) {
+            yelpQueryPojo.setAttributes("default");
+        }
+        JSONObject object = getRestaurant.getRes(yelpQueryPojo.getTerm(), yelpQueryPojo.getLocation(), yelpQueryPojo.getLatitude(), yelpQueryPojo.getLongitude(),
+                yelpQueryPojo.getRedis(), yelpQueryPojo.getCategories(), yelpQueryPojo.getLimit(), yelpQueryPojo.getOffset(), yelpQueryPojo.getSort_by(), yelpQueryPojo.getPrice(),
+                yelpQueryPojo.getOpen_now(), yelpQueryPojo.getAttributes());
+        String Json = object.toString();
+        return Json;
     }
 }
