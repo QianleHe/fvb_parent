@@ -15,13 +15,13 @@
 <body>
 
 <h1>${event.eventName}</h1>
+<h2>Hi! ${user.username}</h2>
 <h2>The event will be hold on ${event.eventDate}</h2>
 <p>${event.description}</p>
-<a href="/fvb_web/event${event.eventId}/deleteEvent">Delete</a>
 <%--<button type="submit" href="/fvb_web/event${event.eventId}/deleteEvent">Next</button>--%>
-<h1>Add restaurants </h1>
+<h1>restaurants</h1>
 
-<h1>Add Members </h1>
+<h1>Members</h1>
 <div id="memberDiv">
     <table id="memeberTable">
         <div id="InitialMemberDisplay">
@@ -47,7 +47,6 @@
                 }
             %>
         </div>
-        <div id = "showdiv"></div>
     </table>
 </div>
 

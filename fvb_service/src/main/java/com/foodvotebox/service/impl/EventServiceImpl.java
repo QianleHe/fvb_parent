@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 @Service(value = "eventService")
 public class EventServiceImpl implements EventService, Serializable {
 
+
     @Autowired(required = false)
     public FvbEventMapper fvbEventMapper;
 
@@ -47,6 +48,11 @@ public class EventServiceImpl implements EventService, Serializable {
         newEvent.setOwnerId(userId);
         fvbEventMapper.createEventAndGetId(newEvent);
         return newEvent.getEventId();
+    }
+
+    @Override
+    public FvbEvent getEventById(Long eventId) {
+        return fvbEventMapper.queryById(eventId);
     }
 
     @Override

@@ -76,8 +76,8 @@ public class UserController {
 	public String doSuccess(@PathVariable("username") String username, HttpSession session, Map<String, Object> model) {
 		FvbUser user = (FvbUser)session.getAttribute("newUser");
 		FvbUser checkUser = fvbUserMapper.queryByUserName(username);
-		if (checkUser == null) {
-			if (user.getUserId() == fvbUserMapper.queryByUserName(username).getUserId()) {
+		if (checkUser != null) {
+			if (user.getUserId() == checkUser.getUserId()) {
 				//如果ID不同，应该可以浏览但不能修改信息，之后可以加个权限
 				logger.log(Level.INFO, user.toString());
 				model.put("user", user);

@@ -85,6 +85,9 @@ public class EventController {
     public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model, HttpServletRequest request) {
         FvbEvent event = fvbEventMapper.queryById(eventId);
         FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (user.getUserId() != eventService.getEventById(eventId).getOwnerId()) {
+            return "redirect:/" + user.getUsername();
+        }
         List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
         request.setAttribute("memberList", members);
         model.put("memberList", members);
@@ -101,6 +104,9 @@ public class EventController {
     @RequestMapping("listEvent{eventId}/deleteEvent")
     public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
         FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (user.getUserId() != eventService.getEventById(eventId).getOwnerId()) {
+            return "redirect:/" + user.getUsername();
+        }
         fvbEventMapper.deleteEvent(eventId);
         return "redirect:/" + user.getUsername();
     }
@@ -156,16 +162,42 @@ public class EventController {
         return members;
     }
 
+    //只有owner可以delete
+    //owner不能delete自己
     @RequestMapping(value = "listEvent{eventId}/deleteMember", method = RequestMethod.GET)
     public @ResponseBody Object deleteMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         String temp = request.getParameter("memberId");
         System.out.println(temp);
         Long memberId = Long.valueOf(temp);
+        if (memberId == eventService.getEventById(eventId).getOwnerId()) {
+            List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+            return members;
+        }
         eventService.deleteEventMember(eventId, memberId);
         List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
         return members;
     }
 
+    @RequestMapping("event{eventId}")
+    public String votePage(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model, HttpServletRequest request) {
+        FvbEvent event = fvbEventMapper.queryById(eventId);
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (eventService.findEventMember(eventId, user.getUserId())){
+            //you are not in this event(JS显示)
+            return "redirect:" + user.getUsername();
+        }
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        request.setAttribute("memberList", members);
+        model.put("memberList", members);
+        model.put("user", user);
+        model.put("event", event);
+        //if (userId在member表里) ｛return eventPage;｝
+//        if (event.getOwnerId() == user.getUserId()) {
+//            //return "eventPage?..."
+//        }
+        logger.log(Level.INFO, event.toString());
+        return "votePage";
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.foodvotebox.service;
 
 import com.foodvotebox.pojo.DBEventMemberReturnType;
+import com.foodvotebox.pojo.FvbEvent;
 
 import java.util.List;
 
@@ -8,6 +9,8 @@ import java.util.List;
  * Created by FYG on 17/6/22.
  */
 public interface EventService {
+    FvbEvent getEventById(Long eventId);
+
     Long createEvent(Long userId, String eventName, String eventDate, String description);
 
     void deleteEvent(Long eventId);

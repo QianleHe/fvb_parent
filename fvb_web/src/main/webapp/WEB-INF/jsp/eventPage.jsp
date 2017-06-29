@@ -194,7 +194,7 @@
                     }
                 },
                 error: function(){
-                    alert("Delet member failed");
+                    alert("Delete member failed");
                 }
             });
         }
