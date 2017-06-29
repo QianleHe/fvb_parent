@@ -19,7 +19,8 @@ CREATE TABLE `fvb_user` (
   PRIMARY KEY (`userid`),
   UNIQUE KEY `username` (`username`) USING BTREE,
   UNIQUE KEY `phone` (`phone`) USING BTREE,
-  UNIQUE KEY `email` (`email`) USING BTREE
+  UNIQUE KEY `email` (`email`) USING BTREE,
+  UNIQUE KEY `picid` (`picid`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 

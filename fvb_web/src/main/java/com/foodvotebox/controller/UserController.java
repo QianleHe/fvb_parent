@@ -107,7 +107,7 @@ public class UserController {
             model.put("errorInfo", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
             return "error";
         }
-		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
+		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getPicid());
 		return "login";
 	}
 

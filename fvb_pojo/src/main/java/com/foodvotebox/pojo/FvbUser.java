@@ -17,6 +17,8 @@ public class FvbUser {
 
     private Date updated;
 
+    private String picid;
+
 	public Long getUserId() {
 		return userid;
 	}
@@ -73,10 +75,14 @@ public class FvbUser {
 		this.updated = updated;
 	}
 
+	public String getPicid() { return picid; }
+
+	public void setPicid(String picid) { this.picid = picid;}
+
 	@Override
 	public String toString() {
 		return "FvbUser [id=" + userid + ", username=" + username + ", password=" + password + ", phone=" + phone
-				+ ", email=" + email + ", created=" + created + ", updated=" + updated + "]";
+				+ ", email=" + email + ", created=" + created + ", updated=" + updated + " picid=" + picid + "]";
 	}
 
 	@Override
@@ -88,18 +94,20 @@ public class FvbUser {
 
 		if (!userid.equals(user.userid)) return false;
 		if (!username.equals(user.username)) return false;
-		if (!password.equals(user.password)) return false;
+		if (password != null ? !password.equals(user.password) : user.password != null) return false;
 		if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
-		return email != null ? email.equals(user.email) : user.email == null;
+		if (email != null ? !email.equals(user.email) : user.email != null) return false;
+		return picid != null ? picid.equals(user.picid) : user.picid == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = userid.hashCode();
 		result = 31 * result + username.hashCode();
-		result = 31 * result + password.hashCode();
+		result = 31 * result + (password != null ? password.hashCode() : 0);
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
 		result = 31 * result + (email != null ? email.hashCode() : 0);
+		result = 31 * result + (picid != null ? picid.hashCode() : 0);
 		return result;
 	}
 }
