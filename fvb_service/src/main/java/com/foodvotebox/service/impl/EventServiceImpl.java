@@ -3,17 +3,16 @@ package com.foodvotebox.service.impl;
 import com.foodvotebox.mapper.FvbEventMapper;
 import com.foodvotebox.mapper.FvbEventMemberMapper;
 import com.foodvotebox.mapper.FvbEventRestaurantMapper;
+import com.foodvotebox.pojo.DBEventMemberReturnType;
 import com.foodvotebox.pojo.FvbEvent;
 import com.foodvotebox.pojo.FvbEventMember;
 import com.foodvotebox.pojo.FvbEventRestaurant;
 import com.foodvotebox.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,6 +75,17 @@ public class EventServiceImpl implements EventService, Serializable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<DBEventMemberReturnType> findAllMembers(Long eventId) {
+        List<DBEventMemberReturnType> result = fvbEventMemberMapper.findAllMembers(eventId);
+        return result;
+    }
+
+    @Override
+    public void deleteEventMember(Long eventId, Long memberId) {
+        fvbEventMemberMapper.deleteEventMember(eventId, memberId);
     }
 
     //删除失败？exception？数据库有问题需要抛exception不
