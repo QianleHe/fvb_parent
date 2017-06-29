@@ -83,6 +83,11 @@ public class EventServiceImpl implements EventService, Serializable {
         return result;
     }
 
+    @Override
+    public void deleteEventMember(Long eventId, Long memberId) {
+        fvbEventMemberMapper.deleteEventMember(eventId, memberId);
+    }
+
     //删除失败？exception？数据库有问题需要抛exception不
     @Override
     public void deleteEvent(Long eventId) {

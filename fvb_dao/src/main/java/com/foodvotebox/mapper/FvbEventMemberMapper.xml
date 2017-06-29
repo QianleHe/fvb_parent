@@ -35,4 +35,12 @@
  		EM.eventid = #{eventId} AND
 		EM.memberid = U.userid
 	</select>
+
+	<delete id="deleteEventMember">
+		DELETE FROM
+		fvb_eventMember
+		WHERE
+		eventid = #{eventId} AND
+		memberid = #{memberId}
+	</delete>
 </mapper>

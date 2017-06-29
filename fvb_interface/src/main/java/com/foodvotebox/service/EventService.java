@@ -21,4 +21,6 @@ public interface EventService {
     boolean findEventMember(Long eventId, Long memberId);
 
     List<DBEventMemberReturnType> findAllMembers(Long eventId);
+
+    void deleteEventMember(Long eventId, Long memberId);
 }

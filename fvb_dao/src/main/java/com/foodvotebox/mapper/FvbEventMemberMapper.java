@@ -16,4 +16,6 @@ public interface FvbEventMemberMapper {
     FvbEventMember findEventMember(@Param("eventId") Long eventId, @Param("memberId") Long memberId);
 
     List<DBEventMemberReturnType> findAllMembers(@Param("eventId") Long eventId);
+
+    void deleteEventMember(@Param("eventId") Long eventId, @Param("memberId") Long memberId);
 }

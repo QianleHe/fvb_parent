@@ -13,6 +13,7 @@
     <title>${event.eventName}</title>
 </head>
 <body>
+    <%--<h1>${memberList.get(0)}</h1>--%>
     <h1>${event.eventName}</h1>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
@@ -40,6 +41,7 @@
                 <tr>
                     <td><%=list.get(i).getMemberId() %></td>
                     <td><%=list.get(i).getUserName() %></td>
+                    <td><input type="submit" value="Delete" id="<%=list.get(i).getMemberId()%>" onclick="deleteMember(<%=list.get(i).getMemberId()%>)"/></td>
                 </tr>
                 <%
                     }
@@ -64,7 +66,7 @@
                 data: data,
                 type: "POST",
                 dataType: "text",
-                url:"event" + "${event.eventId}" + "/addRestaurant",
+                url:"listEvent" + "${event.eventId}" + "/addRestaurant",
                 success: function(result){
                     //alert(result)
                     if(result == "true")
@@ -85,7 +87,7 @@
                 console.log(data);
                 $.ajax({
                     type: "GET",
-                    url: "event" + "${event.eventId}" + "/validRestName",
+                    url: "listEvent" + "${event.eventId}" + "/validRestName",
                     data: data,
                     dataType: "text",
                     success: function(result){
@@ -108,7 +110,7 @@
                 var data = {memberName: $(this).val()};
                 $.ajax({
                     type: "GET",
-                    url: "event" + "${event.eventId}" + "/validMemberName",
+                    url: "listEvent" + "${event.eventId}" + "/validMemberName",
                     data: data,
                     dataType: "text",
                     success: function(result){
@@ -132,22 +134,67 @@
                 data: data,
                 type: "POST",
                 dataType: "json",
-                url:"event" + "${event.eventId}" + "/addMember",
+                url:"listEvent" + "${event.eventId}" + "/addMember",
                 success: function(result){
-                    $("#showdiv").empty();
-                    $("#memeberTable").remove();
-                    var panelheader = $("<tr><td>UserId</td> <td>UserName</td></tr>");
-                    var panelTable = $("<table></table>");
-                    $("#showdiv").append(panelheader);
-                    for(a of result) {
-                        var panelBody = $("<tr></tr>");
-                        var panelBodyId = $("<td></td>").text(a.memberId);
-                        var panelBodyName = $("<td></td>").text(a.userName);
-                        panelBody.append(panelBodyId,panelBodyName);
-                        panelTable.append(panelBody);
-                    }
+                    if (result) {
+                        $("#showdiv").empty();
+                        $("#memeberTable").remove();
+                        var panelTable = $("<table></table>");
+                        var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
+                        for(a of result) {
+                            var panelBody = $("<tr></tr>");
+                            var panelBodyId = $("<td></td>").text(a.memberId);
+                            var panelBodyName = $("<td></td>").text(a.userName);
+//                            var url = "listEvent" + a.eventid + "/deleteMember" + a.memberId;
+                            var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
+//                            panelBodyDelete.attr("href", url);
+                            panelBodyDelete.attr("id", a.memberId);
+                            panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
+                            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+                            panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
+                            panelTable.append(panelBody);
+                        }
 
-                    $("#showdiv").append(panelTable);
+                        $("#showdiv").append(panelheader,panelTable);
+                    }
+                },
+                error: function(){
+                    alert("No such user or you have already added this user");
+                }
+            });
+        }
+    </script>
+    <script>
+        function deleteMember(memberId){
+            $.ajax({
+                data: {memberId: memberId},
+                type: "GET",
+                dataType: "json",
+                url:"listEvent" + "${event.eventId}" + "/deleteMember",
+                success: function(result){
+                    if (result) {
+                        $("#showdiv").empty();
+                        $("#memeberTable").remove();
+                        var panelTable = $("<table></table>");
+                        var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
+                        for(a of result) {
+                            var panelBody = $("<tr></tr>");
+                            var panelBodyId = $("<td></td>").text(a.memberId);
+                            var panelBodyName = $("<td></td>").text(a.userName);
+//                            var url = "listEvent" + a.eventid + "/deleteMember" + a.memberId;
+                            var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
+                            panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
+                            panelBodyDelete.attr("id", a.memberId);
+                            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+                            panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
+                            panelTable.append(panelBody);
+                        }
+
+                        $("#showdiv").append(panelheader,panelTable);
+                    }
+                },
+                error: function(){
+                    alert("Delet member failed");
                 }
             });
         }
