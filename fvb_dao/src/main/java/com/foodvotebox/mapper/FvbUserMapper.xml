@@ -54,7 +54,7 @@
 	<insert id="addUser">
 		<!-- ignore 主键冲突，报错 -->
 		INSERT ignore INTO fvb_user (username, password, phone, email, created, updated, picid)
-		VALUES (#{userName}, #{password}, #{phone}, #{email}, now(), now(), #{picid})
+		VALUES (#{userName}, #{password}, #{phone}, #{email}, now(), now(), #{picId})
 	</insert>
 
 	<update id="updateUser">
@@ -70,6 +70,13 @@
 		UPDATE fvb_user
 		SET password = #{password},
 			updated = now()
-		WHERE userId = #{userId}
+		WHERE userid = #{userId}
+	</update>
+
+	<update id="updatePic">
+		UPDATE fvb_user
+		SET picid = #{picId},
+			updated = now()
+		WHERE userid = #{userId};
 	</update>
 </mapper>

@@ -387,6 +387,10 @@
                         <td>${user.created}
                         </td>
                     </tr>
+                    WEB-INF/upload/img/user/22.jpeg
+                    <tr>
+                        <td colspan="2"><img src="img/${user.picid}"></td>
+                    </tr>
                 </table>
             </form>
 
