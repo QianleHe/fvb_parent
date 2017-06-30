@@ -44,13 +44,12 @@
             $.ajax({
                 data: data,
                 type: "POST",
-                dataType: "text",
+                dataType: "json",
                 url:"/fvb_web/listRestaurant",
                 success: function(result){
                     //alert(result)
-                    if(result == "true"){
-                        alert("success!!");
-                    }
+                    if (result != "1233")
+                        alert(result.total);
                 }
             });
         }

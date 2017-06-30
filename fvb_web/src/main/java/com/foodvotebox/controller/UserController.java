@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.FoodVoteBox.exception.UserServiceEnum;
 import com.foodvotebox.mapper.FvbUserMapper;
+import com.foodvotebox.pojo.FvbEvent;
 import com.foodvotebox.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,10 +45,7 @@ public class UserController {
 		if (session != null) {
 			FvbUser user = (FvbUser)session.getAttribute("newUser");
 			if (user != null) {
-				UserServiceEnum loginType = loginService.login(user.getEmail(), user.getEmail(), user.getPassword());
-				if (loginType == UserServiceEnum.SIGNIN_SUCCESS) {
-				    return "redirect:" + user.getUsername();
-                }
+				return "redirect:" + user.getUsername();
 			}
 		}
 		return "login";
@@ -77,13 +75,16 @@ public class UserController {
 	@RequestMapping("{username}")
 	public String doSuccess(@PathVariable("username") String username, HttpSession session, Map<String, Object> model) {
 		FvbUser user = (FvbUser)session.getAttribute("newUser");
-		if (user.getUserId() == fvbUserMapper.queryByUserName(username).getUserId()) {
-			//如果ID不同，应该可以浏览但不能修改信息，之后可以加个权限
-			logger.log(Level.INFO, user.toString());
-			model.put("user", user);
-			return "loginSuccess";
+		FvbUser checkUser = fvbUserMapper.queryByUserName(username);
+		if (checkUser != null) {
+			if (user.getUserId() == checkUser.getUserId()) {
+				//如果ID不同，应该可以浏览但不能修改信息，之后可以加个权限
+				logger.log(Level.INFO, user.toString());
+				model.put("user", user);
+				return "loginSuccess";
+			}
+			logger.log(Level.INFO, "You can only visit your profile");
 		}
-		logger.log(Level.INFO, "You can only visit your profile");
 		return "redirect:" + user.getUsername();
 	}
 
@@ -107,7 +108,7 @@ public class UserController {
             model.put("errorInfo", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
             return "error";
         }
-		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
+		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getPicid());
 		return "login";
 	}
 

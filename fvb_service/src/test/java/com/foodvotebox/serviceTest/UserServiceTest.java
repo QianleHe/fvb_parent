@@ -21,7 +21,7 @@ public class UserServiceTest {
 	public void testAddUser() {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");
 		FvbUserMapper fvbUserMapper = applicationContext.getBean(FvbUserMapper.class);
-		fvbUserMapper.addUser("hehehe", "123456", "3333133","je@hotmail.com");
+		fvbUserMapper.addUser("hehehe", "123456", "3333133","je@hotmail.com", null);
 		System.out.println("success!");
 	}
 }

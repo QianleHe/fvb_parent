@@ -10,8 +10,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Created by wuqi on 6/24/17.
  */
 public class FriendServiceTest {
-//    @Test
-//    public void testFriendService(){
+    @Test
+    public void testFriendService(){
 //        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");
 //        FvbFriendMapper fvbFriendMapper = applicationContext.getBean(FvbFriendMapper.class);
 //        System.out.println("before add friend");
@@ -26,5 +26,5 @@ public class FriendServiceTest {
 //            System.out.println(friend);
 //        }
 //        System.out.println("after delete friend");
-//    }
+    }
 }

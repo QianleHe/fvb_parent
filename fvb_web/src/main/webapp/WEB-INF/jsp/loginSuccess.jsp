@@ -156,7 +156,11 @@
             border-bottom-right-radius: 0.5em;
             border-bottom: solid lightgrey;
         }
+        .mdl-layout__drawer-button {
+            top: 10px;
+        }
     </style>
+
 
     <style>
         .demo-layout-transparent {
@@ -184,7 +188,7 @@
 
         .page-content {
             margin-top: 200px;
-            height: 100vh;
+            min-height: 100vh;
             border-radius: 1em;
             /*border: 1px solid;*/
             background: rgba(255, 255, 255,1.0);
@@ -214,9 +218,6 @@
             /*cursor: pointer;*/
             transition: all 0.3s ease-out;
         }
-        /*.button:hover {
-        background: #06D85F;
-        }*/
 
         .overlay {
             position: fixed;
@@ -281,12 +282,56 @@
         }
     </style>
 
-
     <style>
-        .mdl-layout__drawer-button {
-            top: 10px;
+        .card-square.mdl-card {
+            width: 230px;
+            height: 320px;
+            margin: 10px;
+        }
+        .card-square > .mdl-card__title {
+            color: #fff;
+            background-size: 220px auto;
+            background-image: url() bottom right 20% no-repeat #020202;
+            /*background-clip: content-box;*/
+            /*background-color: ;*/
+        }
+        .mdl-card__supporting-text {
+            height:120px;
+            overflow: scroll;
         }
 
+        .card-list-item {
+            width: 100%;
+            height: 100px;
+            overflow: scroll;
+        }
+        .mdl-button {
+            width: 100%;
+        }
+        .mdl-card__supporting-text p {
+            text-align: left;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        #cardBoard {
+            padding:20px;
+        }
+        .container {
+            margin-left: 10px;
+            margin-right: 10px;
+            width:100%;
+        }
+        #jsontext {
+            /*webkit-box-sizing: border-box;*/
+            /*-moz-box-sizing: border-box;*/
+            /*box-sizing: border-box;*/
+            width: 100%;
+            height: 250px;
+        }
+
+        .textcenter {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -319,190 +364,324 @@
             <a class="mdl-navigation__link" href="/fvb_web/updatePassword">UPDATE PASSWORD</a>
             <a class="mdl-navigation__link" href="/fvb_web/addFriend">Add Friend</a>
             <a class="mdl-navigation__link" href="/fvb_web/deleteFriend">Delete Friend</a>
+            <a class="mdl-navigation__link" href="/fvb_web/listEvent">Create an event</a>
+            <a class="mdl-navigation__link" href="/fvb_web/myEvents">My events</a>
 
         </nav>
     </div>
+
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            <%--<div id="login_pop" class="overlay">--%>
-                <%--<div class="popup">--%>
-                    <%--<a class="close" href="#">&times;</a>--%>
-                    <%--<div class="content center">--%>
-                        <%--<h4>LOGIN</h4>--%>
-                        <%--<form action="/fvb_web/login" method="post">--%>
-                            <%--<table>--%>
-                                <%--<tr><td><input id="loginusername" class="top" type='text' name='email' placeholder="Username"></td></tr>--%>
-                                <%--<tr><td><input id="loginpass" class="bottom" type='text' name='password' placeholder="Password"></td></tr>--%>
-                            <%--</table>--%>
-                            <%--<div class="flipbtn"><button id="loginbtn"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>--%>
-                                <%--SUBMIT--%>
-                            <%--</button></div>--%>
-                        <%--</form>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+        <div class="page-content">
+            <div class="container">
+                <%--<form action="#">--%>
+                <div id="searchBar" class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="term">
+                            <label class="mdl-textfield__label" for="term">Term</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="location">
+                            <label class="mdl-textfield__label" for="location">Location</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="category">
+                            <label class="mdl-textfield__label" for="category">Category</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <%--<input class="mdl-textfield__input" type="text" id="category">--%>
+                            <%--<label class="mdl-textfield__label" for="sort">Sort By</label>--%>
+                            <select id="sort" type="text" class="mdl-textfield__input">
+                                <option value="0" disabled selected>Sort By</option>
+                                <option value="0">Best Match</option>
+                                <option value="1">Distance</option>
+                                <option value="2">Highest Rated</option>
+                            </select>
+                            <%--<button id="dropdown" class="mdl-textfield__input mdl-js-button ">--%>
+                            <%--Sort--%>
+                            <%--</button>--%>
 
-            <%--<div id="signup_pop" class="overlay">--%>
-                <%--<div class="popup">--%>
-                    <%--<a class="close" href="#">&times;</a>--%>
-                    <%--<div class="content center">--%>
-                        <%--<h4>SING UP</h4>--%>
-                        <%--<form action="/fvb_web/register/do" method="post">--%>
-                            <%--<table>--%>
-                                <%--<tr><td><input id='signUsername' class="top" type='text' name='username' placeholder="Username"></td></tr>--%>
-                                <%--<tr><td><input id='signEmail'lass="middle" type='text' name='email' placeholder="Email"></td></tr>--%>
-                                <%--<tr><td><input id='signPass' clas="middle" type='text' name='password' placeholder="Password"></td></tr>--%>
-                                <%--<tr><td><input class="bottom" type='text' name='phone' placeholder="Phone Number"></td></tr>--%>
-                            <%--</table>--%>
-                            <%--<div class="flipbtn"><button id='signbtn'class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>--%>
-                                <%--SUBMIT--%>
-                            <%--</button></div>--%>
-                        <%--</form>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+                            <%--<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"--%>
+                                <%--for="dropdown">--%>
+                                <%--<li class="mdl-menu__item">Some Action</li>--%>
+                                <%--<li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>--%>
+                                <%--<li class="mdl-menu__item">Yet Another Action</li>--%>
+                            <%--</ul>--%>
+                            <%--<div id="dropdown"></div>--%>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <button class="textcenter mdl-textfield__input mdl-js-button mdl-button--raised mdl-button--accent" onclick="searchResturantList()">
+                                 SEARCH
+                            </button>
+                        </div>
+                    </div>
 
-            <form name="UserInfo" method="get" >
-                <table width="300" border="1" align="center">
-                    <tr>
-                        <td colspan="2">UserInfo</td>
-                    </tr>
-                    <tr>
-                        <td>UserName:</td>
-                        <td>${user.username}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>${user.email}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>PhoneNumber:</td>
-                        <td>${user.phone}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CreateTime:</td>
-                        <td>${user.created}
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                </div>
+                <%--</form>--%>
+            <%--<table id='jsontest' class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">--%>
+                <%--<thead>--%>
+                    <%--<tr>--%>
+                        <%--<th class="mdl-data-table__cell--non-numeric">URL</th>--%>
+                        <%--<th class="mdl-data-table__cell--non-numeric">Method</th>--%>
+                        <%--<th></th>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='url' class="text" /></td>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='method'  class="text" /></td>--%>
+                        <%--<td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="test('jsontest','url','method')">--%>
+                            <%--Test--%>
+                        <%--</button></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='gurl' class="text" value="/fvb_web/listRestaurant"/></td>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='gmethod'  class="text" value="POST"/></td>--%>
+                        <%--<td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="getResturantList('jsontest','gurl','gmethod')">--%>
+                            <%--Get Restaurant List--%>
+                        <%--</button></td>--%>
+                    <%--</tr>--%>
+                <%--</thead>--%>
+
+                <%--<tbody>--%>
 
 
+                <%--</tbody>--%>
+            <%--</table>--%>
+            <br>
+                <div id="cardBoard" class="row"></div>
+            <br>
+                <%--<textarea id='jsontext'></textarea>--%>
+            </div>
         </div>
     </main>
+
 </div>
 </body>
-
 <script>
-    function flip(id) {
-        $('#'+id)[0].classList.toggle('hover');
+    var onSelect = function(){
+        this.button.innerHTML = this.innerHTML;
     }
 
-    function passwordValidate(pass) {
-        // check if the password meet the mininum requirements
-        console.log('check pass:',pass);
-        if (!pass) {
-            return false;
+    var numberOfDropdowns = 0;
+    function makeDropdown(options,id){
+        // create the button
+        var button = document.createElement('BUTTON');
+        button.id = numberOfDropdowns; // this is how Material Design associates option/button
+        button.setAttribute('class', 'mdl-button mdl-js-button');
+        button.innerHTML = 'Default';
+        document.getElementById(id).appendChild(button);
+
+        // add the options to the button (unordered list)
+        var ul = document.createElement('UL');
+        ul.setAttribute('class', 'mdl-menu mdl-js-menu mdl-js-ripple-effect');
+        ul.setAttribute('for', numberOfDropdowns); // associate button
+        for(var index in options) {
+            // add each item to the list
+            var li = document.createElement('LI');
+            li.setAttribute('class', 'mdl-menu__item');
+            li.innerHTML = options[index];
+            li.button = button;
+            li.onclick = onSelect;
+            ul.appendChild(li);
         }
-        var DEFAULT_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8}/;
-        return pass.match(DEFAULT_PASSWORD_PATTERN);
+        document.getElementById(id).appendChild(ul);
+        // and finally add the list to the HTML
+        numberOfDropdowns++;
     }
 
-    function userNameValidate(username) {
-        console.log('check username',username);
-        if (!username || typeof(username)!= 'string' || username.length == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    function emailValidate(email) {
-        console.log('in check email',email);
-        if (!email || typeof(email)!= 'string' || email.length == 0) {
-            return false;
-        }
-        var DEFAULT_EMAIL_PATTERN = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-        return email.match(DEFAULT_EMAIL_PATTERN);
-
-    }
-
-    function loginValidate(username,pass,button,email) {
-        $('#'+pass).on('keyup',function () {
-//            if (passwordValidate($('#'+pass).val())) {
-//                if (userNameValidate($('#'+username).val())) {
-//                    $('#'+button).prop("disabled",false);
-//                } else {
-//                    $('#'+button).prop("disabled",true);
-//                }
-//            } else {
-//                $('#'+button).prop("disabled",true);
-//            }
-
-            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
-                if (!email || emailValidate($('#'+email).val())) {
-                    $('#'+button).prop("disabled",false);
-                } else {
-                    $('#'+button).prop("disabled",true);
-                }
-            } else {
-                $('#'+button).prop("disabled",true);
-            }
-        });
-
-        $('#'+username).on('keyup',function () {
-//            if (userNameValidate($('#'+username).val())) {
-//                if (passwordValidate($('#'+pass).val())) {
-//                    $('#'+button).prop("disabled",false);
-//                } else {
-//                    $('#'+button).prop("disabled",true);
-//                }
-//            } else {
-//                $('#'+button).prop("disabled",true);
-//            }
-
-            if (userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
-                if (!email || emailValidate($('#'+email).val())) {
-                    $('#'+button).prop("disabled",false);
-                } else {
-                    $('#'+button).prop("disabled",true);
-                }
-            } else {
-                $('#'+button).prop("disabled",true);
-            }
-        });
-
-        if (email) {
-            if (emailValidate($('#'+email).val()) && userNameValidate($('#'+username).val()) && passwordValidate($('#'+pass).val())) {
-                $('#'+button).prop("disabled",false);
-            } else {
-                $('#'+button).prop("disabled",true);
-            }
-        }
-    }
-
-    $(document).ready(function () {
-        console.log('ready');
-        loginValidate('loginusername','loginpass','loginbtn');
-        loginValidate('signUsername','signPass','signbtn','signEmail');
-    });
+    var options = ['Best matched','Distance','Highest Rated'];
+//    makeDropdown(options,'dropdown');
 </script>
 
 <script>
-    $.ajax({
-        url:"/fvb_web/userInfo",
-        method:"GET",
-        dataType:"json",
-        success:function(user) {
-            alert("received JSON:" + JSON.stringify(user));//把json的数据打印出来
-        },
-        error:function() {
-            alert("error");
+    var DealQueryParameter = function (config) {
+        var term = $('#term').val();
+        var location = $('#location').val();
+        var category = $('#category').val();
+        term = replaceSpace(term);
+        location = replaceSpace(term);
+        category = replaceSpace(category);
+        if (term) {
+            config['term'] = term;
         }
-    });
+        if (location) {
+            config['location'] = location;
+        }
+        if (category) {
+            config['category_filter'] = category;
+        }
+
+        return config;
+    }
+
+    var replaceSpace = function (str) {
+        if (!str || str.length == 0) {
+            return null;
+        }
+        str = str.trim();
+        str = str.replace(/\s+/g,"+");
+        console.log(str);
+        return str;
+    }
+    var generateCard = function (root,data) {
+        var square = document.createElement('div');
+        square.classList.add('card-square','mdl-card','mdl-shadow--2dp','col-md-4');
+        var title = document.createElement('div');
+        title.classList.add('mdl-card__title','mdl-card--expand');
+        title.style.backgroundImage = "url('"+data.image_url+"')";
+        var title_text = document.createElement('h2');
+        title_text.innerHTML = data.name;
+        title_text.classList.add('mdl-card__title-text');
+        title.appendChild(title_text);
+        square.appendChild(title);
+        var support = document.createElement('div');
+        support.classList.add('mdl-card__supporting-text');
+        var location = document.createElement('P');
+        var loca_text = document.createTextNode('Location:'+data.location.city+'/'+data.location.address1);
+        location.appendChild(loca_text);
+        var price = document.createElement('P');
+        var price_text = document.createTextNode('Price:'+data.price);
+        price.appendChild(price_text);
+        var contact = document.createElement('P');
+        var contact_text = document.createTextNode('Contact:'+data.display_phone);
+        contact.appendChild(contact_text);
+        support.appendChild(location);
+        support.appendChild(price);
+        support.appendChild(contact);
+        square.appendChild(support);
+        var detail = document.createElement('a');
+        // detail.classList.add('mdl-button','mdl-button-colored','mdl-js-button mdl-js-ripple-effect');
+        detail.className = 'mdl-button mdl-button-colored mdl-js-button';
+        detail.innerHTML = 'DETAIL';
+        detail.setAttribute('href',data.url);
+        square.appendChild(detail);
+        root.appendChild(square);
+    }
+
+    var generateCardBoard = function (id,data) {
+        console.log(data);
+        var root = $('#'+id)[0];
+        while (root.firstChild) {
+            root.removeChild(root.firstChild);
+        }
+        for (var i in data) {
+            generateCard(root,data[i]);
+        }
+    }
+
+    var showPosition = function(position) {
+        var config = {};
+//        config['url'] = "/fvb_web/listRestaurant";
+
+        config['url'] = "/fvb_web/listAllRestaurants";
+        config['method'] = "POST";
+        config['table_id'] = "jsontest";
+        config['type'] = 'text';
+//        config['data'] = '{"latitude":"' + position.coords.latitude + '","longitude": "' + position.coords.longitude+'"}';
+        config['data'] ={latitude: position.coords.latitude, longitude: position.coords.longitude};
+//        config = DealQueryParameter(config);
+        var term = $('#term').val();
+        var location = $('#location').val();
+        var category = $('#category').val();
+        term = replaceSpace(term);
+        location = replaceSpace(location);
+        category = replaceSpace(category);
+        if (term) {
+            config['data']['term'] = term;
+        }
+        if (location) {
+            config['data']['location'] = location;
+        }
+        if (category) {
+            config['data']['category_filter'] = category;
+        }
+
+        Comunicate(config,TextResponseHandler,config);
+    }
+
+    var getResturantList = function (talble_id,url_id,method_id) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    var searchResturantList = function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    var test = function (talble_id,url_id,method_id) {
+        var config = {};
+        config['url'] = $('#'+url_id).val();
+        config['method'] = $('#'+method_id).val();
+        config['table_id'] = talble_id;
+        config['type'] = 'json';
+        config['data'] = "";
+        console.log(config);
+        Comunicate(config,JsonResposneHandler,config);
+
+    }
+
+    var Comunicate = function(config,callback,callback_para) {
+        if (!config) {
+            console.log('wrong format');
+            return;
+        }
+        console.log(config);
+        var c_url = config.url;
+        var c_method = config.method;
+        var c_data = config.data;
+        var c_type = config.type;
+        $.ajax({
+            data:c_data,
+            url:c_url,
+            method:c_method,
+            dataType:c_type,
+            success:function (data) {
+//                console.log('Server says: ',data);
+                //could assign some flag in json return value. Based on this value we determine next action
+                callback(data,callback_para);
+            }
+        });
+    }
+    var TextResponseHandler = function(data,callback_para) {
+        var jsonarea = $('#jsontext')[0];
+        var jsonobj = JSON.parse(data);
+        generateCardBoard('cardBoard',jsonobj['businesses']);
+//        jsonarea.innerHTML = prettfy(jsonobj);
+
+//        GenerateCell(callback_para);
+    }
+    var JsonResposneHandler = function(data,callback_para) {
+        var jsonarea = $('#jsontext')[0];
+//        jsonarea.innerHTML = prettfy(data);
+//        GenerateCell(callback_para);
+    }
+    var prettfy = function (json) {
+        return JSON.stringify(json,undefined,4);
+    }
+    var GenerateCell = function(data) {
+//        console.log(data);
+        var row = $('#'+data.table_id)[0].insertRow();
+//        console.log(row);
+        var url = document.createElement('td');
+        var method = document.createElement('td');
+        var blank = document.createElement('td');
+        url.innerHTML = data.url;
+        method.innerHTML = data.method;
+        row.append(url);
+        row.append(method);
+        row.append(blank);
+
+    }
+
 </script>
+
+
 
 </html>
 

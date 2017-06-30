@@ -21,4 +21,26 @@
 		eventid = #{eventId} AND
 		memberid = #{memberId}
 	</select>
+
+	<select id="findAllMembers" resultType="com.foodvotebox.pojo.DBEventMemberReturnType" parameterType="Long">
+		SELECT
+		EM.eventid,
+		EM.memberid,
+		EM.voted,
+		U.username
+		FROM
+		fvb_user AS U,
+		fvb_eventMember AS EM
+		WHERE
+ 		EM.eventid = #{eventId} AND
+		EM.memberid = U.userid
+	</select>
+
+	<delete id="deleteEventMember">
+		DELETE FROM
+		fvb_eventMember
+		WHERE
+		eventid = #{eventId} AND
+		memberid = #{memberId}
+	</delete>
 </mapper>
