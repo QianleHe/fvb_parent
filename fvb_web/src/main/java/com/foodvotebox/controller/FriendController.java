@@ -1,13 +1,17 @@
 package com.foodvotebox.controller;
 
+import com.foodvotebox.pojo.FvbFriend;
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.FvbFriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,5 +59,20 @@ public class FriendController {
         }
         model.put("user",user);
         return "loginSuccess";
+    }
+
+    /**
+     * display friend method, return friend list
+     * @param session
+     * @param model
+     * @return
+     */
+    @RequestMapping("/displayFriend")
+    public @ResponseBody List<FvbFriend> displayFriend(HttpSession session, Map<String, Object> model){
+        FvbUser user = (FvbUser) model.get("user");
+        if (user != null){
+            return fvbFriendService.displayFriend(user.getUserId());
+        }
+        return null;
     }
 }
