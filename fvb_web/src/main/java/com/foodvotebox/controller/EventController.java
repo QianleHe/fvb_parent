@@ -4,12 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodvotebox.mapper.FvbEventMapper;
 import com.foodvotebox.mapper.FvbEventRestaurantMapper;
 import com.foodvotebox.mapper.FvbRestaurantMapper;
 import com.foodvotebox.mapper.FvbUserMapper;
-import com.foodvotebox.pojo.FvbEvent;
-import com.foodvotebox.pojo.FvbRestaurant;
+import com.foodvotebox.pojo.*;
 import com.foodvotebox.service.EventService;
 import com.foodvotebox.service.LoginService;
 import com.foodvotebox.service.RestaurantService;
@@ -20,14 +20,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.UserService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by FYG on 17/6/22.
  */
@@ -71,35 +73,39 @@ public class EventController {
             Long eventId = eventService.createEvent(user.getUserId(), event.getEventName(), event.getEventDate(), event.getDescription());
             //logger.log(Level.INFO, eventId.toString());
             eventService.insertEventMember(eventId, user.getUserId());
-            return "redirect:event" + eventId.toString();
+            return "redirect:listEvent" + eventId.toString();
         }
         return "error";
     }
 
+
     //owner可以添加，浏览，可以在上一步的时候先把owner加进eventMember表里
     //member可以浏览，如果不是member可以做成直接回到个人界面弹窗
-    @RequestMapping("event{eventId}")
-    public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model) {
+    @RequestMapping("listEvent{eventId}")
+    public String eventDisplay(@PathVariable("eventId") Long eventId, HttpSession session, Map<String, Object> model, HttpServletRequest request) {
         FvbEvent event = fvbEventMapper.queryById(eventId);
         FvbUser user = (FvbUser)session.getAttribute("newUser");
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        request.setAttribute("memberList", members);
+        model.put("memberList", members);
         model.put("user", user);
         model.put("event", event);
         //if (userId在member表里) ｛return eventPage;｝
-        if (event.getOwnerId() == user.getUserId()) {
-            //return "eventPage?..."
-        }
+//        if (event.getOwnerId() == user.getUserId()) {
+//            //return "eventPage?..."
+//        }
         logger.log(Level.INFO, event.toString());
         return "eventPage";
     }
 
-    @RequestMapping("event{eventId}/deleteEvent")
+    @RequestMapping("listEvent{eventId}/deleteEvent")
     public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         fvbEventMapper.deleteEvent(eventId);
         return "redirect:/" + user.getUsername();
     }
 
-    @RequestMapping("event{eventId}/validRestName")
+    @RequestMapping("listEvent{eventId}/validRestName")
     public @ResponseBody boolean validRestName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         logger.log(Level.INFO, request.getParameter("restaurantName"));
         if (restaurantService.findRestaurant(request.getParameter("restaurantName"))) {
@@ -111,14 +117,14 @@ public class EventController {
         return false;
     }
 
-    @RequestMapping(value = "event{eventId}/addRestaurant", method = RequestMethod.POST)
+    @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
     public @ResponseBody boolean addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
         //logger.log(Level.INFO, restaurant.toString());
         //logger.log(Level.INFO, eventId.toString());
         if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
             !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-            
+
             return false;
         }
         eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
@@ -126,7 +132,7 @@ public class EventController {
         return true;
     }
 
-    @RequestMapping("event{eventId}/validMemberName")
+    @RequestMapping("listEvent{eventId}/validMemberName")
     public @ResponseBody boolean validMemberName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         logger.log(Level.INFO, request.getParameter("memberName"));
         FvbUser user = fvbUserMapper.queryByUserName(request.getParameter("memberName"));
@@ -138,17 +144,28 @@ public class EventController {
         return false;
     }
 
-    @RequestMapping(value = "event{eventId}/addMember", method = RequestMethod.POST)
-    public @ResponseBody boolean addMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "listEvent{eventId}/addMember", method = RequestMethod.POST)
+    public @ResponseBody Object addMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         FvbUser user = fvbUserMapper.queryByUserName(request.getParameter("memberName"));
-        //logger.log(Level.INFO, user.toString());
-        //logger.log(Level.INFO, eventId.toString());
-        if (user == null ||
-                !eventService.findEventMember(eventId, user.getUserId())) {
-            return false;
-        }
+//        if (user == null ||
+//                !eventService.findEventMember(eventId, user.getUserId())) {
+//            return new String("false");
+//        }
         eventService.insertEventMember(eventId, user.getUserId());
-        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
-        return true;
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        return members;
     }
+
+    @RequestMapping(value = "listEvent{eventId}/deleteMember", method = RequestMethod.GET)
+    public @ResponseBody Object deleteMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        String temp = request.getParameter("memberId");
+        System.out.println(temp);
+        Long memberId = Long.valueOf(temp);
+        eventService.deleteEventMember(eventId, memberId);
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        return members;
+    }
+
+
+
 }
