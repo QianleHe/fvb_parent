@@ -199,5 +199,15 @@ public class EventController {
         return "votePage";
     }
 
+    @RequestMapping("myEvents")
+    public String showMyEvents(Map<String, Object> model, HttpSession session, HttpServletRequest request) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        List<DBEventReturnType> events = eventService.getAllEventsByUserId(user.getUserId());
+        model.put("eventList", events);
+        model.put("user", user);
+        request.setAttribute("eventList", events);
+        System.out.println(events);
+        return "eventList";
+    }
 
 }

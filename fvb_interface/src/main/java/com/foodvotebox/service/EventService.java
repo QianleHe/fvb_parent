@@ -1,6 +1,7 @@
 package com.foodvotebox.service;
 
 import com.foodvotebox.pojo.DBEventMemberReturnType;
+import com.foodvotebox.pojo.DBEventReturnType;
 import com.foodvotebox.pojo.FvbEvent;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface EventService {
     List<DBEventMemberReturnType> findAllMembers(Long eventId);
 
     void deleteEventMember(Long eventId, Long memberId);
+
+    List<DBEventReturnType> getAllEventsByUserId(Long userId);
 }
