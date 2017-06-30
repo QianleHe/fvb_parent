@@ -30,4 +30,24 @@
 		DELETE FROM fvb_event
 		WHERE eventid = #{eventId}
 	</delete>
+
+	<select id="getAllEventsByUserId" resultType="com.foodvotebox.pojo.DBEventReturnType" parameterType="long">
+		SELECT
+		E.eventid,
+		M.memberid,
+		M.voted,
+		E.eventname,
+		E.eventdate,
+		E.ownerid,
+		U.username,
+		E.description
+		FROM
+		fvb_event AS E,
+		fvb_eventMember AS M,
+		fvb_user AS U
+		WHERE
+		M.memberid = #{userId} AND
+		M.eventid = E.eventid AND
+		E.ownerid = U.userid
+	</select>
 </mapper>
