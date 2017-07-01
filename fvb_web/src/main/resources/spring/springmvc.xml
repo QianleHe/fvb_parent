@@ -26,7 +26,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/"></mvc:exclude-mapping>
-			<!--<mvc:exclude-mapping path="/register/**"></mvc:exclude-mapping>-->
+			<mvc:exclude-mapping path="/register/**"></mvc:exclude-mapping>
 			<mvc:exclude-mapping path="/login"></mvc:exclude-mapping>
 			<bean id="loginInterceptor" class="com.foodvotebox.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
