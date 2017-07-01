@@ -1,5 +1,3 @@
-<%@ page import="com.foodvotebox.pojo.DBEventMemberReturnType" %>
-<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: FYG
@@ -8,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.foodvotebox.pojo.DBEventMemberReturnType" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
     <title>${event.eventName}</title>
@@ -17,7 +17,6 @@
     <h1>${event.eventName}</h1>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
-    <a href="/fvb_web/event${event.eventId}/deleteEvent">Delete</a>
     <%--<button type="submit" href="/fvb_web/event${event.eventId}/deleteEvent">Next</button>--%>
     <h1>Add restaurants </h1>
     <input type="text" name="restaurantName" id="restaurantName"/>
@@ -56,6 +55,7 @@
         </table>
     </div>
 
+    <a href="/fvb_web/listEvent${event.eventId}/deleteEvent">Delete</a>
 
     <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
     <script src="../fvb_web/js/eventPage.js"></script>
@@ -194,7 +194,7 @@
                     }
                 },
                 error: function(){
-                    alert("Delet member failed");
+                    alert("Delete member failed");
                 }
             });
         }

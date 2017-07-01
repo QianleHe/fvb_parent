@@ -364,6 +364,8 @@
             <a class="mdl-navigation__link" href="/fvb_web/updatePassword">UPDATE PASSWORD</a>
             <a class="mdl-navigation__link" href="/fvb_web/addFriend">Add Friend</a>
             <a class="mdl-navigation__link" href="/fvb_web/deleteFriend">Delete Friend</a>
+            <a class="mdl-navigation__link" href="/fvb_web/listEvent">Create an event</a>
+            <a class="mdl-navigation__link" href="/fvb_web/myEvents">My events</a>
 
         </nav>
     </div>
