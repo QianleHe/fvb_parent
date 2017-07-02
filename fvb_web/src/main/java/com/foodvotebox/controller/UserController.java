@@ -96,7 +96,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register/do", method = RequestMethod.POST)
 	public  String doRegister(FvbUser user, Map<String, String> model) {
-		//logger.log(Level.INFO, user.getUsername());
+		logger.log(Level.INFO, user.getUsername());
         FvbUser userTemp;
         userTemp = fvbUserMapper.queryByUserName(user.getUsername());
         if (userTemp != null) {
@@ -108,7 +108,8 @@ public class UserController {
             model.put("errorInfo", UserServiceEnum.REPEAT_EMAIL.getStateinfo());
             return "error";
         }
-		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getPicid());
+        System.out.println("11111");
+		loginService.register(user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail());
 		return "login";
 	}
 
