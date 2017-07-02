@@ -61,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void register(String userName, String password, String phone, String email, String picid) {
+    public void register(String userName, String password, String phone, String email) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/ApplicationContext-dao.xml");
         PasswordEncoder encoder = (PasswordEncoder)context.getBean("passwordEncoder");
         String newPassword = "";
@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
             logger.log(Level.INFO, e.toString());
         }
         logger.log(Level.INFO, userName);
-        fvbUserMapper.addUser(userName, newPassword, phone, email, picid);
+        fvbUserMapper.addUser(userName, newPassword, phone, email);
     }
 
 
