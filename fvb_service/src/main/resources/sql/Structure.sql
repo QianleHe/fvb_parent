@@ -97,3 +97,19 @@ CREATE TABLE `fvb_user_friends` (
   CONSTRAINT FOREIGN KEY (`userid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`friendid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='朋友表';
+
+-- Restaurant info which need to be stored in database -----------
+
+
+
+
+
+-- Added Restaurants -----------------
+DROP TABLE IF EXISTS `fvb_added_restaurants`;
+CREATE TABLE `fvb_added_restaurants` (
+  `userid` BIGINT(20) NOT NULL,
+  `restaurantid` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`userid`, `restaurantid`),
+  CONSTRAINT FOREIGN KEY (`userid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`restaurantid`) REFERENCES `fvb_added_restaurants_info` (`restaurantid`) ON DELETE CASCADE
+)
