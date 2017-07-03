@@ -115,7 +115,8 @@ public class UserController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("newUser");
+		if (session.getAttribute("newUser") != null) session.removeAttribute("newUser");
+		if (session.getAttribute("locationnow") != null) session.removeAttribute("locationnow");
 		return "login";
 	}
 

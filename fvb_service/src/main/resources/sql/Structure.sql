@@ -82,10 +82,10 @@ CREATE TABLE `fvb_eventRestaurant` (
 
 
 
-INSERT INTO `fvb_user` VALUES ('9', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '13800000000', 'aaa@qq.com', '2015-05-16 15:19:39', '2015-05-16 15:19:39');
-INSERT INTO `fvb_user` VALUES ('10', 'zhangsan1', '195d91be1e3ba6f1c857d46f24c5a454', '13800000001', null, '2015-05-16 17:13:10', '2015-05-16 17:13:10');
-INSERT INTO `fvb_user` VALUES ('11', 'zhangsan2', '195d91be1e3ba6f1c857d46f24c5a454', '13800000002', null, '2015-05-16 17:25:09', '2015-05-16 17:25:09');
-INSERT INTO `fvb_user` VALUES ('12', 'zhangsan3', '195d91be1e3ba6f1c857d46f24c5a454', '13800000003', null, '2015-05-16 17:27:44', '2015-05-16 17:27:44');
+INSERT INTO `fvb_user` VALUES ('9', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '13800000000', 'aaa@qq.com', '2015-05-16 15:19:39', '2015-05-16 15:19:39', NULL );
+INSERT INTO `fvb_user` VALUES ('10', 'zhangsan1', '195d91be1e3ba6f1c857d46f24c5a454', '13800000001', null, '2015-05-16 17:13:10', '2015-05-16 17:13:10', NULL );
+INSERT INTO `fvb_user` VALUES ('11', 'zhangsan2', '195d91be1e3ba6f1c857d46f24c5a454', '13800000002', null, '2015-05-16 17:25:09', '2015-05-16 17:25:09', NULL );
+INSERT INTO `fvb_user` VALUES ('12', 'zhangsan3', '195d91be1e3ba6f1c857d46f24c5a454', '13800000003', null, '2015-05-16 17:27:44', '2015-05-16 17:27:44', NULL );
 
 -- friend part --------------------
 DROP TABLE IF EXISTS `fvb_user_friends`;

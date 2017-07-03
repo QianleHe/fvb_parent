@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,15 +55,21 @@ public class YelpRestaurantController {
 
     @RequestMapping(value = "/listAllRestaurants")
     @ResponseBody
-    public String getAllRes(YelpQueryPojo yelpQueryPojo) {
+    public String getAllRes(YelpQueryPojo yelpQueryPojo, HttpSession session) {
         // location must has one
         if (yelpQueryPojo.getTerm() == null) {
             yelpQueryPojo.setTerm("");
         }
         if (yelpQueryPojo.getLocation() == null && (yelpQueryPojo.getLatitude() == null && yelpQueryPojo.getLongitude() == null)) {
-            yelpQueryPojo.setLocation("Seattle");
-            yelpQueryPojo.setLatitude(0.0);
-            yelpQueryPojo.setLongitude(0.0);
+            Double[] location = (Double[])session.getAttribute("locationnow");
+            if (location != null) {
+                yelpQueryPojo.setLatitude(location[0]);
+                yelpQueryPojo.setLongitude(location[1]);
+            } else {
+                yelpQueryPojo.setLocation("Seattle");
+                yelpQueryPojo.setLatitude(0.0);
+                yelpQueryPojo.setLongitude(0.0);
+            }
         }
         if (yelpQueryPojo.getRedis() == null) {
             yelpQueryPojo.setRedis(2000);
