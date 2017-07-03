@@ -1,18 +1,21 @@
 package com.foodvotebox.controller;
 
+import com.foodvotebox.mapper.FvbUserMapper;
 import com.foodvotebox.pojo.FvbFriend;
 import com.foodvotebox.pojo.FvbUser;
 import com.foodvotebox.service.FvbFriendService;
+import com.foodvotebox.service.UserService;
+import com.sun.corba.se.impl.io.FVDCodeBaseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by wuqi on 6/28/17.
@@ -22,6 +25,11 @@ import java.util.Map;
 public class FriendController {
     @Autowired
     private FvbFriendService fvbFriendService;
+    @Autowired(required = false)
+    private FvbUserMapper fvbUserMapper;
+
+    private Logger log = Logger.getAnonymousLogger();
+
     @RequestMapping("/addFriend")
     public String gotoAddFriend(HttpSession session){
         if (session == null){
@@ -60,19 +68,63 @@ public class FriendController {
         model.put("user",user);
         return "loginSuccess";
     }
-
-    /**
-     * display friend method, return friend list
-     * @param session
-     * @param model
-     * @return
-     */
-    @RequestMapping("/displayFriend")
-    public @ResponseBody List<FvbFriend> displayFriend(HttpSession session, Map<String, Object> model){
-        FvbUser user = (FvbUser) model.get("user");
-        if (user != null){
-            return fvbFriendService.displayFriend(user.getUserId());
+    @RequestMapping("/checkFriend")
+    @ResponseBody
+    public boolean checkFriend(HttpServletRequest request, HttpServletResponse response){
+        String friendInput = request.getParameter("friendInput");
+        FvbUser fvbUser = fvbUserMapper.queryByUserName(friendInput);
+        if (fvbUser == null){
+            FvbUser fvbUserByEmail = fvbUserMapper.queryByEmail(friendInput);
+            return fvbUserByEmail != null;
+        } else{
+            return true;
         }
-        return null;
     }
+
+    @RequestMapping("displayFriend")
+    public String friendDisplay(HttpSession session, Map<String, Object> model, HttpServletRequest request) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (user == null) {
+            return "login";
+        }
+        List<FvbFriend> friends = fvbFriendService.displayFriend(user.getUserId());
+        request.setAttribute("friendList", friends);
+        model.put("friendList", friends);
+        model.put("user", user);
+        return "deleteFriend";
+    }
+
+    @RequestMapping(value = "deleteFriend", method = RequestMethod.GET)
+    public @ResponseBody Object deleteMember(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        String temp = request.getParameter("friendId");
+        FvbUser user = (FvbUser) session.getAttribute("newUser");
+        Long friendId = Long.valueOf(temp);
+        fvbFriendService.deleteFriend(user.getUserId(),friendId);
+        List<FvbFriend> friends = fvbFriendService.displayFriend(user.getUserId());
+        return friends;
+    }
+    @RequestMapping("/addFriend/bool")
+    public @ResponseBody Object addFriend(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+        FvbUser user = (FvbUser) session.getAttribute("newUser");
+        String friendInput = request.getParameter("friendInput");
+        if (user != null && !fvbFriendService.cannotAddFriend(user.getUserId(),friendInput)) {
+            fvbFriendService.addFriend(user.getUserId(), friendInput);
+        }
+        List<FvbFriend> friends = fvbFriendService.displayFriend(user.getUserId());
+        return friends;
+    }
+//    /**
+//     * display friend method, return friend list
+//     * @param session
+//     * @param model
+//     * @return
+//     */
+//    @RequestMapping("/displayFriend")
+//    public @ResponseBody List<FvbFriend> displayFriend(HttpSession session, Map<String, Object> model){
+//        FvbUser user = (FvbUser) model.get("user");
+//        if (user != null){
+//            return fvbFriendService.displayFriend(user.getUserId());
+//        }
+//        return null;
+//    }
 }
