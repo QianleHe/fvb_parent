@@ -28,15 +28,18 @@ CREATE TABLE `fvb_user` (
 --  Restaurant table  -----------------
 DROP TABLE IF EXISTS `fvb_restaurant`;
 CREATE TABLE `fvb_restaurant` (
-  `restaurantid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `restaurantname` varchar(100) NOT NULL,
-  `address` varchar(150) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `photodir` varchar(100),
+  `restaurantid` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `restaurantname` VARCHAR(100) NOT NULL,
+  `city` VARCHAR(30) DEFAULT NULL,
+  `address` VARCHAR(200) DEFAULT NULL,
+  `phone` VARCHAR(30) DEFAULT NULL,
+  `price` VARCHAR(10) DEFAULT NULL,
+  `rating` VARCHAR(10) DEFAULT NULL,
+  `yelpurl` VARCHAR(200) DEFAULT NULL,
+  `imgurl` VARCHAR(200) DEFAULT NULL,
+  `created` DATETIME DEFAULT NULL,
   PRIMARY KEY (`restaurantid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Restaurant table';
-
-INSERT INTO `fvb_restaurant` VALUES ('', 'KFC', '201 Conant Road, Rochester, NY 14623', '5855856666','');
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='fvb_restaurant';
 
 --  Event table  -------------------------
 
@@ -67,7 +70,7 @@ CREATE TABLE `fvb_eventMember` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='EventMember table';
 
 
--- Restaurant table  --------------
+-- EventRestaurant table  --------------
 
 DROP TABLE IF EXISTS `fvb_eventRestaurant`;
 CREATE TABLE `fvb_eventRestaurant` (
