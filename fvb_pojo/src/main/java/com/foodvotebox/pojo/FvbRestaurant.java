@@ -1,18 +1,28 @@
 package com.foodvotebox.pojo;
 
+import java.util.Date;
+
 /**
  * Created by FYG on 17/6/25.
  */
 public class FvbRestaurant {
-    Long restaurantId;
+    private Long restaurantId;
 
-    String restaurantName;
+    private String restaurantName;
 
-    String address;
+    private String city;
 
-    String phone;
+    private String address;
 
-    String photoDir;
+    private String phone;
+
+    private String rating;
+
+    private String yelpUrl;
+
+    private String imgUrl;
+
+    private Date created;
 
     public Long getRestaurantId() {
         return restaurantId;
@@ -28,6 +38,14 @@ public class FvbRestaurant {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {
@@ -46,12 +64,36 @@ public class FvbRestaurant {
         this.phone = phone;
     }
 
-    public String getPhotoDir() {
-        return photoDir;
+    public String getRating() {
+        return rating;
     }
 
-    public void setPhotoDir(String photoDir) {
-        this.photoDir = photoDir;
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getYelpUrl() {
+        return yelpUrl;
+    }
+
+    public void setYelpUrl(String yelpUrl) {
+        this.yelpUrl = yelpUrl;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override
@@ -59,9 +101,13 @@ public class FvbRestaurant {
         return "FvbRestaurant{" +
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
+                ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
-                ", photoDir='" + photoDir + '\'' +
+                ", rating='" + rating + '\'' +
+                ", yelpUrl='" + yelpUrl + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", created=" + created +
                 '}';
     }
 }
