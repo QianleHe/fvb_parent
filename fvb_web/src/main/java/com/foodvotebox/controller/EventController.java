@@ -111,32 +111,30 @@ public class EventController {
         return "redirect:/" + user.getUsername();
     }
 
-    @RequestMapping("listEvent{eventId}/validRestName")
-    public @ResponseBody boolean validRestName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
-        logger.log(Level.INFO, request.getParameter("restaurantName"));
-        if (restaurantService.findRestaurant(request.getParameter("restaurantName"))) {
-            FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
-            if (eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
-    public @ResponseBody boolean addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
-        FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
-        //logger.log(Level.INFO, restaurant.toString());
-        //logger.log(Level.INFO, eventId.toString());
-        if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
-            !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-
-            return false;
-        }
-        eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
-        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
-        return true;
-    }
+//    @RequestMapping("listEvent{eventId}/validRestName")
+//    public @ResponseBody boolean validRestName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+//        logger.log(Level.INFO, request.getParameter("restaurantName"));
+//        if (restaurantService.findRestaurant(request.getParameter("restaurantName"))) {
+//            FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
+//            if (eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
+//    public @ResponseBody boolean addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+//        FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
+//        if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
+//            !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
+//
+//            return false;
+//        }
+//        eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
+//        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
+//        return true;
+//    }
 
     @RequestMapping("listEvent{eventId}/validMemberName")
     public @ResponseBody boolean validMemberName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {

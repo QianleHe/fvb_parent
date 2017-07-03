@@ -19,18 +19,18 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Logger logger = Logger.getAnonymousLogger();
 
 
-    //这两个方法其实可以改成一个
-    @Override
-    public boolean findRestaurant(String restaurantName) {
-        if (fvbRestaurantMapper.queryByName(restaurantName) != null) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public FvbRestaurant getRestaurant(String restaurantName) {
-        FvbRestaurant restaurant = fvbRestaurantMapper.queryByName(restaurantName);
-        return restaurant;
-    }
+//    //这两个方法其实可以改成一个
+//    @Override
+//    public boolean findRestaurant(String restaurantName) {
+//        if (fvbRestaurantMapper.queryByName(restaurantName) != null) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    @Override
+//    public FvbRestaurant getRestaurant(String restaurantName) {
+//        FvbRestaurant restaurant = fvbRestaurantMapper.queryByName(restaurantName);
+//        return restaurant;
+//    }
 }
