@@ -111,6 +111,12 @@ public class EventController {
         return "redirect:/" + user.getUsername();
     }
 
+    @RequestMapping(value = "listEvent{eventId}/displayRestaurant", method = RequestMethod.GET)
+    public @ResponseBody List<DBEventRestaurantReturnType> displayRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
+    }
+
     @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
     public @ResponseBody List<DBEventRestaurantReturnType> addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         String restaurantName = request.getParameter("restaurantName");
