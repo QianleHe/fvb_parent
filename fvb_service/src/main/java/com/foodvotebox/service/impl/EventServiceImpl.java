@@ -72,6 +72,11 @@ public class EventServiceImpl implements EventService, Serializable {
     }
 
     @Override
+    public void deleteEventRestaurant(Long eventId, Long restaurantId) {
+        fvbEventRestaurantMapper.deleteEventRestaurant(eventId, restaurantId);
+    }
+
+    @Override
     public void insertEventMember(Long eventId, Long memberId) {
         fvbEventMemberMapper.insertMember(eventId, memberId);
     }
@@ -100,5 +105,11 @@ public class EventServiceImpl implements EventService, Serializable {
     @Override
     public void deleteEvent(Long eventId) {
         fvbEventMapper.deleteEvent(eventId);
+    }
+
+    @Override
+    public List<DBEventRestaurantReturnType> getAllRestaurant(Long eventId) {
+        List<DBEventRestaurantReturnType> result = fvbEventRestaurantMapper.getAllRestaurant(eventId);
+        return result;
     }
 }

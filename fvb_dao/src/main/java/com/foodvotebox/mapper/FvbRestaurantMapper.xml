@@ -4,22 +4,27 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.foodvotebox.mapper.FvbRestaurantMapper">
 
-	<!--<select id="findRestaurantByAddr" resultType="com.foodvotebox.pojo.FvbRestaurant" parameterType="String">-->
-		<!--SELECT-->
-		<!--restaurantid,-->
-		<!--restaurantname,-->
-		<!--city,-->
-		<!--address,-->
-		<!--phone,-->
-		<!--rating,-->
-		<!--yelpurl,-->
-		<!--imgurl,-->
-		<!--created-->
-		<!--FROM-->
-		<!--fvb_restaurant-->
-		<!--WHERE-->
-		<!--restaurantname = #{restaurantName} AND-->
-		<!--city = #{city} AND-->
-		<!--address = #{address}-->
-	<!--</select>-->
+	<select id="findRestaurantByAddr" resultType="com.foodvotebox.pojo.FvbRestaurant" parameterType="String">
+		SELECT
+		restaurantid,
+		restaurantname,
+		city,
+		address,
+		phone,
+		rating,
+		yelpurl,
+		imgurl,
+		updated
+		FROM
+		fvb_restaurant
+		WHERE
+		restaurantname = #{restaurantName} AND
+		city = #{city} AND
+		address = #{address}
+	</select>
+
+	<insert id="insertRestaurant" useGeneratedKeys="true" keyProperty="restaurantId" parameterType="com.foodvotebox.pojo.FvbRestaurant">
+		INSERT ignore INTO fvb_restaurant (restaurantname, city, address, phone, price, rating, yelpurl, imgurl, updated)
+		VALUES (#{restaurantName}, #{city}, #{address}, #{phone}, #{price}, #{rating}, #{yelpUrl}, #{imgUrl}, now());
+	</insert>
 </mapper>
