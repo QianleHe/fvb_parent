@@ -16,13 +16,15 @@ public class FvbRestaurant {
 
     private String phone;
 
+    private String price;
+
     private String rating;
 
     private String yelpUrl;
 
     private String imgUrl;
 
-    private Date created;
+    private Date updated;
 
     public Long getRestaurantId() {
         return restaurantId;
@@ -88,12 +90,20 @@ public class FvbRestaurant {
         this.imgUrl = imgUrl;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getUpdated() {
+        return updated;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     @Override
@@ -104,10 +114,11 @@ public class FvbRestaurant {
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", price='" + price + '\'' +
                 ", rating='" + rating + '\'' +
                 ", yelpUrl='" + yelpUrl + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", created=" + created +
+                ", updated=" + updated +
                 '}';
     }
 }
