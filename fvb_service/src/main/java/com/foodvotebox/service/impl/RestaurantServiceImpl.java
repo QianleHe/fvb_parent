@@ -33,4 +33,27 @@ public class RestaurantServiceImpl implements RestaurantService {
 //        FvbRestaurant restaurant = fvbRestaurantMapper.queryByName(restaurantName);
 //        return restaurant;
 //    }
+
+    @Override
+    public FvbRestaurant findRestaurantByAddr(String restaurantName, String city, String address) {
+        FvbRestaurant restaurant = fvbRestaurantMapper.findRestaurantByAddr(restaurantName, city, address);
+        return restaurant;
+    }
+
+    @Override
+    public Long insertRestaurant(String restaurantName, String city, String address, String phone, String price, String rating, String yelpUrl, String imgUrl) {
+        FvbRestaurant restaurant = new FvbRestaurant();
+        restaurant.setRestaurantName(restaurantName);
+        restaurant.setCity(city);
+        restaurant.setAddress(address);
+        restaurant.setPhone(phone);
+        restaurant.setPrice(price);
+        restaurant.setRating(rating);
+        restaurant.setYelpUrl(yelpUrl);
+        restaurant.setImgUrl(imgUrl);
+        fvbRestaurantMapper.insertRestaurant(restaurant);
+        return restaurant.getRestaurantId();
+    }
+
+
 }

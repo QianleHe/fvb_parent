@@ -3,9 +3,9 @@ package com.foodvotebox.pojo;
 import java.util.Date;
 
 /**
- * Created by FYG on 17/6/25.
+ * Created by FYG on 17/7/3.
  */
-public class FvbRestaurant {
+public class DBEventRestaurantReturnType {
     private Long restaurantId;
 
     private String restaurantName;
@@ -24,7 +24,8 @@ public class FvbRestaurant {
 
     private String imgUrl;
 
-    private Date updated;
+
+    private int votes;
 
     public Long getRestaurantId() {
         return restaurantId;
@@ -66,6 +67,14 @@ public class FvbRestaurant {
         this.phone = phone;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getRating() {
         return rating;
     }
@@ -90,25 +99,17 @@ public class FvbRestaurant {
         this.imgUrl = imgUrl;
     }
 
-    public Date getUpdated() {
-        return updated;
+    public int getVotes() {
+        return votes;
     }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 
     @Override
     public String toString() {
-        return "FvbRestaurant{" +
+        return "DBEventRestaurantReturnType{" +
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", city='" + city + '\'' +
@@ -118,7 +119,7 @@ public class FvbRestaurant {
                 ", rating='" + rating + '\'' +
                 ", yelpUrl='" + yelpUrl + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", updated=" + updated +
+                ", votes=" + votes +
                 '}';
     }
 }

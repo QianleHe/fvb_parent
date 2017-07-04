@@ -37,7 +37,7 @@ CREATE TABLE `fvb_restaurant` (
   `rating` VARCHAR(10) DEFAULT NULL,
   `yelpurl` VARCHAR(200) DEFAULT NULL,
   `imgurl` VARCHAR(200) DEFAULT NULL,
-  `created` DATETIME DEFAULT NULL,
+  `updated` DATETIME DEFAULT NULL,
   PRIMARY KEY (`restaurantid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='fvb_restaurant';
 

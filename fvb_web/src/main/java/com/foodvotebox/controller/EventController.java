@@ -111,30 +111,37 @@ public class EventController {
         return "redirect:/" + user.getUsername();
     }
 
-//    @RequestMapping("listEvent{eventId}/validRestName")
-//    public @ResponseBody boolean validRestName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
-//        logger.log(Level.INFO, request.getParameter("restaurantName"));
-//        if (restaurantService.findRestaurant(request.getParameter("restaurantName"))) {
-//            FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
-//            if (eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
-//    public @ResponseBody boolean addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
-//        FvbRestaurant restaurant = restaurantService.getRestaurant(request.getParameter("restaurantName"));
-//        if (!restaurantService.findRestaurant(request.getParameter("restaurantName")) ||
-//            !eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
-//
-//            return false;
-//        }
-//        eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
-//        //fvbEventRestaurantMapper.insertRestaurant(eventId, restaurant.getRestaurantId());
-//        return true;
-//    }
+    @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
+    public @ResponseBody List<DBEventRestaurantReturnType> addRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        String restaurantName = request.getParameter("restaurantName");
+        String city = request.getParameter("city");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String price = request.getParameter("price");
+        String rating = request.getParameter("rating");
+        String yelpUrl = request.getParameter("yelpUrl");
+        String imgUrl = request.getParameter("imgUrl");
+        System.out.println(restaurantName +"     "+city + "     "+ address);
+        FvbRestaurant restaurant = restaurantService.findRestaurantByAddr(restaurantName, city, address);
+        if (restaurant == null) {
+            Long restaurantId = restaurantService.insertRestaurant(restaurantName, city, address, phone, price, rating, yelpUrl, imgUrl);
+            eventService.insertEventRestaurant(eventId, restaurantId);
+        } else if (eventService.findEventRestaurant(eventId, restaurant.getRestaurantId())) {
+            eventService.insertEventRestaurant(eventId, restaurant.getRestaurantId());
+        }
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
+    }
+
+    @RequestMapping(value = "listEvent{eventId}/deleteRestaurant")
+    public @ResponseBody Object deleteRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        String temp = request.getParameter("restaurantId");
+        Long restaurantId = Long.valueOf(temp);
+        eventService.deleteEventRestaurant(eventId, restaurantId);
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
+    }
+
 
     @RequestMapping("listEvent{eventId}/validMemberName")
     public @ResponseBody boolean validMemberName(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
@@ -172,6 +179,12 @@ public class EventController {
             return members;
         }
         eventService.deleteEventMember(eventId, memberId);
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        return members;
+    }
+
+    @RequestMapping(value = "listEvent{eventId}/displayMember", method = RequestMethod.GET)
+    public @ResponseBody Object displayMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
         return members;
     }

@@ -21,4 +21,32 @@
 		eventid = #{eventId} AND
 		restaurantid = #{restaurantId}
 	</select>
+
+	<select id="getAllRestaurant" resultType="com.foodvotebox.pojo.DBEventRestaurantReturnType" parameterType="Long">
+		SELECT
+		R.restaurantid,
+		R.restaurantname,
+		R.city,
+		R.address,
+		R.phone,
+		R.rating,
+		R.yelpurl,
+		R.imgurl,
+		ER.votes
+		FROM
+		fvb_eventRestaurant AS ER,
+		fvb_restaurant AS R
+		WHERE
+		eventid = #{eventId} AND
+		R.restaurantid = ER.restaurantid
+	</select>
+
+	<delete id="deleteEventRestaurant">
+		DELETE FROM
+		fvb_eventRestaurant
+		WHERE
+		eventid = #{eventId} AND
+		restaurantid = #{restaurantId}
+	</delete>
+
 </mapper>
