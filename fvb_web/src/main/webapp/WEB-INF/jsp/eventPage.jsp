@@ -49,6 +49,43 @@
 <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
 <script src="../fvb_web/js/eventPage.js"></script>
 <script>
+    function DisplayMember(result) {
+        $("#showdiv").empty();
+        var panelTable = $("<table></table>");
+        var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
+        for(a of result) {
+            var panelBody = $("<tr></tr>");
+            var panelBodyId = $("<td></td>").text(a.memberId);
+            var panelBodyName = $("<td></td>").text(a.userName);
+            var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
+            panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
+            panelBodyDelete.attr("id", a.memberId);
+            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+            panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
+            panelTable.append(panelBody);
+        }
+        $("#showdiv").append(panelheader,panelTable);
+    }
+
+    $(function (){
+        initialDisplayMember();
+    });
+    function initialDisplayMember() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/displayMember",
+            success: function(result){
+                if (result) {
+                    DisplayMember(result);
+                }
+            },
+            error: function(){
+                alert("Display member failed");
+            }
+        });
+    }
+
     $("#memberName").blur(function () {
         if ($(this).val()) {
             var data = {memberName: $(this).val()};
@@ -70,8 +107,7 @@
             })
         }
     })
-</script>
-<script>
+
     function addMember(){
         var data = {memberName: $("#memberName").val()};
         $.ajax({
@@ -81,24 +117,7 @@
             url:"listEvent" + "${event.eventId}" + "/addMember",
             success: function(result){
                 if (result) {
-                    $("#showdiv").empty();
-                    var panelTable = $("<table></table>");
-                    var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
-                    for(a of result) {
-                        var panelBody = $("<tr></tr>");
-                        var panelBodyId = $("<td></td>").text(a.memberId);
-                        var panelBodyName = $("<td></td>").text(a.userName);
-//                            var url = "listEvent" + a.eventid + "/deleteMember" + a.memberId;
-                        var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
-//                            panelBodyDelete.attr("href", url);
-                        panelBodyDelete.attr("id", a.memberId);
-                        panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
-                        panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-                        panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
-                        panelTable.append(panelBody);
-                    }
-
-                    $("#showdiv").append(panelheader,panelTable);
+                    DisplayMember(result);
                 }
             },
             error: function(){
@@ -106,8 +125,7 @@
             }
         });
     }
-</script>
-<script>
+
     function deleteMember(memberId){
         $.ajax({
             data: {memberId: memberId},
@@ -116,61 +134,11 @@
             url:"listEvent" + "${event.eventId}" + "/deleteMember",
             success: function(result){
                 if (result) {
-                    $("#showdiv").empty();
-                    var panelTable = $("<table></table>");
-                    var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
-                    for(a of result) {
-                        var panelBody = $("<tr></tr>");
-                        var panelBodyId = $("<td></td>").text(a.memberId);
-                        var panelBodyName = $("<td></td>").text(a.userName);
-                        var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
-                        panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
-                        panelBodyDelete.attr("id", a.memberId);
-                        panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-                        panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
-                        panelTable.append(panelBody);
-                    }
-
-                    $("#showdiv").append(panelheader,panelTable);
+                    DisplayMember(result);
                 }
             },
             error: function(){
                 alert("Delete member failed");
-            }
-        });
-    }
-</script>
-<script>
-    $(function (){
-        initialDisplayMember();
-    });
-    function initialDisplayMember() {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url:"listEvent" + "${event.eventId}" + "/displayMember",
-            success: function(result){
-                if (result) {
-                    $("#showdiv").empty();
-                    var panelTable = $("<table></table>");
-                    var panelheader = $("<tr><td>UserId</td> <td>UserName</td> <td></td></tr>");
-                    for(a of result) {
-                        var panelBody = $("<tr></tr>");
-                        var panelBodyId = $("<td></td>").text(a.memberId);
-                        var panelBodyName = $("<td></td>").text(a.userName);
-                        var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
-                        panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
-                        panelBodyDelete.attr("id", a.memberId);
-                        panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-                        panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
-                        panelTable.append(panelBody);
-                    }
-
-                    $("#showdiv").append(panelheader,panelTable);
-                }
-            },
-            error: function(){
-                alert("Display member failed");
             }
         });
     }
