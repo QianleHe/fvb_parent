@@ -121,6 +121,7 @@ public class EventController {
         String rating = request.getParameter("rating");
         String yelpUrl = request.getParameter("yelpUrl");
         String imgUrl = request.getParameter("imgUrl");
+        System.out.println(restaurantName +"     "+city + "     "+ address);
         FvbRestaurant restaurant = restaurantService.findRestaurantByAddr(restaurantName, city, address);
         if (restaurant == null) {
             Long restaurantId = restaurantService.insertRestaurant(restaurantName, city, address, phone, price, rating, yelpUrl, imgUrl);

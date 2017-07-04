@@ -123,7 +123,6 @@
                         var panelBody = $("<tr></tr>");
                         var panelBodyId = $("<td></td>").text(a.memberId);
                         var panelBodyName = $("<td></td>").text(a.userName);
-//                            var url = "listEvent" + a.eventid + "/deleteMember" + a.memberId;
                         var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
                         panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
                         panelBodyDelete.attr("id", a.memberId);
@@ -159,7 +158,6 @@
                         var panelBody = $("<tr></tr>");
                         var panelBodyId = $("<td></td>").text(a.memberId);
                         var panelBodyName = $("<td></td>").text(a.userName);
-//                            var url = "listEvent" + a.eventid + "/deleteMember" + a.memberId;
                         var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
                         panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
                         panelBodyDelete.attr("id", a.memberId);
@@ -214,13 +212,14 @@
         support.appendChild(contact);
         square.appendChild(support);
 //            var addToEvent = document.createElement('button');
-////            addToEvent.setAttribute('type', 'submit');
-////            addToEvent.setAttribute('value', 'ADD');
-//            addToEvent.appendChild(document.createTextNode("Add"));
+        var addToEvent = document.createElement('input');
+        addToEvent.setAttribute('type', 'submit');
+        addToEvent.setAttribute('value', 'ADD');
+        //addToEvent.appendChild(document.createTextNode("Add"));
 //            addToEvent.setAttribute("onclick", 'addRestaurant('+data.name+')');
 //            //addToEvent.setAttribute("onclick", "addRestaurant("+data.name+", "+data.image_url+", "+data.location.city+", "+data.location.address1+", "+data.price+", "+data.display_phone+", "+data.url+")");
-//            //addToEvent.setAttribute('onclick', 'addRestaurant('+data.name+')');
-//            square.appendChild(addToEvent);
+        addToEvent.setAttribute('onclick', "addRestaurant('"+data.name+"', '"+data.location.city+"', '"+data.location.address1+"', '"+data.display_phone+"', '"+data.price+"', '', '"+data.url+"', '"+data.image_url+"')");
+        square.appendChild(addToEvent);
         var detail = document.createElement('a');
         // detail.classList.add('mdl-button','mdl-button-colored','mdl-js-button mdl-js-ripple-effect');
 //            detail.className = 'mdl-button mdl-button-colored mdl-js-button';
@@ -243,15 +242,12 @@
 
     var showPosition = function(position) {
         var config = {};
-//        config['url'] = "/fvb_web/listRestaurant";
-
         config['url'] = "/fvb_web/listAllRestaurants";
         config['method'] = "POST";
         config['table_id'] = "jsontest";
         config['type'] = 'text';
-//        config['data'] = '{"latitude":"' + position.coords.latitude + '","longitude": "' + position.coords.longitude+'"}';
         config['data'] ={latitude: position.coords.latitude, longitude: position.coords.longitude};
-//        config = DealQueryParameter(config);
+
         var term = $('#term').val();
         var location = $('#location').val();
         var category = $('#category').val();
@@ -313,6 +309,32 @@
 //        jsonarea.innerHTML = prettfy(jsonobj);
 
 //        GenerateCell(callback_para);
+    }
+</script>
+
+<script>
+    function addRestaurant(name,city,address,phone,price,rating,yelpUrl,imgUrl){
+        $.ajax({
+            data: {restaurantName: name,
+                   city: city,
+                   address: address,
+                   phone: phone,
+                   price: price,
+                   rating: rating,
+                   yelpUrl: yelpUrl,
+                   imgUrl: imgUrl},
+            type: "POST",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/addRestaurant",
+            success: function(result){
+                if (result) {
+                    alert("HAHAHA");
+                }
+            },
+            error: function(){
+                alert("No such user or you have already added this user");
+            }
+        });
     }
 </script>
 </html>
