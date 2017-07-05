@@ -56,4 +56,12 @@ public class AddRestaurantAsFavouriteServiceImpl implements AddRestaurantAsFavou
         }
         return AddAsFavouriteEnum.REMOVE_SUCCESS;
     }
+
+    @Override
+    public List<FvbRestaurant> listAllFavourite(long userId) {
+        List<FvbRestaurant> list = fvbAddedRestaurantMapper.queryAddedRestaurantsByUserId(userId);
+        return list;
+    }
+
+
 }
