@@ -1,5 +1,6 @@
 package com.foodvotebox.mapper;
 
+import com.foodvotebox.pojo.DBEventMemberReturnType;
 import com.foodvotebox.pojo.DBEventReturnType;
 import com.foodvotebox.pojo.FvbEvent;
 import com.foodvotebox.pojo.FvbRestaurant;
@@ -19,5 +20,4 @@ public interface FvbEventMapper {
     FvbEvent queryById(Long eventId);
 
     List<DBEventReturnType> getAllEventsByUserId(@Param("userId") Long userId);
-
 }

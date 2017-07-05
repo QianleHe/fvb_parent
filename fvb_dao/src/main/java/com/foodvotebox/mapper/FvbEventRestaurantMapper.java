@@ -18,4 +18,6 @@ public interface FvbEventRestaurantMapper {
     List<DBEventRestaurantReturnType> getAllRestaurant(Long eventId);
 
     void deleteEventRestaurant(@Param("eventId") Long eventId, @Param("restaurantId") Long restaurantId);
+
+    void updateVotes(@Param("eventId") Long eventId, @Param("restaurantId") Long restaurantId);
 }
