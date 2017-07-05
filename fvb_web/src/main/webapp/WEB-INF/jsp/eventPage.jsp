@@ -18,9 +18,12 @@
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
     <h1>Add restaurants </h1>
+    <div id = "showRestaurantdiv"></div>
     <%--在这显示已经加入event的Restaurant--%>
     <%--已经加入的restaurantke--%>
+    <label for="term">Term</label>
     <input type="text" name="term" id="term"/>
+    <label for="location">Location</label>
     <input type="text" name="location" id="location"/>
     <select name="show" id="show">
         <option value="1">1</option>
@@ -144,6 +147,90 @@
     }
 </script>
 <script>
+    function displayRestaurant(result) {
+        $("#showRestaurantdiv").empty();
+        var panelTable = $("<table></table>");
+        var panelHeader = $("<tr><td>RestaurantName</td> <td>Location</td> <td>Price</td> <td>Votes</td> <td>Link</td> <td></td></tr>");
+        for(a of result) {
+            var panelBody = $("<tr></tr>");
+            var panelBodyName = $("<td></td>").text(a.restaurantName);
+            var panelBodyLocation = $("<td></td>").text(a.address + "," + a.city);
+            var panelBodyPrice = $("<td></td>").text(a.price);
+            var panelBodyVotes = $("<td></td>").text(a.votes);
+            var panelBodyLink = $("<a></a>").text("Details");
+            panelBodyLink.attr("href", a.yelpUrl);
+            var panelBodyDelete = $("<input type=\"submit\" value=\"Delete\" />")
+            panelBodyDelete.attr("onclick", "deleteRestaurant("+a.restaurantId+")");
+            panelBodyDelete.attr("id", a.restaurantId);
+            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyVotes,panelBodyLink,panelBodyDelete);
+            panelTable.append(panelBody);
+        }
+        $("#showRestaurantdiv").append(panelHeader,panelTable);
+    }
+
+    $(function (){
+        initialDisplayRestaurant();
+    });
+    function initialDisplayRestaurant() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/displayRestaurant",
+            success: function(result){
+                if (result) {
+                    displayRestaurant(result);
+                }
+            },
+            error: function(){
+                alert("Failed todisplay restaurant ");
+            }
+        });
+    }
+
+
+    function addRestaurant(name,city,address,phone,price,rating,yelpUrl,imgUrl){
+        $.ajax({
+            data: {restaurantName: name,
+                city: city,
+                address: address,
+                phone: phone,
+                price: price,
+                rating: rating,
+                yelpUrl: yelpUrl,
+                imgUrl: imgUrl},
+            type: "POST",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/addRestaurant",
+            success: function(result){
+                if (result) {
+                    displayRestaurant(result);
+                }
+            },
+            error: function(){
+                alert("Failed to add restaurant to the event");
+            }
+        });
+    }
+
+    function deleteRestaurant(restaurantId){
+        $.ajax({
+            data: {restaurantId: restaurantId},
+            type: "GET",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/deleteRestaurant",
+            success: function(result){
+                if (result) {
+                    displayRestaurant(result);
+                }
+            },
+            error: function(){
+                alert("Delete restaurant failed");
+            }
+        });
+    }
+</script>
+<script>
     var replaceSpace = function (str) {
         if (!str || str.length == 0) {
             return null;
@@ -179,13 +266,10 @@
         support.appendChild(price);
         support.appendChild(contact);
         square.appendChild(support);
-//            var addToEvent = document.createElement('button');
+
         var addToEvent = document.createElement('input');
         addToEvent.setAttribute('type', 'submit');
         addToEvent.setAttribute('value', 'ADD');
-        //addToEvent.appendChild(document.createTextNode("Add"));
-//            addToEvent.setAttribute("onclick", 'addRestaurant('+data.name+')');
-//            //addToEvent.setAttribute("onclick", "addRestaurant("+data.name+", "+data.image_url+", "+data.location.city+", "+data.location.address1+", "+data.price+", "+data.display_phone+", "+data.url+")");
         addToEvent.setAttribute('onclick', "addRestaurant('"+data.name+"', '"+data.location.city+"', '"+data.location.address1+"', '"+data.display_phone+"', '"+data.price+"', '', '"+data.url+"', '"+data.image_url+"')");
         square.appendChild(addToEvent);
         var detail = document.createElement('a');
@@ -277,32 +361,6 @@
 //        jsonarea.innerHTML = prettfy(jsonobj);
 
 //        GenerateCell(callback_para);
-    }
-</script>
-
-<script>
-    function addRestaurant(name,city,address,phone,price,rating,yelpUrl,imgUrl){
-        $.ajax({
-            data: {restaurantName: name,
-                   city: city,
-                   address: address,
-                   phone: phone,
-                   price: price,
-                   rating: rating,
-                   yelpUrl: yelpUrl,
-                   imgUrl: imgUrl},
-            type: "POST",
-            dataType: "json",
-            url:"listEvent" + "${event.eventId}" + "/addRestaurant",
-            success: function(result){
-                if (result) {
-                    alert("HAHAHA");
-                }
-            },
-            error: function(){
-                alert("No such user or you have already added this user");
-            }
-        });
     }
 </script>
 </html>

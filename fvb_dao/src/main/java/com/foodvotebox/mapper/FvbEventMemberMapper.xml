@@ -43,4 +43,29 @@
 		eventid = #{eventId} AND
 		memberid = #{memberId}
 	</delete>
+
+	<select id="getEventMember" resultType="com.foodvotebox.pojo.DBEventMemberReturnType" parameterType="Long">
+		SELECT
+		EM.eventid,
+		EM.memberid,
+		EM.voted,
+		U.username
+		FROM
+		fvb_user AS U,
+		fvb_eventMember AS EM
+		WHERE
+ 		EM.eventid = #{eventId} AND
+		EM.memberid = U.userid AND
+		EM.memberid = #{userId}
+	</select>
+
+	<update id="updateVoteStatus">
+		UPDATE
+		fvb_eventMember
+		SET
+		voted = TRUE
+		WHERE
+		eventid = #{eventId} AND
+		memberid = #{memberId}
+	</update>
 </mapper>

@@ -49,4 +49,13 @@
 		restaurantid = #{restaurantId}
 	</delete>
 
+	<update id="updateVotes">
+		UPDATE
+		fvb_eventRestaurant
+		SET
+		votes = votes + 1
+		WHERE
+		eventid = #{eventId} AND
+		restaurantid = #{restaurantId}
+	</update>
 </mapper>

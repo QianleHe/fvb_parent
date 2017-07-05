@@ -31,4 +31,10 @@ public interface EventService {
     List<DBEventRestaurantReturnType> getAllRestaurant(Long eventId);
 
     void deleteEventRestaurant(Long eventId, Long restaurantId);
+
+    DBEventMemberReturnType getEventMember(Long userId, Long eventId);
+
+    void updateVoteStatus(Long eventId, Long memberId);
+
+    void updateVotes(Long eventId, Long restaurantId);
 }
