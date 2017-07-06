@@ -20,7 +20,9 @@
 		eventname,
 		eventdate,
 		ownerid,
-		description
+		description,
+		resultid,
+		submitted
 		FROM
 		fvb_event
 		WHERE
@@ -50,4 +52,13 @@
 		M.eventid = E.eventid AND
 		E.ownerid = U.userid
 	</select>
+
+	<update id="updateSubmitStatus">
+		UPDATE
+		fvb_event
+		SET
+		submitted = TRUE
+		WHERE
+		eventid = #{eventId}
+	</update>
 </mapper>

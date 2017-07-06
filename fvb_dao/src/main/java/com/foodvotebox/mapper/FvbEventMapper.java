@@ -20,4 +20,6 @@ public interface FvbEventMapper {
     FvbEvent queryById(Long eventId);
 
     List<DBEventReturnType> getAllEventsByUserId(@Param("userId") Long userId);
+
+    void updateSubmitStatus(@Param("eventId") Long eventId);
 }

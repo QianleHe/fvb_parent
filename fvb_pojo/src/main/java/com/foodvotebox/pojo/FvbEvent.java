@@ -16,6 +16,10 @@ public class FvbEvent {
 
     private String description;
 
+    private Long resultid;
+
+    private boolean submitted;
+
 
     public void setEventId(Long eventId) {
         this.eventId = eventId;
@@ -58,6 +62,23 @@ public class FvbEvent {
         return description;
     }
 
+
+    public Long getResultid() {
+        return resultid;
+    }
+
+    public void setResultid(Long resultid) {
+        this.resultid = resultid;
+    }
+
+    public boolean isSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        this.submitted = submitted;
+    }
+
     @Override
     public String toString() {
         return "FvbEvent{" +
@@ -66,6 +87,8 @@ public class FvbEvent {
                 ", eventDate='" + eventDate + '\'' +
                 ", ownerId=" + ownerId +
                 ", description='" + description + '\'' +
+                ", resultid=" + resultid +
+                ", submitted=" + submitted +
                 '}';
     }
 }

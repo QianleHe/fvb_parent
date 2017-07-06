@@ -124,6 +124,11 @@ public class EventServiceImpl implements EventService, Serializable {
     }
 
     @Override
+    public void updateSubmitStatus(Long eventId) {
+        fvbEventMapper.updateSubmitStatus(eventId);
+    }
+
+    @Override
     public void updateVotes(Long eventId, Long restaurantId) {
         fvbEventRestaurantMapper.updateVotes(eventId, restaurantId);
     }

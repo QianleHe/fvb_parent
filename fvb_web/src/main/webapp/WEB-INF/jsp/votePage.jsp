@@ -27,6 +27,9 @@
     <div id="memberDiv">
         <div id = "showdiv"></div>
     </div>
+    <br/>
+    <a href="/fvb_web/myEvents"> Return to my events</a>
+    <br/>
 
 
 <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
