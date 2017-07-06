@@ -113,18 +113,18 @@ public class FriendController {
         List<FvbFriend> friends = fvbFriendService.displayFriend(user.getUserId());
         return friends;
     }
-//    /**
-//     * display friend method, return friend list
-//     * @param session
-//     * @param model
-//     * @return
-//     */
-//    @RequestMapping("/displayFriend")
-//    public @ResponseBody List<FvbFriend> displayFriend(HttpSession session, Map<String, Object> model){
-//        FvbUser user = (FvbUser) model.get("user");
-//        if (user != null){
-//            return fvbFriendService.displayFriend(user.getUserId());
-//        }
-//        return null;
-//    }
+    /**
+     * display friend method, return friend list
+     * @param session
+     * @param
+     * @return
+     */
+    @RequestMapping("/displayFriendList")
+    public @ResponseBody Object displayFriend(HttpSession session){
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (user == null) return null;
+        List<FvbFriend> friends = fvbFriendService.displayFriend(user.getUserId());
+
+        return friends;
+    }
 }
