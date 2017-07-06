@@ -1,11 +1,12 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by FYG on 17/7/3.
  */
-public class DBEventRestaurantReturnType {
+public class DBEventRestaurantReturnType implements Serializable{
     private Long restaurantId;
 
     private String restaurantName;

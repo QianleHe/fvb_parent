@@ -1,11 +1,12 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by FYG on 17/6/25.
  */
-public class FvbRestaurant {
+public class FvbRestaurant implements Serializable{
     private Long restaurantId;
 
     private String restaurantName;

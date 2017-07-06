@@ -1,9 +1,11 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by qianle on 6/28/17.
  */
-public class YelpQueryPojo {
+public class YelpQueryPojo implements Serializable{
     String term;
     String location;
     Double latitude;
