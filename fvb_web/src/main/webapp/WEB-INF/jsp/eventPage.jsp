@@ -19,6 +19,7 @@
     <p>${event.description}</p>
     <h1>Add restaurants </h1>
     <div id = "showRestaurantdiv"></div>
+    <div id = "showFavorite"> </div>
     <%--在这显示已经加入event的Restaurant--%>
     <%--已经加入的restaurantke--%>
     <label for="term">Term</label>
@@ -34,14 +35,18 @@
     <button onclick="searchRestaurantList()">
         SEARCH
     </button>
-
+    <button onclick="getFavorite()">
+        Add From Favorite
+    </button>
     <br>
     <div id="cardBoard" class="row"></div>
     <br>
 
     <h1>Add Members </h1>
+    <div id="FriendDiv"></div>
     <input type="text" name="memberName" id="memberName"/>
     <input type="submit" value="Add" onclick="addMember();"/>
+    <input type="submit" value="Add from my friend" onclick="displayFriend();">
     <div id="memberDiv">
         <div id = "showdiv"></div>
     </div>
@@ -145,8 +150,93 @@
             }
         });
     }
+    function addFromFriend(name){
+        var data = {memberName: name};
+        $.ajax({
+            data: data,
+            type: "POST",
+            dataType: "json",
+            url:"listEvent" + "${event.eventId}" + "/addMember",
+            success: function(result){
+                if (result) {
+                    DisplayMember(result);
+                }
+            },
+            error: function(){
+                alert("No such user or you have already added this user");
+            }
+        });
+    }
+    function displayFriend(){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "displayFriendList",
+            success: function(result){
+                if (result) {
+                    $("#FriendDiv").empty();
+                    var panelTitle = $("<h2>Friend List</h2>");
+                    var panelTable = $("<table></table>");
+                    var panelheader = $("<tr> <td>UserName</td> <td></td></tr>");
+                    for(a of result) {
+                        var panelBody = $("<tr></tr>");
+                        var panelBodyName = $("<td></td>").text(a.friendname);
+                        var panelBodyDelete = $("<input type=\"submit\" value=\"Add\" />")
+                        panelBodyDelete.attr("onclick", "addFromFriend('"+a.friendname+"')");
+                        panelBodyDelete.attr("id", a.friendname);
+                        panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+                        panelBody.append(panelBodyName,panelBodyDelete);
+                        panelTable.append(panelBody);
+                    }
+
+                    $("#FriendDiv").append(panelTitle,panelheader,panelTable);
+                }
+            },
+            error: function(){
+                alert("Delete friend failed");
+            }
+        });
+    }
 </script>
 <script>
+    function getFavorite() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url:"listAllFavourite"+"${user.userId}",
+            success: function(result){
+                if (result) {
+                    displayFavorite(result);
+                }
+            },
+            error: function(){
+                alert("Failed todisplay restaurant ");
+            }
+        });
+    }
+
+    function displayFavorite(result){
+
+        $("#showFavorite").empty();
+        var panelTable = $("<table></table>");
+        var panelTitle = $("<h1>Favorite List</h1>");
+        var panelHeader = $("<tr><td>RestaurantName</td> <td>Location</td> <td>Price</td> <td>Link</td> <td></td></tr>");
+        for(a of result) {
+            var panelBody = $("<tr></tr>");
+            var panelBodyName = $("<td></td>").text(a.restaurantName);
+            var panelBodyLocation = $("<td></td>").text(a.address + "," + a.city);
+            var panelBodyPrice = $("<td></td>").text(a.price);
+            var panelBodyLink = $("<a></a>").text("Details");
+            panelBodyLink.attr("href", a.yelpUrl);
+            var panelBodyDelete = $("<input type=\"submit\" value=\"Add\" />");
+            panelBodyDelete.attr("onclick", "addRestaurant('"+a.restaurantName+"','"+a.city+"','"+a.address+"','"+a.phone+"','"+a.price+"','"+a.rating+"','"+a.yelpUrl+"','"+a.imgUrl+"')");
+            panelBodyDelete.attr("id", a.restaurantId);
+            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyLink,panelBodyDelete);
+            panelTable.append(panelBody);
+        }
+        $("#showFavorite").append(panelTitle,panelHeader,panelTable);
+    }
     function displayRestaurant(result) {
         $("#showRestaurantdiv").empty();
         var panelTable = $("<table></table>");

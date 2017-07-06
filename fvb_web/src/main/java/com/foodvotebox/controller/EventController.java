@@ -98,7 +98,7 @@ public class EventController {
 //            //return "eventPage?..."
 //        }
         logger.log(Level.INFO, event.toString());
-        return "friendEventPage";
+        return "eventPage";
     }
 
     @RequestMapping("listEvent{eventId}/deleteEvent")

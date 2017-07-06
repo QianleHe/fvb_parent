@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.foodvotebox.pojo.DBEventMemberReturnType" %>
+<%@ page import="com.foodvotebox.pojo.FvbRestaurant" %>
 <%@ page import="com.foodvotebox.pojo.FvbFriend" %>
 <%@ page import="java.util.List" %>
 <html>
@@ -19,7 +20,10 @@
 <h2>The event will be hold on ${event.eventDate}</h2>
 <p>${event.description}</p>
 <h1>Add restaurants </h1>
+
 <div id = "showRestaurantdiv"></div>
+
+<div id = "showFavorite"> </div>
 <%--在这显示已经加入event的Restaurant--%>
 <%--已经加入的restaurantke--%>
 <label for="term">Term</label>
@@ -35,7 +39,9 @@
 <button onclick="searchRestaurantList()">
     SEARCH
 </button>
-
+<button onclick="getFavorite()">
+    Add From Favorite
+</button>
 <br>
 <div id="cardBoard" class="row"></div>
 <br>
@@ -201,6 +207,45 @@
 </script>
 
 <script>
+    function getFavorite() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url:"listAllFavourite"+"${user.userId}",
+            success: function(result){
+                if (result) {
+                    displayFavorite(result);
+                }
+            },
+            error: function(){
+                alert("Failed todisplay restaurant ");
+            }
+        });
+    }
+
+    function displayFavorite(result){
+
+        $("#showFavorite").empty();
+        var panelTable = $("<table></table>");
+        var panelTitle = $("<h1>Favorite List</h1>");
+        var panelHeader = $("<tr><td>RestaurantName</td> <td>Location</td> <td>Price</td> <td>Link</td> <td></td></tr>");
+        for(a of result) {
+            var panelBody = $("<tr></tr>");
+            var panelBodyName = $("<td></td>").text(a.restaurantName);
+            var panelBodyLocation = $("<td></td>").text(a.address + "," + a.city);
+            var panelBodyPrice = $("<td></td>").text(a.price);
+            var panelBodyLink = $("<a></a>").text("Details");
+            panelBodyLink.attr("href", a.yelpUrl);
+            var panelBodyDelete = $("<input type=\"submit\" value=\"Add\" />");
+            panelBodyDelete.attr("onclick", "addRestaurant('"+a.restaurantName+"','"+a.city+"','"+a.address+"','"+a.phone+"','"+a.price+"','"+a.rating+"','"+a.yelpUrl+"','"+a.imgUrl+"')");
+            panelBodyDelete.attr("id", a.restaurantId);
+            panelBodyDelete = $("<td></td>").append(panelBodyDelete);
+            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyLink,panelBodyDelete);
+            panelTable.append(panelBody);
+        }
+        $("#showFavorite").append(panelTitle,panelHeader,panelTable);
+    }
+
     function displayRestaurant(result) {
         $("#showRestaurantdiv").empty();
         var panelTable = $("<table></table>");
