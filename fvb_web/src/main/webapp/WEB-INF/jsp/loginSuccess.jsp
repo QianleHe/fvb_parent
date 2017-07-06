@@ -414,7 +414,7 @@
     <div class="mdl-layout__drawer">
         <!-- <span class="mdl-layout-title">Title</span> -->
         <div class="drawer_pic"></div>
-        <nav class="mdl-navigation">
+        <div class="mdl-navigation">
             <a class="mdl-navigation__link" href="/fvb_web/memberinfo">Check my infomation</a>
             <a class="mdl-navigation__link" href="/fvb_web/">Return to login page</a>
             <a class="mdl-navigation__link" href="/fvb_web/logout">Log out!</a>
@@ -425,7 +425,7 @@
             <a class="mdl-navigation__link" href="/fvb_web/listEvent">Create an event</a>
             <a class="mdl-navigation__link" href="/fvb_web/myEvents">My events</a>
 
-        </nav>
+        </div>
     </div>
 
     <main class="mdl-layout__content">
