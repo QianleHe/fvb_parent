@@ -17,19 +17,14 @@
     </select>
 
     <select id="getMessageList" resultType="com.foodvotebox.pojo.FvbMessage">
---         select count(id) id, msgid, fromid, toid, content, createdDate, hasRead, conversationid,
---         from (  select fromid, toid, content, createdDate, hasRead, conversationid
---                 from fvb_message where fromid = #{userid} or toid = #{userid}
---                 order by createdDate desc)
---             group by conversationid limit #{offset}, #{limit}
-
-        select msgid, fromid, toid, content, createdDate, hasRead, conversationid
-        from fvb_message where fromid = #{userId} or toid = #{userId}
-        order by createdDate desc
-		limit #{offset}, #{limit}
+        SELECT msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        FROM fvb_message
+        WHERE fromid = #{userId} OR toid = #{userId}
+        order by createdDate
+        desc limit #{offset}, #{limit}
     </select>
 
-    <select id="getConversationUnreadMsgs" parameterType="Long">
+    <select id="getConversationUnreadMsgs" parameterType="Long" resultType="Integer">
         select count(msgid) from fvb_message
         where hasRead = 0 and toId = #{userId}
     </select>

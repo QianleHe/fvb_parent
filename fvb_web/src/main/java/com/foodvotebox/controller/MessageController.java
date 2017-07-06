@@ -50,7 +50,7 @@ public class MessageController {
         return messageService.getAllMessagesSent(user.getUserId(), 0, 20);
     }
 
-    @RequestMapping("/updated{userId}&{msgId}")
+    @RequestMapping("/updated/user={userId}&msg={msgId}")
     @ResponseBody
     public String updateUnread(@PathVariable("userId") long userId, @PathVariable("msgId") long msgId) {
         MessageStatusEnum e = messageService.updateHasRead(msgId, userId);
