@@ -1,63 +1,63 @@
 <%--
   Created by IntelliJ IDEA.
-  User: FYG
-  Date: 17/6/23
-  Time: 下午2:16
+  User: wuqi
+  Date: 7/5/17
+  Time: 3:06 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.foodvotebox.pojo.DBEventMemberReturnType" %>
+<%@ page import="com.foodvotebox.pojo.FvbRestaurant" %>
+<%@ page import="com.foodvotebox.pojo.FvbFriend" %>
 <%@ page import="java.util.List" %>
 <html>
 <head>
     <title>${event.eventName}</title>
 </head>
 <body>
-    <%--<h1>${memberList.get(0)}</h1>--%>
-    <h1>${event.eventName}</h1>
-    <h2>The event will be hold on ${event.eventDate}</h2>
-    <p>${event.description}</p>
-    <h1>Add restaurants </h1>
-    <div id = "showRestaurantdiv"></div>
-    <div id = "showFavorite"> </div>
-    <%--在这显示已经加入event的Restaurant--%>
-    <%--已经加入的restaurantke--%>
-    <label for="term">Term</label>
-    <input type="text" name="term" id="term"/>
-    <label for="location">Location</label>
-    <input type="text" name="location" id="location"/>
-    <select name="show" id="show">
-        <option value="1">1</option>
-        <option value="3">3</option>
-        <option value="5">5</option>
-    </select>
-    <%--每个--%>
-    <button onclick="searchRestaurantList()">
-        SEARCH
-    </button>
-    <button onclick="getFavorite()">
-        Add From Favorite
-    </button>
-    <br>
-    <div id="cardBoard" class="row"></div>
-    <br>
+<%--<h1>${memberList.get(0)}</h1>--%>
+<h1>${event.eventName}</h1>
+<h2>The event will be hold on ${event.eventDate}</h2>
+<p>${event.description}</p>
+<h1>Add restaurants </h1>
 
-    <h1>Add Members </h1>
-    <div id="FriendDiv"></div>
-    <input type="text" name="memberName" id="memberName"/>
-    <input type="submit" value="Add" onclick="addMember();"/>
-    <input type="submit" value="Add from my friend" onclick="displayFriend();">
-    <div id="memberDiv">
-        <div id = "showdiv"></div>
-    </div>
-    <br/>
-    <form action="/fvb_web/listEvent${event.eventId}/deleteEvent" method="POST">
-        <button type="sumbit">Delete event</button>
-    </form>
-    <br/>
-    <form action="/fvb_web/listEvent${event.eventId}/submit" method="POST">
-        <button type="sumbit">Submit</button>
-    </form>
+<div id = "showRestaurantdiv"></div>
+
+<div id = "showFavorite"> </div>
+<%--在这显示已经加入event的Restaurant--%>
+<%--已经加入的restaurantke--%>
+<label for="term">Term</label>
+<input type="text" name="term" id="term"/>
+<label for="location">Location</label>
+<input type="text" name="location" id="location"/>
+<select name="show" id="show">
+    <option value="1">1</option>
+    <option value="3">3</option>
+    <option value="5">5</option>
+</select>
+<%--每个--%>
+<button onclick="searchRestaurantList()">
+    SEARCH
+</button>
+<button onclick="getFavorite()">
+    Add From Favorite
+</button>
+<br>
+<div id="cardBoard" class="row"></div>
+<br>
+
+<h1>Add Members </h1>
+<%--friend list --%>
+<div id="FriendDiv"></div>
+
+<input type="text" name="memberName" id="memberName"/>
+<input type="submit" value="Add" id="addMember" onclick="addMember();"/>
+<input type="submit" value="Add from my friend" onclick="displayFriend();">
+<div id="memberDiv">
+    <div id = "showdiv"></div>
+</div>
+
+<a href="/fvb_web/listEvent${event.eventId}/deleteEvent">Delete</a>
 </body>
 
 <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
@@ -75,10 +75,7 @@
             panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
             panelBodyDelete.attr("id", a.memberId);
             panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-            panelBody.append(panelBodyId,panelBodyName);
-            if (!${event.submitted}) {
-                panelBody.append(panelBodyDelete);
-            }
+            panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
             panelTable.append(panelBody);
         }
         $("#showdiv").append(panelheader,panelTable);
@@ -142,6 +139,7 @@
             }
         });
     }
+
 
     function deleteMember(memberId){
         $.ajax({
@@ -207,8 +205,8 @@
         });
     }
 </script>
-<script>
 
+<script>
     function getFavorite() {
         $.ajax({
             type: "GET",
@@ -264,10 +262,7 @@
             panelBodyDelete.attr("onclick", "deleteRestaurant("+a.restaurantId+")");
             panelBodyDelete.attr("id", a.restaurantId);
             panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyVotes,panelBodyLink);
-            if (!${event.submitted}) {
-                panelBody.append(panelBodyDelete);
-            }
+            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyVotes,panelBodyLink,panelBodyDelete);
             panelTable.append(panelBody);
         }
         $("#showRestaurantdiv").append(panelHeader,panelTable);
