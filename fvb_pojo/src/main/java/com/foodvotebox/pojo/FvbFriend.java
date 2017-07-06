@@ -1,10 +1,12 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by wuqi on 6/23/17.
  */
 
-public class FvbFriend {
+public class FvbFriend implements Serializable{
 
     private Long friendid;
 

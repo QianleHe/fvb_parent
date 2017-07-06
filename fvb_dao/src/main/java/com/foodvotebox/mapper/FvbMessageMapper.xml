@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbMessageMapper">
+    <insert id="addMessage" parameterType="com.foodvotebox.pojo.FvbMessage">
+        INSERT INTO fvb_message (fromid, toid, content, createdDate, hasRead, conversationid)
+        VALUES (#{fromId}, #{toId}, #{content}, now(), #{hasRead}, #{conversationId})
+    </insert>
+
+    <select id="getLastestMessages" resultType="com.foodvotebox.pojo.FvbMessage">
+        select msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        from fvb_message
+        where conversationid = #{conversationId}
+        order by createdDate
+        desc limit #{offset}, #{limit}
+    </select>
+
+    <select id="getMessageList" resultType="com.foodvotebox.pojo.FvbMessage">
+--         select count(id) id, msgid, fromid, toid, content, createdDate, hasRead, conversationid,
+--         from (  select fromid, toid, content, createdDate, hasRead, conversationid
+--                 from fvb_message where fromid = #{userid} or toid = #{userid}
+--                 order by createdDate desc)
+--             group by conversationid limit #{offset}, #{limit}
+
+        select msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        from fvb_message where fromid = #{userId} or toid = #{userId}
+        order by createdDate desc
+		limit #{offset}, #{limit}
+    </select>
+
+    <select id="getConversationUnreadMsgs" parameterType="Long">
+        select count(msgid) from fvb_message
+        where hasRead = 0 and toId = #{userId}
+    </select>
+
+    <update id="updateHasRead">
+        update fvb_message
+        set hasRead = #{hasRead}
+        where msgid = #{msgId} and toid = #{userId}
+    </update>
+
+    <delete id="daleteMessage">
+        DELETE FROM fvb_message
+        WHERE msgid = #{msgId}
+    </delete>
+
+    <select id="queryMessageById" parameterType="long" resultType="com.foodvotebox.pojo.FvbMessage">
+        SELECT msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        FROM fvb_message
+        WHERE msgid = #{msgId}
+    </select>
+
+    <select id="getAllMessagesReceived" resultType="com.foodvotebox.pojo.FvbMessage">
+        SELECT msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        FROM fvb_message
+        WHERE toid = #{userId}
+        order by createdDate
+        desc limit #{offset}, #{limit}
+    </select>
+
+    <select id="getAllMessagesSent" resultType="com.foodvotebox.pojo.FvbMessage">
+        SELECT msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        FROM fvb_message
+        WHERE fromid = #{userId}
+        order by createdDate
+        desc limit #{offset}, #{limit}
+    </select>
+
+    <select id="getAllMessageUnread" resultType="com.foodvotebox.pojo.FvbMessage">
+        SELECT msgid, fromid, toid, content, createdDate, hasRead, conversationid
+        FROM fvb_message
+        WHERE toid = #{userId} AND hasRead = 0
+        order by createdDate
+        desc limit #{offset}, #{limit}
+    </select>
+</mapper>

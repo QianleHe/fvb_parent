@@ -1,9 +1,11 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by FYG on 17/6/25.
  */
-public class FvbEventMember {
+public class FvbEventMember implements Serializable{
     Long eventid;
 
     Long memberId;

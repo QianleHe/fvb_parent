@@ -110,4 +110,19 @@ CREATE TABLE `fvb_user_added_restaurants` (
   PRIMARY KEY (`userid`, `restaurantid`),
   CONSTRAINT FOREIGN KEY (`userid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`restaurantid`) REFERENCES `fvb_restaurant` (`restaurantid`) ON DELETE CASCADE
-)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='饭店收藏表';
+
+-- MESSAGE part------------
+DROP TABLE IF EXISTS `fvb_message`;
+CREATE TABLE `fvb_message` (
+  `msgid` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `fromid` BIGINT(20) NOT NULL,
+  `toid` BIGINT(20) NOT NULL ,
+  `content` VARCHAR(500) NOT NULL,
+  `createdDate` DATETIME NOT NULL,
+  `hasRead` BOOLEAN NOT NULL,
+  `conversationid` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`msgid`),
+  CONSTRAINT FOREIGN KEY (`fromid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`toid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='站内信';
