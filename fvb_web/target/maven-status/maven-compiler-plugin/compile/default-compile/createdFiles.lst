@@ -1,0 +1,8 @@
+com/foodvotebox/controller/EventController.class
+com/foodvotebox/controller/AddAsFavouriteController.class
+com/foodvotebox/controller/FriendController.class
+com/foodvotebox/controller/LocationController.class
+com/foodvotebox/controller/YelpRestaurantController.class
+com/foodvotebox/controller/UserController.class
+com/foodvotebox/controller/PicController.class
+com/foodvotebox/interceptor/LoginInterceptor.class

@@ -1,0 +1,7 @@
+com/foodvotebox/mapper/FvbEventMapper.class
+com/foodvotebox/mapper/FvbEventRestaurantMapper.class
+com/foodvotebox/mapper/FvbUserMapper.class
+com/foodvotebox/mapper/FvbFriendMapper.class
+com/foodvotebox/mapper/FvbEventMemberMapper.class
+com/foodvotebox/mapper/FvbAddedRestaurantMapper.class
+com/foodvotebox/mapper/FvbRestaurantMapper.class

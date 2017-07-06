@@ -4,6 +4,7 @@
   Date: 6/17/17
   Time: 6:18 PM
   To change this template use File | Settings | File Templates.
+  auther:wjm
 --%>
 
 <!DOCUTYPE html>
@@ -11,16 +12,31 @@
 
 <head>
     <title>This is FoodVoteBox!</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script>
+    <%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> --%>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
 
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-deep_orange.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="shortcut icon" href="https://github.com/JiamengWang/ImageStore/raw/master/box347643540.ico" type="image/x-icon" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <%-- <!-- Compiled and minified CSS -->--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+
+
 
     <style>
         .flip-container {
@@ -317,8 +333,8 @@
             padding:20px;
         }
         .container {
-            margin-left: 10px;
-            margin-right: 10px;
+            /*margin-left: 10px;*/
+            /*margin-right: 10px;*/
             width:100%;
         }
         #jsontext {
@@ -331,6 +347,49 @@
 
         .textcenter {
             text-align: center;
+        }
+
+        .mdl-textfield{
+          /*width: 20%;*/
+          max-width: 20%;
+        }
+
+        .blockquote {
+          margin: 20px 0;
+          padding-left: 24px;
+          font-weight: 300;
+          text-align: left;
+        }
+        .card-image{
+          /*background-image: url("https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg");*/
+          /*padding-bottom: 73px;*/
+          /*width: 50%;*/
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          /*min-height: 340px;*/
+          background-size: 100% auto;
+          background-repeat: no-repeat;
+          /*opacity: 0;*/
+          /*background-color: rgba(0,0,0,0);*/
+        }
+        /*.card-image img {
+          max-height: 377px;
+        }*/
+        .img {
+          /*z-index: 1112;*/
+          height: auto;
+          /*max-height: 377px;*/
+        }
+        .card-action {
+          text-align: left;
+        }
+        .card {
+          /*max-height: 450px;*/
+        }
+        .card-img-bottom{
+          width: 100%;
+          height: 73px;
         }
     </style>
 </head>
@@ -346,16 +405,16 @@
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <div class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="button mdl-navigation__link" href="/fvb_web/logout">LOGOUT</a>
                 <%--<a class="mdl-navigation__link" href="#signup_pop">SIGN UP</a>--%>
-            </nav>
+            </div>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <!-- <span class="mdl-layout-title">Title</span> -->
         <div class="drawer_pic"></div>
-        <nav class="mdl-navigation">
+        <div class="mdl-navigation">
             <a class="mdl-navigation__link" href="/fvb_web/memberinfo">Check my infomation</a>
             <a class="mdl-navigation__link" href="/fvb_web/">Return to login page</a>
             <a class="mdl-navigation__link" href="/fvb_web/logout">Log out!</a>
@@ -366,7 +425,7 @@
             <a class="mdl-navigation__link" href="/fvb_web/listEvent">Create an event</a>
             <a class="mdl-navigation__link" href="/fvb_web/myEvents">My events</a>
 
-        </nav>
+        </div>
     </div>
 
     <main class="mdl-layout__content">
@@ -388,25 +447,12 @@
                             <label class="mdl-textfield__label" for="category">Category</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <%--<input class="mdl-textfield__input" type="text" id="category">--%>
-                            <%--<label class="mdl-textfield__label" for="sort">Sort By</label>--%>
                             <select id="sort" type="text" class="mdl-textfield__input">
                                 <option value="0" disabled selected>Sort By</option>
                                 <option value="0">Best Match</option>
                                 <option value="1">Distance</option>
                                 <option value="2">Highest Rated</option>
                             </select>
-                            <%--<button id="dropdown" class="mdl-textfield__input mdl-js-button ">--%>
-                            <%--Sort--%>
-                            <%--</button>--%>
-
-                            <%--<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"--%>
-                                <%--for="dropdown">--%>
-                                <%--<li class="mdl-menu__item">Some Action</li>--%>
-                                <%--<li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>--%>
-                                <%--<li class="mdl-menu__item">Yet Another Action</li>--%>
-                            <%--</ul>--%>
-                            <%--<div id="dropdown"></div>--%>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <button class="textcenter mdl-textfield__input mdl-js-button mdl-button--raised mdl-button--accent" onclick="searchResturantList()">
@@ -414,8 +460,8 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
+
                 <%--</form>--%>
             <%--<table id='jsontest' class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">--%>
                 <%--<thead>--%>
@@ -449,12 +495,102 @@
                 <div id="cardBoard" class="row"></div>
             <br>
                 <%--<textarea id='jsontext'></textarea>--%>
+                <div class="col-md-12">
+                  <div id="todo-list-example">
+                    <ul>
+                      <li v-for="(todo,index) in resturants">
+                        <%-- <p class="text-success" v-on:click="getIndex(index)">Text:{{todo.text}}--Vlue:{{todo.value}}</p> --%>
+                        <div class="col-md-12">
+                            <div class="card horizontal hoverable" >
+                                <%-- <div class="card-image"> --%>
+                                <%-- <div class="card-stacked"> --%>
+                                  <div class="card-image card-content" v-bind:style="{'background-image':'url('+todo.image_url+')'}">
+                                    <%-- <img :src="todo.image_url"> --%>
+                                    <%-- <img src="https://github.com/JiamengWang/ImageStore/raw/master/635938589851171129-1119557603_food-buffet-1134498.jpg"> --%>
+                                  </div>
+                                  <%-- <div class="card-img-bottom"> --%>
+                                  <%-- </div> --%>
+                                <%-- </div> --%>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <!--<p>I am a very simple card. I am good at containing small bits of information.</p>-->
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <div class="blockquote condensed light" style="border-left: 5px solid #263238" >
+                                                    <p style="font-size: 35px;">{{todo.name}}</p>
+                                                </div>
+                                            </div>
+                                            <div class=" col s12">
+                                                <div class="blockquote condensed light" style="border-left: 5px solid #263238" >
+                                                    <p style="font-size: 20px">Contact: {{todo.display_phone}}</p>
+                                                    <p v-for="ad in todo.location.display_address"style="font-size: 13px">{{ad}}</p>
+                                                    <p style="font-size: 13px">Web: <a :href="todo.url" class="btn-small waves-effect waves-light" style="font-size: 20px"><i class="material-icons" style="font-size: 15px;color: #263238">web</i></a></p>
+                                                </div>
+                                            </div>
+                                            <div class=" col s12">
+                                            <div class="blockquote condensed light" style="border-left: 5px solid #263238" >
+                                                <p style="font-size: 20px">Price: {{todo.price}}</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <a v-on:click="fav()" class="btn-floating waves-effect waves-light blue-grey darken-4 "><i class="material-icons">add</i></a>
+
+                                        <a v-on:click="fav()" class="blue-grey-text text-darken-4">&nbsp&nbsp&nbsp&nbsp&nbspAdd as favourite</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </li>
+                    </ul>
+                    <%-- <div v-if="isNaN(click)==false">
+                        <span>你点击的索引为: {{ click }}</span>
+                    </div> --%>
+                  </div>
+                </div>
             </div>
+
+
+
+
         </div>
+
+
+
     </main>
 
 </div>
 </body>
+
+<script>
+    Vue.prototype.$consoleLog = function() {console.log(...arguments)}
+    Vue.component('todo-item', {
+
+    props: ['title']
+    })
+    var yelp = new Vue({
+    el: '#todo-list-example',
+    data: {
+        resturants:[
+      	],
+
+      },
+      methods:{
+                getIndex:function(index){
+                    // this.click = 1;
+                    console.log(1,index);
+                },
+                fav:function() {
+                  console.log('you like this resturant!');
+                }
+            }
+    })
+
+</script>
 <script>
     var onSelect = function(){
         this.button.innerHTML = this.innerHTML;
@@ -569,15 +705,13 @@
 
     var showPosition = function(position) {
         var config = {};
-//        config['url'] = "/fvb_web/listRestaurant";
-
         config['url'] = "/fvb_web/listAllRestaurants";
         config['method'] = "POST";
         config['table_id'] = "jsontest";
         config['type'] = 'text';
-//        config['data'] = '{"latitude":"' + position.coords.latitude + '","longitude": "' + position.coords.longitude+'"}';
+        //config['data'] = '{"latitude":"' + position.coords.latitude + '","longitude": "' + position.coords.longitude+'"}';
         config['data'] ={latitude: position.coords.latitude, longitude: position.coords.longitude};
-//        config = DealQueryParameter(config);
+        //config = DealQueryParameter(config);
         var term = $('#term').val();
         var location = $('#location').val();
         var category = $('#category').val();
@@ -641,8 +775,9 @@
             method:c_method,
             dataType:c_type,
             success:function (data) {
-//                console.log('Server says: ',data);
+              // console.log(data);
                 //could assign some flag in json return value. Based on this value we determine next action
+
                 callback(data,callback_para);
             }
         });
@@ -650,23 +785,22 @@
     var TextResponseHandler = function(data,callback_para) {
         var jsonarea = $('#jsontext')[0];
         var jsonobj = JSON.parse(data);
-        generateCardBoard('cardBoard',jsonobj['businesses']);
-//        jsonarea.innerHTML = prettfy(jsonobj);
-
-//        GenerateCell(callback_para);
+        console.log(yelp);
+        yelp.resturants = jsonobj['businesses'];
+        // generateCardBoard('cardBoard',jsonobj['businesses']);
+        //jsonarea.innerHTML = prettfy(jsonobj);
+        //GenerateCell(callback_para);
     }
     var JsonResposneHandler = function(data,callback_para) {
         var jsonarea = $('#jsontext')[0];
-//        jsonarea.innerHTML = prettfy(data);
-//        GenerateCell(callback_para);
+        //jsonarea.innerHTML = prettfy(data);
+        //GenerateCell(callback_para);
     }
     var prettfy = function (json) {
         return JSON.stringify(json,undefined,4);
     }
-    var GenerateCell = function(data) {
-//        console.log(data);
-        var row = $('#'+data.table_id)[0].insertRow();
-//        console.log(row);
+    var GenerateCell = function(data) {//console.log(data);
+        var row = $('#'+data.table_id)[0].insertRow();//console.log(row);
         var url = document.createElement('td');
         var method = document.createElement('td');
         var blank = document.createElement('td');
@@ -683,5 +817,3 @@
 
 
 </html>
-
-
