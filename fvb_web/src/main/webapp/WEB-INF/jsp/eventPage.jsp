@@ -45,8 +45,14 @@
     <div id="memberDiv">
         <div id = "showdiv"></div>
     </div>
-
-    <a href="/fvb_web/listEvent${event.eventId}/deleteEvent">Delete</a>
+    <br/>
+    <form action="/fvb_web/listEvent${event.eventId}/deleteEvent" method="POST">
+        <button type="sumbit">Delete event</button>
+    </form>
+    <br/>
+    <form action="/fvb_web/listEvent${event.eventId}/submit" method="POST">
+        <button type="sumbit">Submit</button>
+    </form>
 </body>
 
 <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
@@ -64,7 +70,10 @@
             panelBodyDelete.attr("onclick", "deleteMember("+a.memberId+")");
             panelBodyDelete.attr("id", a.memberId);
             panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-            panelBody.append(panelBodyId,panelBodyName,panelBodyDelete);
+            panelBody.append(panelBodyId,panelBodyName);
+            if (!${event.submitted}) {
+                panelBody.append(panelBodyDelete);
+            }
             panelTable.append(panelBody);
         }
         $("#showdiv").append(panelheader,panelTable);
@@ -147,6 +156,7 @@
     }
 </script>
 <script>
+
     function displayRestaurant(result) {
         $("#showRestaurantdiv").empty();
         var panelTable = $("<table></table>");
@@ -163,7 +173,10 @@
             panelBodyDelete.attr("onclick", "deleteRestaurant("+a.restaurantId+")");
             panelBodyDelete.attr("id", a.restaurantId);
             panelBodyDelete = $("<td></td>").append(panelBodyDelete);
-            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyVotes,panelBodyLink,panelBodyDelete);
+            panelBody.append(panelBodyName,panelBodyLocation,panelBodyPrice,panelBodyVotes,panelBodyLink);
+            if (!${event.submitted}) {
+                panelBody.append(panelBodyDelete);
+            }
             panelTable.append(panelBody);
         }
         $("#showRestaurantdiv").append(panelHeader,panelTable);

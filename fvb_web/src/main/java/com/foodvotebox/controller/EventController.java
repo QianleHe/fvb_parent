@@ -101,7 +101,13 @@ public class EventController {
         return "eventPage";
     }
 
-    @RequestMapping("listEvent{eventId}/deleteEvent")
+    @RequestMapping(value="listEvent{eventId}/submit", method = RequestMethod.POST)
+    public String submitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+        eventService.updateSubmitStatus(eventId);
+        return "redirect:/event" + eventId.toString();
+    }
+
+    @RequestMapping(value="listEvent{eventId}/deleteEvent", method = RequestMethod.POST)
     public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         if (user.getUserId() != eventService.getEventById(eventId).getOwnerId()) {

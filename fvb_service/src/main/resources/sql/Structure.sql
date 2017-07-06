@@ -50,6 +50,8 @@ CREATE TABLE `fvb_event` (
   `eventdate` datetime NOT NULL,
   `ownerid` bigint(20) NOT NULL,
   `description` varchar(200),
+  `resultid` bigint(20) DEFAULT NULL,
+  `submitted` boolean DEFAULT FALSE,
   PRIMARY KEY (`eventid`),
   KEY `ownerid` (`ownerid`) USING BTREE,
   CONSTRAINT FOREIGN KEY (`ownerid`) REFERENCES `fvb_user` (`userid`) ON DELETE CASCADE

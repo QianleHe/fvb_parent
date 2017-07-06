@@ -37,4 +37,6 @@ public interface EventService {
     void updateVoteStatus(Long eventId, Long memberId);
 
     void updateVotes(Long eventId, Long restaurantId);
+
+    void updateSubmitStatus(Long eventId);
 }
