@@ -20,7 +20,9 @@
 		eventname,
 		eventdate,
 		ownerid,
-		description
+		description,
+		resultid,
+		submitted
 		FROM
 		fvb_event
 		WHERE
@@ -50,4 +52,38 @@
 		M.eventid = E.eventid AND
 		E.ownerid = U.userid
 	</select>
+
+	<update id="updateSubmitStatus">
+		UPDATE
+		fvb_event
+		SET
+		submitted = TRUE
+		WHERE
+		eventid = #{eventId}
+	</update>
+
+	<select id="getFinishedEventByEndTime" resultType="com.foodvotebox.pojo.FvbEvent">
+		SELECT
+		eventid,
+		eventname,
+		eventdate,
+		ownerid,
+		description,
+		resultid,
+		submitted
+		FROM
+		fvb_event
+		WHERE
+		eventdate &lt;= now() AND
+		ISNULL(resultid)
+	</select>
+
+	<update id="updateEventResult">
+		UPDATE
+		fvb_event
+		SET
+		resultid = #{resultId}
+		WHERE
+		eventid = #{eventId}
+	</update>
 </mapper>
