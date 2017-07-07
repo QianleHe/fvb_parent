@@ -15,10 +15,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
-        System.out.println("post URL：" + url);
+        System.out.println("URL：" + url);
         if (url != "") {
             FvbUser user = (FvbUser)request.getSession().getAttribute("newUser");
-            System.out.println(user);
+            //System.out.println(user);
             if (user == null) {
                 response.sendRedirect("/fvb_web/");
                 return false;

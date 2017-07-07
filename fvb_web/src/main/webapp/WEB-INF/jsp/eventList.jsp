@@ -23,7 +23,7 @@
                 <td>Created By</td>
                 <td>Description</td>
                 <td>Already voted</td>
-                <td>Edit event</td>
+                <%--<td>Edit event</td>--%>
             </tr>
             <%
                 List<DBEventReturnType> list = (List)request.getAttribute("eventList");
@@ -37,13 +37,13 @@
                 <td><%=list.get(i).getUserName() %></td>
                 <td><%=list.get(i).getDescription() %></td>
                 <td><%=list.get(i).isVoted() %></td>
-                <%
-                    if (list.get(i).getMemberId() == list.get(i).getOwnerId()) {
-                %>
-                <td><a href="/fvb_web/listEvent<%=list.get(i).getEventId()%>">Edit</a></td>
-                 <%
-                    }
-                 %>
+                <%--<%--%>
+                    <%--if (list.get(i).getMemberId() == list.get(i).getOwnerId()) {--%>
+                <%--%>--%>
+                <%--<td><a href="/fvb_web/listEvent<%=list.get(i).getEventId()%>">Edit</a></td>--%>
+                 <%--<%--%>
+                    <%--}--%>
+                 <%--%>--%>
             </tr>
             <%
                 }

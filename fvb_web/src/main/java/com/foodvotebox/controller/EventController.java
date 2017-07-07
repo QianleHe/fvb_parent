@@ -101,7 +101,13 @@ public class EventController {
         return "eventPage";
     }
 
-    @RequestMapping("listEvent{eventId}/deleteEvent")
+    @RequestMapping(value="listEvent{eventId}/submit", method = RequestMethod.POST)
+    public String submitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+        eventService.updateSubmitStatus(eventId);
+        return "redirect:/event" + eventId.toString();
+    }
+
+    @RequestMapping(value="listEvent{eventId}/deleteEvent", method = RequestMethod.POST)
     public String deleteEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
         FvbUser user = (FvbUser)session.getAttribute("newUser");
         if (user.getUserId() != eventService.getEventById(eventId).getOwnerId()) {
@@ -109,6 +115,12 @@ public class EventController {
         }
         fvbEventMapper.deleteEvent(eventId);
         return "redirect:/" + user.getUsername();
+    }
+
+    @RequestMapping(value = "listEvent{eventId}/displayRestaurant", method = RequestMethod.GET)
+    public @ResponseBody List<DBEventRestaurantReturnType> displayRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
     }
 
     @RequestMapping(value = "listEvent{eventId}/addRestaurant", method = RequestMethod.POST)
@@ -198,10 +210,12 @@ public class EventController {
             return "redirect:" + user.getUsername();
         }
         List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        DBEventMemberReturnType curUser = eventService.getEventMember(user.getUserId(), eventId);
         request.setAttribute("memberList", members);
         model.put("memberList", members);
         model.put("user", user);
         model.put("event", event);
+        model.put("curUser", curUser);
         //if (userId在member表里) ｛return eventPage;｝
 //        if (event.getOwnerId() == user.getUserId()) {
 //            //return "eventPage?..."
@@ -221,4 +235,26 @@ public class EventController {
         return "eventList";
     }
 
+    @RequestMapping(value = "event{eventId}/displayRestaurant", method = RequestMethod.GET)
+    public @ResponseBody List<DBEventRestaurantReturnType> displayRestaurantInVotePage(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
+    }
+
+    @RequestMapping(value = "event{eventId}/displayMember", method = RequestMethod.GET)
+    public @ResponseBody List<DBEventMemberReturnType> displayMemberInVotePage(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
+        List<DBEventMemberReturnType> members = eventService.findAllMembers(eventId);
+        return members;
+    }
+
+    @RequestMapping(value = "event{eventId}/voteRestaurant", method = RequestMethod.POST)
+    public @ResponseBody List<DBEventRestaurantReturnType> voteRestaurant(@PathVariable("eventId") Long eventId, HttpSession session, HttpServletRequest request) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        String restaurantIdTemp = request.getParameter("restaurantId");
+        Long restaurantId = Long.valueOf(restaurantIdTemp);
+        eventService.updateVoteStatus(eventId, user.getUserId());
+        eventService.updateVotes(eventId, restaurantId);
+        List<DBEventRestaurantReturnType> restaurants = eventService.getAllRestaurant(eventId);
+        return restaurants;
+    }
 }

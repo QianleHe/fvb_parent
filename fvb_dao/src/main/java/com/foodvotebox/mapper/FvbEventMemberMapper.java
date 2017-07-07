@@ -18,4 +18,8 @@ public interface FvbEventMemberMapper {
     List<DBEventMemberReturnType> findAllMembers(@Param("eventId") Long eventId);
 
     void deleteEventMember(@Param("eventId") Long eventId, @Param("memberId") Long memberId);
+
+    DBEventMemberReturnType getEventMember(@Param("userId") Long userId, @Param("eventId") Long eventId);
+
+    void updateVoteStatus(@Param("eventId") Long eventId, @Param("memberId") Long memberId);
 }
