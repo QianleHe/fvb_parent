@@ -58,4 +58,17 @@
 		eventid = #{eventId} AND
 		restaurantid = #{restaurantId}
 	</update>
+
+	<select id="getEventVotes" resultType="com.foodvotebox.pojo.FvbEventRestaurant" parameterType="Long">
+		SELECT
+		eventid,
+		restaurantid,
+		votes
+		FROM
+		fvb_eventRestaurant
+		WHERE
+		votes = (SELECT MAX(votes)
+				 FROM fvb_eventRestaurant
+				 WHERE eventid = #{eventId})
+	</select>
 </mapper>
