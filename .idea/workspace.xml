@@ -2,113 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18d3cc88-d008-4a46-b076-939865adc191" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_7_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_12_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_all_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20160810.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_2_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbAddedRestaurantMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbAddedRestaurantMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventMemberMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventMemberMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventRestaurantMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbEventRestaurantMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbFriendMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbFriendMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbRestaurantMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbRestaurantMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbUserMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/classes/com/foodvotebox/mapper/FvbUserMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_dao/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/AddRestaurantAsFavouriteService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/EventService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/FvbFriendService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/LoginService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/RestaurantService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/classes/com/foodvotebox/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_interface/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/DBEventMemberReturnType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/DBEventRestaurantReturnType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/DBEventReturnType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbEvent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbEventMember.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbEventRestaurant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbFriend.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbRestaurant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/FvbUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/YelpListRestaurant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/classes/com/foodvotebox/pojo/YelpQueryPojo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_pojo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/AddRestaurantAsFavouriteServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/EventServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/FvbFriendServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/LoginServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/RestaurantServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/com/foodvotebox/service/impl/UserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/mybatis/SqlMapConfig.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/properties/db.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/spring/ApplicationContext-dao.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/spring/ApplicationContext-service.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/spring/ApplicationContext-trans.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/classes/sql/Structure.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/exception/AddAsFavouriteEnum.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/exception/UserServiceEnum.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/util/PasswordChecker.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/util/PasswordEncoder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/weatherApi/GetWeather.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/yelpApi/GetRestaurant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/com/FoodVoteBox/yelpApi/Token.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/classes/properties/salt.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_util/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/AddAsFavouriteController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/EventController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/FriendController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/LocationController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/PicController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/controller/YelpRestaurantController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/com/foodvotebox/interceptor/LoginInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/mybatis/SqlMapConfig.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/properties/db.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/spring/ApplicationContext-dao.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/spring/ApplicationContext-service.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/spring/ApplicationContext-trans.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/classes/spring/springmvc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/conf/logging.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/conf/tomcat-users.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/conf/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/logs/access_log.2017-07-06" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/deleteFriend_jsp.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/deleteFriend_jsp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/loginSuccess_jsp.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/loginSuccess_jsp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/login_jsp.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/login_jsp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/userPasswordRevise_jsp.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/userPasswordRevise_jsp.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_dao/fvb_dao.iml" afterPath="$PROJECT_DIR$/fvb_dao/fvb_dao.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_interface/fvb_interface.iml" afterPath="$PROJECT_DIR$/fvb_interface/fvb_interface.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_service/fvb_service.iml" afterPath="$PROJECT_DIR$/fvb_service/fvb_service.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_util/fvb_util.iml" afterPath="$PROJECT_DIR$/fvb_util/fvb_util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/fvb_web.iml" afterPath="$PROJECT_DIR$/fvb_web/fvb_web.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp" afterPath="$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -138,11 +32,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loginSuccess.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="loginSuccess.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6319">
-              <caret line="411" column="14" lean-forward="false" selection-start-line="411" selection-start-column="14" selection-end-line="411" selection-end-column="14" />
+            <state relative-caret-position="10863">
+              <caret line="639" column="9" lean-forward="false" selection-start-line="639" selection-start-column="9" selection-end-line="639" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YelpRestaurantController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/YelpRestaurantController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="65" column="55" lean-forward="true" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -402,16 +306,17 @@
       <option name="presentableId" value="Default" />
       <updated>1499326372184</updated>
       <workItem from="1499326379222" duration="1504000" />
-      <workItem from="1499377936951" duration="31000" />
+      <workItem from="1499377936951" duration="213000" />
+      <workItem from="1499387794631" duration="177000" />
+      <workItem from="1499406637805" duration="305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1535000" />
+    <option name="totallyTimeSpent" value="2199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="839" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -430,8 +335,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987013" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -453,7 +358,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -461,6 +368,46 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10863">
+          <caret line="639" column="9" lean-forward="true" selection-start-line="639" selection-start-column="9" selection-end-line="639" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/YelpRestaurantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="67" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11679">
+          <caret line="687" column="0" lean-forward="true" selection-start-line="687" selection-start-column="0" selection-end-line="687" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -494,8 +441,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6319">
-          <caret line="411" column="14" lean-forward="false" selection-start-line="411" selection-start-column="14" selection-end-line="411" selection-end-column="14" />
+        <state relative-caret-position="10863">
+          <caret line="639" column="9" lean-forward="false" selection-start-line="639" selection-start-column="9" selection-end-line="639" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/YelpRestaurantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="65" column="55" lean-forward="true" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
           <folding />
         </state>
       </provider>

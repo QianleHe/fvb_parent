@@ -782,6 +782,7 @@
             }
         });
     }
+
     var TextResponseHandler = function(data,callback_para) {
         var jsonarea = $('#jsontext')[0];
         var jsonobj = JSON.parse(data);
