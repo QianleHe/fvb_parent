@@ -145,7 +145,7 @@ public class EventController {
         return restaurants;
     }
 
-    @RequestMapping(value = "listEvent{eventId}/deleteRestaurant")
+    @RequestMapping(value = "listEvent{eventId}/deleteRestaurant", method = RequestMethod.POST)
     public @ResponseBody Object deleteRestaurant(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         String temp = request.getParameter("restaurantId");
         Long restaurantId = Long.valueOf(temp);
@@ -181,7 +181,7 @@ public class EventController {
 
     //只有owner可以delete
     //owner不能delete自己
-    @RequestMapping(value = "listEvent{eventId}/deleteMember", method = RequestMethod.GET)
+    @RequestMapping(value = "listEvent{eventId}/deleteMember", method = RequestMethod.POST)
     public @ResponseBody Object deleteMember(@PathVariable("eventId") Long eventId, HttpServletRequest request, HttpServletResponse response) {
         String temp = request.getParameter("memberId");
         System.out.println(temp);
@@ -216,6 +216,8 @@ public class EventController {
         model.put("user", user);
         model.put("event", event);
         model.put("curUser", curUser);
+        //FvbRestaurant result = restaurantService.getRestaurantById(event.getResultid());
+        //model.put("result", result);
         //if (userId在member表里) ｛return eventPage;｝
 //        if (event.getOwnerId() == user.getUserId()) {
 //            //return "eventPage?..."

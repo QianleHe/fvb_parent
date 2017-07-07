@@ -146,7 +146,7 @@
     function deleteMember(memberId){
         $.ajax({
             data: {memberId: memberId},
-            type: "GET",
+            type: "POST",
             dataType: "json",
             url:"listEvent" + "${event.eventId}" + "/deleteMember",
             success: function(result){
@@ -320,7 +320,7 @@
     function deleteRestaurant(restaurantId){
         $.ajax({
             data: {restaurantId: restaurantId},
-            type: "GET",
+            type: "POST",
             dataType: "json",
             url:"listEvent" + "${event.eventId}" + "/deleteRestaurant",
             success: function(result){
