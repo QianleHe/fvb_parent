@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Created by qianle on 7/6/17.
  */
@@ -46,5 +47,4 @@ public class TimerTask {
         int resultNum = rand.nextInt(resultList.size());
         return resultList.get(resultNum).getRestaurantId();
     }
-
 }
