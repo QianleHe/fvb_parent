@@ -61,4 +61,29 @@
 		WHERE
 		eventid = #{eventId}
 	</update>
+
+	<select id="getFinishedEventByEndTime" resultType="com.foodvotebox.pojo.FvbEvent">
+		SELECT
+		eventid,
+		eventname,
+		eventdate,
+		ownerid,
+		description,
+		resultid,
+		submitted
+		FROM
+		fvb_event
+		WHERE
+		eventdate &lt;= now() AND
+		ISNULL(resultid)
+	</select>
+
+	<update id="updateEventResult">
+		UPDATE
+		fvb_event
+		SET
+		resultid = #{resultId}
+		WHERE
+		eventid = #{eventId}
+	</update>
 </mapper>
