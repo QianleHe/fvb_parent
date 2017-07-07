@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Created by qianle on 7/6/17.
  */
 @Component
-public class TImerTask {
+public class TimerTask {
 
     @Autowired
 

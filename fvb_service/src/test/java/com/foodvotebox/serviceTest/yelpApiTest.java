@@ -31,7 +31,7 @@ public class yelpApiTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");
         GetRestaurant restaurant = context.getBean(GetRestaurant.class);
         JSONObject object = restaurant.getRes("HOTPOT","SEATTLE", "1",2);
-
+        //JSONObject object1 = restaurant.getRes("KFC","NEW YORK", "0", "0",500,)
         System.out.println(object.toString());
     }
 }
