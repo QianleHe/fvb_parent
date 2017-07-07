@@ -17,6 +17,7 @@
     <h2>Hi! ${user.username}</h2>
     <h2>The event will be hold on ${event.eventDate}</h2>
     <p>${event.description}</p>
+    <div id="showResultdiv"></div>
     <%--<button type="submit" href="/fvb_web/event${event.eventId}/deleteEvent">Next</button>--%>
     <h1>restaurants</h1>
     <div id="restaurantDiv">
@@ -34,6 +35,17 @@
 
 <script type="text/javascript" src="../fvb_web/js/jquery-3.1.1.js"></script>
     <script>
+        <%--$(function (){--%>
+            <%--DisplayResult();--%>
+        <%--});--%>
+        <%--function DisplayResult() {--%>
+            <%--$("#showResultdiv").empty();--%>
+            <%--if (${event.resultid != null}) {--%>
+                <%--var head = $("<h1></h1>").text("Result is:'" + ${result.}+ "'");--%>
+                <%--var resultText = $("<p></p>").text("${result.eventName}");--%>
+                <%--$("#showResultdiv").append(head, resultText);--%>
+            <%--}--%>
+        <%--}--%>
         function DisplayMember(result) {
             $("#showdiv").empty();
             var panelTable = $("<table></table>");
