@@ -1,9 +1,11 @@
 package com.foodvotebox.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by qianle on 6/27/17.
  */
-public class YelpListRestaurant {
+public class YelpListRestaurant implements Serializable{
 
     public String name;
     public String phoneNumber;

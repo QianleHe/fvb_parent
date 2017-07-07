@@ -16,7 +16,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.4" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20160810" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.7.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.12.0" level="project" />
     <orderEntry type="module" module-name="fvb_pojo" />
     <orderEntry type="module" module-name="fvb_util" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.4" level="project" />

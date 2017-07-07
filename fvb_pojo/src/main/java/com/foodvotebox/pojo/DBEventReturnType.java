@@ -1,11 +1,12 @@
 package com.foodvotebox.pojo;
 
 
+import java.io.Serializable;
 
 /**
  * Created by FYG on 17/6/29.
  */
-public class DBEventReturnType {
+public class DBEventReturnType implements Serializable{
     private Long eventId;
 
     private Long memberId;

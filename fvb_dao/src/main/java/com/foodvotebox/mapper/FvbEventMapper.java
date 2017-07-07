@@ -22,4 +22,8 @@ public interface FvbEventMapper {
     List<DBEventReturnType> getAllEventsByUserId(@Param("userId") Long userId);
 
     void updateSubmitStatus(@Param("eventId") Long eventId);
+
+    List<FvbEvent> getFinishedEventByEndTime();
+
+    void updateEventResult(@Param("eventId") Long eventId, @Param("resultId") Long resultId);
 }

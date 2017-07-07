@@ -1,0 +1,7 @@
+com/foodvotebox/service/impl/LoginServiceImpl.class
+com/foodvotebox/service/impl/UserServiceImpl.class
+com/foodvotebox/service/impl/RestaurantServiceImpl.class
+com/foodvotebox/service/impl/MessageServiceImpl.class
+com/foodvotebox/service/impl/EventServiceImpl.class
+com/foodvotebox/service/impl/AddRestaurantAsFavouriteServiceImpl.class
+com/foodvotebox/service/impl/FvbFriendServiceImpl.class

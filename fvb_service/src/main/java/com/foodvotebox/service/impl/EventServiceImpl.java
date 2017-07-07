@@ -124,6 +124,18 @@ public class EventServiceImpl implements EventService, Serializable {
     }
 
     @Override
+    public List<FvbEvent> getFinishedEventByEndTime() {
+        List<FvbEvent> result = fvbEventMapper.getFinishedEventByEndTime();
+        return result;
+    }
+
+
+    @Override
+    public List<FvbEventRestaurant> getEventVotes(Long eventId) {
+        return fvbEventRestaurantMapper.getEventVotes(eventId);
+    }
+
+    @Override
     public void updateSubmitStatus(Long eventId) {
         fvbEventMapper.updateSubmitStatus(eventId);
     }
@@ -131,5 +143,10 @@ public class EventServiceImpl implements EventService, Serializable {
     @Override
     public void updateVotes(Long eventId, Long restaurantId) {
         fvbEventRestaurantMapper.updateVotes(eventId, restaurantId);
+    }
+
+    @Override
+    public void updateEventResult(Long eventId, Long resultId) {
+        fvbEventMapper.updateEventResult(eventId, resultId);
     }
 }
