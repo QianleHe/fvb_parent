@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18d3cc88-d008-4a46-b076-939865adc191" name="Default" comment="" />
+    <list default="true" id="18d3cc88-d008-4a46-b076-939865adc191" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/logs/access_log.2017-07-06" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_interface/fvb_interface.iml" afterPath="$PROJECT_DIR$/fvb_interface/fvb_interface.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_service/fvb_service.iml" afterPath="$PROJECT_DIR$/fvb_service/fvb_service.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_service/target/classes/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_service/target/classes/properties/db.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_util/fvb_util.iml" afterPath="$PROJECT_DIR$/fvb_util/fvb_util.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/fvb_web.iml" afterPath="$PROJECT_DIR$/fvb_web/fvb_web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/target/classes/properties/db.properties" afterPath="$PROJECT_DIR$/fvb_web/target/classes/properties/db.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/login_jsp.java" afterPath="$PROJECT_DIR$/fvb_web/target/tomcat/work/Tomcat/localhost/fvb_web/org/apache/jsp/WEB_002dINF/jsp/login_jsp.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/fvb_util/target/" />
     <ignored path="$PROJECT_DIR$/fvb_web/target/" />
@@ -23,7 +35,17 @@
         <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -32,8 +54,8 @@
       <file leaf-file-name="loginSuccess.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="415" column="26" lean-forward="true" selection-start-line="415" selection-start-column="26" selection-end-line="415" selection-end-column="26" />
+            <state relative-caret-position="250">
+              <caret line="553" column="33" lean-forward="true" selection-start-line="553" selection-start-column="33" selection-end-line="553" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -42,7 +64,7 @@
       <file leaf-file-name="MessageController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/MessageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
+            <state relative-caret-position="187">
               <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding />
             </state>
@@ -82,8 +104,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" />
         <option value="$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties" />
+        <option value="$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties" />
         <option value="$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp" />
       </list>
     </option>
@@ -325,12 +347,13 @@
       <workItem from="1499326379222" duration="1504000" />
       <workItem from="1499377936951" duration="213000" />
       <workItem from="1499387794631" duration="177000" />
-      <workItem from="1499406637805" duration="1303000" />
+      <workItem from="1499406637805" duration="1411000" />
+      <workItem from="1499495532587" duration="878000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3197000" />
+    <option name="totallyTimeSpent" value="4183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="839" extended-state="6" />
@@ -338,7 +361,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32987013" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293872" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -353,8 +376,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987013" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987013" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -386,6 +409,46 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/MessageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_interface/src/main/java/com/foodvotebox/service/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/YelpRestaurantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="49" column="50" lean-forward="false" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7055">
+          <caret line="415" column="26" lean-forward="true" selection-start-line="415" selection-start-column="26" selection-end-line="415" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -442,21 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/YelpRestaurantController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -475,16 +523,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fvb_web/src/main/java/com/foodvotebox/controller/MessageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="187">
           <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_service/src/main/resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fvb_web/src/main/resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fvb_web/src/main/webapp/WEB-INF/jsp/loginSuccess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="415" column="26" lean-forward="true" selection-start-line="415" selection-start-column="26" selection-end-line="415" selection-end-column="26" />
+        <state relative-caret-position="250">
+          <caret line="553" column="33" lean-forward="true" selection-start-line="553" selection-start-column="33" selection-end-line="553" selection-end-column="33" />
           <folding />
         </state>
       </provider>
