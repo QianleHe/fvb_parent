@@ -11,8 +11,8 @@ import java.util.Date;
 public class FvbMessage implements Serializable{
 
     private int msgId;
-    private int fromId;
-    private int toId;
+    private Long fromId;
+    private Long toId;
     private String content;
     private Date createdDate;
     private int hasRead;
@@ -26,19 +26,19 @@ public class FvbMessage implements Serializable{
         this.msgId = id;
     }
 
-    public int getFromId() {
+    public Long getFromId() {
         return fromId;
     }
 
-    public void setFromId(int fromId) {
+    public void setFromId(Long fromId) {
         this.fromId = fromId;
     }
 
-    public int getToId() {
+    public Long getToId() {
         return toId;
     }
 
-    public void setToId(int toId) {
+    public void setToId(Long toId) {
         this.toId = toId;
     }
 
@@ -74,7 +74,7 @@ public class FvbMessage implements Serializable{
         this.conversationId = conversationId;
     }
 
-    public void setConversationId(int fromId, int toId){
+    public void setConversationId(Long fromId, Long toId){
         this.conversationId = String.format("%d_%d", Math.min(fromId, toId), Math.max(fromId, toId));
     }
 
