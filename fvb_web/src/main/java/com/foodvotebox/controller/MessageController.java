@@ -79,4 +79,11 @@ public class MessageController {
     public String gotoMessage(){
         return "sendMessageSample";
     }
+
+    @RequestMapping("/getAllMessageUnread")
+    @ResponseBody
+    public List<FvbMessage> getAllMessageUnread(HttpSession session) {
+        FvbUser user = (FvbUser) session.getAttribute("newUser");
+        return messageService.getAllMessagesUnread(user.getUserId(), 0, 20);
+    }
 }
