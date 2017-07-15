@@ -296,10 +296,33 @@ auther:wjm
         <div class="mdl-layout-icon"></div>
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Hello ${user.username}</span>
+            <span class="mdl-layout-title">Hello ${user.username} </span>
+
+            <div id="unReadMessage" class="mdl-navigation">
+                <div id="messageIcon" class="material-icons mdl-badge mdl-badge--overlap" data-badge="0">email</div>
+                <%--<button id="demo-menu-lower-left"--%>
+                <%--class="mdl-button mdl-js-button mdl-button--icon">--%>
+                <%--<i class="material-icons">more_vert</i>--%>
+                <%--</button>--%>
+
+                <ul id="unReadMessage_list" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                    for="unReadMessage">
+                    <%--<li class="mdl-menu__item">Some Action, I just want to test long message. How will it be displayed in this cituation</li>--%>
+                    <%--<li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>--%>
+                    <%--<li disabled class="mdl-menu__item">Disabled Action</li>--%>
+                    <%--<li class="mdl-menu__item">Yet Another Action</li>--%>
+                        <li class="mdl-menu__item" v-for="(m,index) in messages" v-on:click="setMessage(index)">{{m.message}}</li>
+                </ul>
+            </div>
             <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-layout-spacer">
+                <%--<div class="mdl-textfield mdl-js-textfield">--%>
+                    <%--<input class="mdl-textfield__input" type="text" id="sample1">--%>
+                    <%--<label class="mdl-textfield__label" for="sample1">Message...</label>--%>
+                <%--</div>--%>
+            </div>
             <!-- Navigation. We hide it in small screens. -->
+
             <div class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="button mdl-navigation__link" href="/fvb_web/logout">LOGOUT</a>
             </div>
@@ -355,8 +378,8 @@ auther:wjm
                 </div>
 
                 ​
-                <div class="col-md-12">
-                    <div id="todo-list-example">
+                <div class="col-md-12 cardDisplay">
+                    <div id="resturants_list">
                         <ul>
                             <li v-for="(todo,index) in resturants">
                                 <div class="col-md-12">
@@ -398,6 +421,7 @@ auther:wjm
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
@@ -410,7 +434,7 @@ auther:wjm
         props: ['title']
     })
     var yelp = new Vue({
-        el: '#todo-list-example',
+        el: '#resturants_list',
         data: {
             resturants:[
             ],
@@ -422,6 +446,24 @@ auther:wjm
             },
             fav:function() {
                 console.log('you like this resturant!');
+            }
+        }
+    });
+
+    var UnRreadMessgae = new Vue({
+        el:'#unReadMessage_list',
+        data: {
+            messages:[
+                { message:"I am message 1!"},
+                { message:"I am message 2!"},
+                { message:"I am message 3!"},
+                { message:"I am message 4!"}
+            ],
+            count:"4",
+        },
+        methods:{
+            setMessage:function (index) {
+                console.log('you read:',index);
             }
         }
     });
@@ -457,51 +499,7 @@ auther:wjm
         console.log(str);
         return str;
     }
-    var generateCard = function (root,data) {
-        var square = document.createElement('div');
-        square.classList.add('card-square','mdl-card','mdl-shadow--2dp','col-md-4');
-        var title = document.createElement('div');
-        title.classList.add('mdl-card__title','mdl-card--expand');
-        title.style.backgroundImage = "url('"+data.image_url+"')";
-        var title_text = document.createElement('h2');
-        title_text.innerHTML = data.name;
-        title_text.classList.add('mdl-card__title-text');
-        title.appendChild(title_text);
-        square.appendChild(title);
-        var support = document.createElement('div');
-        support.classList.add('mdl-card__supporting-text');
-        var location = document.createElement('P');
-        var loca_text = document.createTextNode('Location:'+data.location.city+'/'+data.location.address1);
-        location.appendChild(loca_text);
-        var price = document.createElement('P');
-        var price_text = document.createTextNode('Price:'+data.price);
-        price.appendChild(price_text);
-        var contact = document.createElement('P');
-        var contact_text = document.createTextNode('Contact:'+data.display_phone);
-        contact.appendChild(contact_text);
-        support.appendChild(location);
-        support.appendChild(price);
-        support.appendChild(contact);
-        square.appendChild(support);
-        var detail = document.createElement('a');
-        // detail.classList.add('mdl-button','mdl-button-colored','mdl-js-button mdl-js-ripple-effect');
-        detail.className = 'mdl-button mdl-button-colored mdl-js-button';
-        detail.innerHTML = 'DETAIL';
-        detail.setAttribute('href',data.url);
-        square.appendChild(detail);
-        root.appendChild(square);
-    }
 
-    var generateCardBoard = function (id,data) {
-        console.log(data);
-        var root = $('#'+id)[0];
-        while (root.firstChild) {
-            root.removeChild(root.firstChild);
-        }
-        for (var i in data) {
-            generateCard(root,data[i]);
-        }
-    }
 
     var showPosition = function(position) {
         var config = {};
@@ -509,7 +507,8 @@ auther:wjm
         config['method'] = "POST";
         config['table_id'] = "jsontest";
         config['type'] = 'text';
-        config['data'] = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+        config['data'] = {};
+//        config['data'] = {latitude: position.coords.latitude, longitude: position.coords.longitude};
         var term = $('#term').val();
         var location = $('#location').val();
         var category = $('#category').val();
@@ -529,19 +528,23 @@ auther:wjm
     }
 
     var getResturantList = function (talble_id,url_id,method_id) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+        var position = {'coords':{'latitude':'40.730610','longitude':'-73.935242'}};
+        showPosition(position);
+//        if (navigator.geolocation) {
+//            navigator.geolocation.getCurrentPosition(showPosition);
+//        } else {
+//            alert("Geolocation is not supported by this browser.");
+//        }
     }
 
     var searchResturantList = function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+//        if (navigator.geolocation) {
+//            navigator.geolocation.getCurrentPosition(showPosition);
+//        } else {
+//            alert("Geolocation is not supported by this browser.");
+//        }
+        var position = {'coords':{'latitude':'40.730610','longitude':'-73.935242'}};
+        showPosition(position);
     }
 
     var test = function (talble_id,url_id,method_id) {
@@ -572,7 +575,10 @@ auther:wjm
             method:c_method,
             dataType:c_type,
             success: function (data) {
-                callback(data,callback_para);
+                console.log(data);
+                if (callback) {
+                    callback(data, callback_para);
+                }
             }
         });
     }
@@ -597,9 +603,34 @@ auther:wjm
         row.append(url);
         row.append(method);
         row.append(blank);
-
     }
 
+
+
+    ////initial work
+    var initial_position = function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var config = {};
+                config['url'] = "/fvb_web/getlocation";
+                config['method'] = "POST";
+                config['data'] = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+                config['type'] = 'json';
+                Comunicate(config);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    initial_position();
+
+    var unReadMessage = function () {
+        var config = {};
+        config[""] = "";
+        config[""] = "";
+        config[""] = "";
+        config[""] = "";
+    }
 </script>
 
 
