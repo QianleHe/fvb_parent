@@ -1,0 +1,7 @@
+com/foodvotebox/service/MessageService.class
+com/foodvotebox/service/EventService.class
+com/foodvotebox/service/LoginService.class
+com/foodvotebox/service/UserService.class
+com/foodvotebox/service/FvbFriendService.class
+com/foodvotebox/service/RestaurantService.class
+com/foodvotebox/service/AddRestaurantAsFavouriteService.class

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodvotebox.mapper.FvbUserMapper">
+	<select id="queryById" resultType="com.foodvotebox.pojo.FvbUser" parameterType="long">
+		SELECT
+			userid,
+			username,
+			password,
+			phone,
+			email,
+			created,
+			updated,
+			picid
+		FROM
+			fvb_user
+		WHERE
+			userid = #{userId}
+	</select>
+
+	<select id="queryByUserName" resultType="com.foodvotebox.pojo.FvbUser" parameterType="String">
+		SELECT
+			userid,
+			username,
+			password,
+			phone,
+			email,
+			created,
+			updated,
+			picid
+		FROM
+			fvb_user
+		WHERE
+			username = #{userName}
+	</select>
+
+	<select id="queryByEmail" resultType="com.foodvotebox.pojo.FvbUser" parameterType="String">
+		SELECT
+			userid,
+			username,
+			password,
+			phone,
+			email,
+			created,
+			updated,
+			picid
+		FROM
+			fvb_user
+		WHERE
+			email = #{email}
+	</select>
+	
+	<insert id="addUser">
+		<!-- ignore 主键冲突，报错 -->
+		INSERT ignore INTO fvb_user (username, password, phone, email, created, updated, picid)
+		VALUES (#{userName}, #{password}, #{phone}, #{email}, now(), now(), NULL)
+	</insert>
+
+	<update id="updateUser">
+		UPDATE fvb_user
+		SET username = #{userName},
+			phone = #{phone},
+			email = #{email},
+			updated = now()
+		WHERE userid = #{userId}
+	</update>
+
+	<update id="updatePassword">
+		UPDATE fvb_user
+		SET password = #{password},
+			updated = now()
+		WHERE userid = #{userId}
+	</update>
+
+	<update id="updatePic">
+		UPDATE fvb_user
+		SET picid = #{picId},
+			updated = now()
+		WHERE userid = #{userId};
+	</update>
+</mapper>
