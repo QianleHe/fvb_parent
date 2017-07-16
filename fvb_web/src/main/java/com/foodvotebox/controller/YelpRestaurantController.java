@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,13 +60,16 @@ public class YelpRestaurantController {
         if (yelpQueryPojo.getTerm() == null) {
             yelpQueryPojo.setTerm("");
         }
-        if (yelpQueryPojo.getLocation() == null) {
+        if (yelpQueryPojo.getLocation() == null && (yelpQueryPojo.getLatitude() == null && yelpQueryPojo.getLongitude() == null)) {
             Double[] location = (Double[])session.getAttribute("locationnow");
-            yelpQueryPojo.setLatitude(location[0]);
-            yelpQueryPojo.setLongitude(location[1]);
-        } else {
-            yelpQueryPojo.setLatitude(0.0);
-            yelpQueryPojo.setLongitude(0.0);
+            if (location != null) {
+                yelpQueryPojo.setLatitude(location[0]);
+                yelpQueryPojo.setLongitude(location[1]);
+            } else {
+                yelpQueryPojo.setLocation("Seattle");
+                yelpQueryPojo.setLatitude(0.0);
+                yelpQueryPojo.setLongitude(0.0);
+            }
         }
         if (yelpQueryPojo.getRedis() == null) {
             yelpQueryPojo.setRedis(2000);
