@@ -286,6 +286,44 @@ auther:wjm
             width: 100%;
             height: 73px;
         }
+
+        .mdl-menu{
+            max-width: 1200px;
+
+        }
+
+        .messageContent {
+            /*max-width: 600px;*/
+            /*word-wrap: break-word;*/
+            /*max-width: 730px;*/
+            /*min-width:600px;*/
+            width: 700px;
+            height: 100%;
+            line-height:1.3em;
+            display: inline-block;
+            /*overflow-wrap: break-word;*/
+            /*word-wrap: break-word;*/
+            /*height:100px;*/
+            /*word-break: keep-all;*/
+            white-space: -moz-pre-wrap; /* Mozilla */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            /*white-space: pre-wrap;  !* CSS 2.1 *!*/
+            white-space: pre-line; /* CSS 3 */
+            word-wrap: break-word; /* IE */
+            /*border: 1px solid #000000;*/
+        }
+        .messageDate{
+            border-right:2px solid rgb(38,50,56);
+            display: inline-block;
+            width: 170px;
+            margin-right: 20px;
+            height: 100%;
+        }
+        .mdl-menu__item {
+            height:auto;
+            max-width: 1000px;
+            min-width: 836px;
+        }
     </style>
 </head>
 <body>
@@ -300,26 +338,14 @@ auther:wjm
 
             <div id="unReadMessage" class="mdl-navigation">
                 <div id="messageIcon" class="material-icons mdl-badge mdl-badge--overlap" data-badge="0">email</div>
-                <%--<button id="demo-menu-lower-left"--%>
-                <%--class="mdl-button mdl-js-button mdl-button--icon">--%>
-                <%--<i class="material-icons">more_vert</i>--%>
-                <%--</button>--%>
 
-                <ul id="unReadMessage_list" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                <table id="unReadMessage_list" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                     for="unReadMessage">
-                    <%--<li class="mdl-menu__item">Some Action, I just want to test long message. How will it be displayed in this cituation</li>--%>
-                    <%--<li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>--%>
-                    <%--<li disabled class="mdl-menu__item">Disabled Action</li>--%>
-                    <%--<li class="mdl-menu__item">Yet Another Action</li>--%>
-                        <li class="mdl-menu__item" v-for="(m,index) in messages" v-on:click="setMessage(index)">{{m.message}}</li>
-                </ul>
+                        <tr class="mdl-menu__item" v-for="(m,index) in messages" v-on:click="setMessage(index)"><td><div class="messageDate">{{m.createdDate}}</div></td><td><div v-bind:class="{'messageContent':unread}">{{m.content}}</div></td></tr>
+                </table>
             </div>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer">
-                <%--<div class="mdl-textfield mdl-js-textfield">--%>
-                    <%--<input class="mdl-textfield__input" type="text" id="sample1">--%>
-                    <%--<label class="mdl-textfield__label" for="sample1">Message...</label>--%>
-                <%--</div>--%>
             </div>
             <!-- Navigation. We hide it in small screens. -->
 
@@ -377,7 +403,6 @@ auther:wjm
                     </div>
                 </div>
 
-                ​
                 <div class="col-md-12 cardDisplay">
                     <div id="resturants_list">
                         <ul>
@@ -422,6 +447,33 @@ auther:wjm
                     </div>
                 </div>
 
+                <%--<table id='jsontest' class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">--%>
+                    <%--<thead>--%>
+                    <%--<tr>--%>
+                        <%--<th class="mdl-data-table__cell--non-numeric">URL</th>--%>
+                        <%--<th class="mdl-data-table__cell--non-numeric">Method</th>--%>
+                        <%--<th></th>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='url' class="text" /></td>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='method'  class="text" /></td>--%>
+                        <%--<td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="test('jsontest','url','method')">--%>
+                            <%--Test--%>
+                        <%--</button></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='gurl' class="text" value="/fvb_web/listRestaurant"/></td>--%>
+                        <%--<td class="mdl-data-table__cell--non-numeric"><input id='gmethod'  class="text" value="POST"/></td>--%>
+                        <%--<td><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="getResturantList('jsontest','gurl','gmethod')">--%>
+                            <%--Get Restaurant List--%>
+                        <%--</button></td>--%>
+                    <%--</tr>--%>
+                    <%--</thead>--%>
+                    <%--<tbody>--%>
+                    <%--</tbody>--%>
+                <%--</table>--%>
+                <%--<br>--%>
+                <%--<textarea id='jsontext'></textarea>--%>
             </div>
         </div>
     </main>
@@ -454,16 +506,22 @@ auther:wjm
         el:'#unReadMessage_list',
         data: {
             messages:[
-                { message:"I am message 1!"},
-                { message:"I am message 2!"},
-                { message:"I am message 3!"},
-                { message:"I am message 4!"}
             ],
-            count:"4",
+            unread:true,
         },
         methods:{
             setMessage:function (index) {
                 console.log('you read:',index);
+                var m = this.messages[index];
+                var config = {};
+                config["method"] = "GET";
+                config["type"] = "json";
+                config["url"] = "/fvb_web/updated/user="+m.toId+"&msg="+m.id;
+                config["data"] = {};
+                Comunicate(config);
+                this.messages.splice(index,1);
+                console.log(this.messages);
+                $("#messageIcon")[0].setAttribute("data-badge",this.messages.length);
             }
         }
     });
@@ -556,7 +614,6 @@ auther:wjm
         config['data'] = "";
         console.log(config);
         Comunicate(config,JsonResposneHandler,config);
-
     }
 
     var Comunicate = function(config,callback,callback_para) {
@@ -583,13 +640,17 @@ auther:wjm
         });
     }
     var TextResponseHandler = function(data,callback_para) {
-        var jsonarea = $('#jsontext')[0];
+//        var jsonarea = $('#jsontext')[0];
         var jsonobj = JSON.parse(data);
         yelp.resturants = jsonobj['businesses'];
     }
+
     var JsonResposneHandler = function(data,callback_para) {
         var jsonarea = $('#jsontext')[0];
+        console.log(jsonarea,data);
+        jsonarea.innerHTML = prettfy(data);
     }
+
     var prettfy = function (json) {
         return JSON.stringify(json,undefined,4);
     }
@@ -626,11 +687,37 @@ auther:wjm
 
     var unReadMessage = function () {
         var config = {};
-        config[""] = "";
-        config[""] = "";
-        config[""] = "";
-        config[""] = "";
+        config["method"] = "GET";
+        config["url"] = "/fvb_web/getAllMessageUnread";
+        config["type"] = "json";
+        config["data"] = {};
+        config["badge"] = "messageIcon";
+        Comunicate(config,unReadMessage_callback,config);
     }
+
+    var unReadMessage_callback = function(data,config) {
+        for (var i in data) {
+            if (data[i]["createdDate"]) {
+                data[i]["createdDate"] = getFormatDate(data[i]["createdDate"]);
+            }
+        }
+        UnRreadMessgae.messages = data;
+        $('#'+config["badge"])[0].setAttribute("data-badge",data.length);
+    }
+    
+    var getFormatDate = function (timestamp) {
+        var m = new Date(timestamp);
+        var dateString =
+            m.getUTCFullYear() + "/" +
+            ("0" + (m.getUTCMonth()+1)).slice(-2) + "/" +
+            ("0" + m.getUTCDate()).slice(-2) + " " +
+            ("0" + m.getUTCHours()).slice(-2) + ":" +
+            ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+            ("0" + m.getUTCSeconds()).slice(-2);
+        return dateString;
+    }
+
+    unReadMessage();
 </script>
 
 
