@@ -9,5 +9,8 @@ import org.apache.ibatis.annotations.Param;
 public interface FvbRestaurantMapper {
     FvbRestaurant findRestaurantByAddr(@Param("restaurantName")String restaurantName, @Param("city")String city, @Param("address")String address);
 
+    FvbRestaurant getRestaurantById(@Param("restaurantId")Long restaurantId);
+
     Long insertRestaurant(FvbRestaurant restaurant);
+
 }

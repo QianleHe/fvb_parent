@@ -55,5 +55,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurant.getRestaurantId();
     }
 
-
+    @Override
+    public FvbRestaurant getRestaurantById(Long restaurantId) {
+        return fvbRestaurantMapper.getRestaurantById(restaurantId);
+    }
 }

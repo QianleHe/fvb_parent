@@ -13,4 +13,5 @@ public interface RestaurantService {
 
     Long insertRestaurant(String restaurantName, String city, String address, String phone, String price, String rating, String yelpUrl, String imgUrl);
 
+    FvbRestaurant getRestaurantById(Long restaurantId);
 }

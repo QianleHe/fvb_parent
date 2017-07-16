@@ -9,9 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by qianle on 7/5/17.
@@ -21,6 +24,8 @@ import java.util.List;
 public class MessageController {
     @Autowired
     public MessageService messageService;
+
+    Logger logger = Logger.getAnonymousLogger();
 
     @RequestMapping("/getUnreadNumber")
     @ResponseBody
@@ -59,8 +64,26 @@ public class MessageController {
 
     @RequestMapping("/addMessage")
     @ResponseBody
-    public String addMessage(FvbMessage message) {
+    public String addMessage(FvbMessage message, HttpSession session) {
+        FvbUser user = (FvbUser)session.getAttribute("newUser");
+        if (message.getContent() == null) message.setContent("");
+        message.setHasRead(0);
+        message.setFromId(user.getUserId());
+        if (message.getConversationId() == null) message.setConversationId(message.getFromId(), message.getToId());
+        logger.log(Level.INFO, message.toString());
         MessageStatusEnum e = messageService.addMessage(message);
         return e.getStateinfo();
+    }
+
+    @RequestMapping("/msg")
+    public String gotoMessage(){
+        return "sendMessageSample";
+    }
+
+    @RequestMapping("/getAllMessageUnread")
+    @ResponseBody
+    public List<FvbMessage> getAllMessageUnread(HttpSession session) {
+        FvbUser user = (FvbUser) session.getAttribute("newUser");
+        return messageService.getAllMessagesUnread(user.getUserId(), 0, 20);
     }
 }
